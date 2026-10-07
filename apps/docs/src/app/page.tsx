@@ -36,9 +36,9 @@ export default function Home() {
     <>
       <main id="main" tabIndex={-1} className="outline-none">
         {/* Hero */}
-        <section className="relative isolate overflow-hidden">
+        <section className="relative isolate -mt-12 overflow-hidden">
           <HeroBackground />
-          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 pb-20 pt-20 lg:grid-cols-[1fr_1.05fr] lg:pb-28 lg:pt-28">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 pb-20 pt-32 lg:grid-cols-[1fr_1.05fr] lg:pb-28 lg:pt-40">
             <div className="animate-rise min-w-0 space-y-8">
               <Eyebrow>Open source · Base UI · shadcn registry</Eyebrow>
               <h1 className="font-display text-[clamp(2.75rem,6.4vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.05em]">
