@@ -20,7 +20,7 @@ function StatusDot({ state }: { state: ToolCallState }) {
       className={cn(
         "size-2 rounded-full",
         state === "pending" && "bg-muted-foreground/40",
-        state === "running" && "animate-pulse bg-accent",
+        state === "running" && "animate-pulse motion-reduce:animate-none bg-accent",
         state === "success" && "bg-emerald-500",
         state === "error" && "bg-red-500",
       )}
@@ -74,7 +74,7 @@ export function ToolCall({
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="size-3.5 text-muted-foreground transition-transform group-data-[panel-open]:rotate-90"
+          className="size-3.5 text-muted-foreground transition-transform motion-reduce:transition-none group-data-[panel-open]:rotate-90"
         >
           <path d="m6 4 4 4-4 4" />
         </svg>

@@ -67,7 +67,7 @@ export const docs: ComponentDoc[] = [
       { name: "CommandMenu", type: "component", description: "The listbox on its own, for custom inputs. Takes id, commands, activeIndex, onActiveChange and onSelect." },
       { name: "filterCommands(commands, query)", type: "SlashCommand[]", description: "Ranks name-prefix matches first, then name substrings, then keywords or description words starting with the query." },
     ] },
-  { slug: "model-picker", a11y: ["Built on Base UI Combobox: the trigger is a combobox with aria-expanded and the popup is a dialog with a listbox.", "Opening moves focus to the search field; Arrow keys and Enter select, Escape closes and returns focus to the trigger.", "Disabled pickers cannot be opened."],  title: "Model Picker", group: "Input", description: "Searchable model selector grouped by provider, with context size and capability tags. Sits in the Prompt Composer toolbar.", file: "model-picker.tsx", demo: D.ModelPickerDemo,
+  { slug: "model-picker", a11y: ["Built on Base UI Combobox: the trigger is a combobox with aria-expanded and the popup is a dialog with a listbox.", "Opening moves focus to the search field; Arrow keys and Enter select, Escape closes and returns focus to the trigger.", "Disabled pickers cannot be opened.", "Respects prefers-reduced-motion: the popup opens and closes without the scale/fade animation."],  title: "Model Picker", group: "Input", description: "Searchable model selector grouped by provider, with context size and capability tags. Sits in the Prompt Composer toolbar.", file: "model-picker.tsx", demo: D.ModelPickerDemo,
     props: [
       { name: "models", type: "Model[]", description: "{ value, label, provider, description?, contextWindow?, capabilities? }. contextWindow is in tokens." },
       { name: "value", type: "string", description: "Selected model id (controlled)." },
@@ -78,7 +78,7 @@ export const docs: ComponentDoc[] = [
       { name: "disabled", type: "boolean", description: "Disable the picker." },
       { name: "PromptComposer.toolbar", type: "ReactNode", description: "Slot below the input for controls like this picker." },
     ] },
-  { slug: "attachment", a11y: ["Remove buttons are named \"Remove <file>\" and are visible on hover, on focus, and always on touch devices.", "Upload progress is a progressbar named \"Uploading <file>\"; errors are shown as text, not color alone.", "After removing an item, focus moves to the next one (or the message input when the list is empty)."],  title: "Attachment", group: "Input", description: "File chips and image thumbnails with upload progress and errors, plus a hook that handles validation, previews and uploads. Plugs into Prompt Composer for drag-and-drop, paste and attach.", file: "attachment.tsx", demo: D.AttachmentDemo,
+  { slug: "attachment", a11y: ["Remove buttons are named \"Remove <file>\" and are visible on hover, on focus, and always on touch devices.", "Upload progress is a progressbar named \"Uploading <file>\"; errors are shown as text, not color alone.", "After removing an item, focus moves to the next one (or the message input when the list is empty).", "Respects prefers-reduced-motion: the progress bar fill updates without animating."],  title: "Attachment", group: "Input", description: "File chips and image thumbnails with upload progress and errors, plus a hook that handles validation, previews and uploads. Plugs into Prompt Composer for drag-and-drop, paste and attach.", file: "attachment.tsx", demo: D.AttachmentDemo,
     props: [
       { name: "Attachment.item", type: "AttachmentData", description: "{ name, size, previewUrl?, status, progress, error? }. Images with a previewUrl render as thumbnails." },
       { name: "Attachment.onRemove", type: "() => void", description: "Shows a remove button when set." },
@@ -90,12 +90,12 @@ export const docs: ComponentDoc[] = [
       { name: "PromptComposer.allowEmpty", type: "boolean", default: "false", description: "Allow sending with no text." },
       { name: "PromptComposer.submitDisabled", type: "boolean", default: "false", description: "Block sending, e.g. while uploading." },
     ] },
-  { slug: "reasoning", a11y: ["The header is a button with aria-expanded; its label reflects state (\"Thinking…\", \"Thought for 3s\").", "It opens while streaming and collapses afterwards."],  title: "Reasoning", group: "Agent", description: "Collapsible thinking block that opens while streaming and collapses when done.", file: "reasoning.tsx", demo: D.ReasoningDemo,
+  { slug: "reasoning", a11y: ["The header is a button with aria-expanded; its label reflects state (\"Thinking…\", \"Thought for 3s\").", "It opens while streaming and collapses afterwards.", "Respects prefers-reduced-motion: the thinking pulse, chevron rotation and expand/collapse animation are turned off."],  title: "Reasoning", group: "Agent", description: "Collapsible thinking block that opens while streaming and collapses when done.", file: "reasoning.tsx", demo: D.ReasoningDemo,
     props: [
       { name: "isStreaming", type: "boolean", default: "false", description: "Open and animate while true." },
       { name: "duration", type: "number", description: 'Seconds thought, shown as "Thought for Ns".' },
     ] },
-  { slug: "tool-call", a11y: ["The header is a button with aria-expanded; its accessible name includes the tool name and status.", "Status changes are in a polite live region."],  title: "Tool Call", group: "Agent", description: "Collapsible card showing a tool's status, input, output and error.", file: "tool-call.tsx", demo: D.ToolCallDemo,
+  { slug: "tool-call", a11y: ["The header is a button with aria-expanded; its accessible name includes the tool name and status.", "Status changes are in a polite live region.", "Respects prefers-reduced-motion: the running pulse and chevron rotation are turned off; the status is still shown by color and text."],  title: "Tool Call", group: "Agent", description: "Collapsible card showing a tool's status, input, output and error.", file: "tool-call.tsx", demo: D.ToolCallDemo,
     props: [
       { name: "name", type: "string", description: "Tool name." },
       { name: "state", type: '"pending" | "running" | "success" | "error"', description: "Current status." },
@@ -103,7 +103,7 @@ export const docs: ComponentDoc[] = [
       { name: "error", type: "string", description: "Error message." },
       { name: "defaultOpen", type: "boolean", default: "false", description: "Start expanded." },
     ] },
-  { slug: "plan", a11y: ["An ordered list named \"Plan\"; the active step has aria-current=\"step\".", "Each step's state is read out (\"Completed:\", \"In progress:\", \"Not started:\", \"Failed:\"), not just shown as an icon."],  title: "Plan", group: "Agent", description: "Step list with done, active, pending and error states.", file: "plan.tsx", demo: D.PlanDemo,
+  { slug: "plan", a11y: ["An ordered list named \"Plan\"; the active step has aria-current=\"step\".", "Each step's state is read out (\"Completed:\", \"In progress:\", \"Not started:\", \"Failed:\"), not just shown as an icon.", "Respects prefers-reduced-motion: the active-step pulse is turned off; the active step is still marked by its ring and aria-current."],  title: "Plan", group: "Agent", description: "Step list with done, active, pending and error states.", file: "plan.tsx", demo: D.PlanDemo,
     props: [{ name: "steps", type: "PlanStep[]", description: "{ id, title, state, detail? }" }] },
   { slug: "trace", a11y: ["A table with a header row. Every span has its duration as text, so the bars are a visual extra.", "Failed spans are labelled \"failed\" in text as well as shown in red."],  title: "Trace", group: "Agent", description: "Waterfall view of an agent run, one row per span.", file: "trace.tsx", demo: D.TraceDemo,
     props: [{ name: "events", type: "TraceEvent[]", description: "{ id, kind, name, start, duration, status? } with times in ms." }] },

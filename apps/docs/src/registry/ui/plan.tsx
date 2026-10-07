@@ -14,7 +14,7 @@ function StepIcon({ state }: { state: StepState }) {
       </span>
     );
   if (state === "active")
-    return <span aria-hidden className={cn(base, "border-accent")}><span className="size-2 animate-pulse rounded-full bg-accent" /></span>;
+    return <span aria-hidden className={cn(base, "border-accent")}><span className="size-2 animate-pulse motion-reduce:animate-none rounded-full bg-accent" /></span>;
   if (state === "error")
     return <span aria-hidden className={cn(base, "border-red-500 text-red-500")}>!</span>;
   return <span aria-hidden className={cn(base, "border-border")} />;
