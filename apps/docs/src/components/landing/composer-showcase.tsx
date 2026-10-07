@@ -50,16 +50,42 @@ export function ComposerShowcase() {
   const [log, setLog] = React.useState<string[]>([]);
   const push = (s: string) => setLog((l) => [s, ...l].slice(0, 4));
 
+  // Start with two files so the attachment chips and upload progress are visible straight away.
+  React.useEffect(() => {
+    const id = setTimeout(() => {
+      add([
+        new File([new Uint8Array(2_400_000)], "q3-report.pdf", { type: "application/pdf" }),
+        new File([new Uint8Array(18_000)], "notes.md", { type: "text/markdown" }),
+      ]);
+    }, 0);
+    return () => clearTimeout(id);
+  }, [add]);
+
   return (
-    <div className="flex h-full min-h-[460px] flex-col justify-end gap-5 p-6 sm:p-10">
-      <ul className="space-y-1.5 text-[15px] text-muted-foreground">
-        <li>type <span className="font-mono text-foreground">/</span> for commands</li>
-        <li>drop, paste or attach files</li>
-        <li>switch models from the toolbar</li>
-      </ul>
-      <ul aria-label="Activity" className="min-h-[5.5rem] space-y-1 font-mono text-[13px] text-faint">
-        {log.map((l, i) => <li key={i}>{l}</li>)}
-      </ul>
+    <div className="flex h-full min-h-[460px] flex-col gap-6 p-6 sm:p-10">
+      <div className="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 [&>*]:min-w-0">
+        <ul className="divide-y self-start border-y text-[15px]">
+          {[
+            ["/", "commands", "type / at the start"],
+            ["⌘V", "files", "paste, drop or attach"],
+            ["↵", "send", "⇧↵ for a new line"],
+            ["esc", "stop", "ends a running reply"],
+          ].map(([key, name, hint]) => (
+            <li key={name} className="flex items-center gap-4 py-3">
+              <kbd className="flex h-6 min-w-10 items-center justify-center rounded-sm border px-1.5 font-mono text-[13px] text-foreground">{key}</kbd>
+              <span>{name}</span>
+              <span className="ml-auto text-muted-foreground">{hint}</span>
+            </li>
+          ))}
+        </ul>
+        <div>
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">activity</p>
+          <ul aria-label="Activity" className="min-h-[6rem] space-y-1.5 font-mono text-[13px] text-muted-foreground">
+            {log.length === 0 && <li className="text-faint">nothing yet. send a message or run a command.</li>}
+            {log.map((l, i) => <li key={i} className={i === 0 ? "text-foreground" : undefined}>{l}</li>)}
+          </ul>
+        </div>
+      </div>
       <PromptComposer
         placeholder="Message the model…"
         commands={COMMANDS}
