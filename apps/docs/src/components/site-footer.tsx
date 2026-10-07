@@ -5,7 +5,7 @@ const link = "text-muted-foreground transition-colors hover:text-foreground";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-white/[0.06]">
+    <footer className="mt-auto border-t border-white/[0.045]">
       <div className="mx-auto flex max-w-[1240px] flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-start md:justify-between">
         <div className="max-w-xs">
           <Wordmark />

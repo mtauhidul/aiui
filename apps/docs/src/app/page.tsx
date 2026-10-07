@@ -1,7 +1,7 @@
 import Link from "next/link";
 import * as React from "react";
 import { Panel, Statement } from "@/components/kit";
-import { Arcs, Lattice, Lens, RailNodes, StackedSquares, fade } from "@/components/patterns";
+import { StackedSquares } from "@/components/patterns";
 import { cn } from "@/lib/utils";
 import { CopyCommand } from "@/components/copy-command";
 import { Showcase } from "@/components/landing/showcase";
@@ -45,12 +45,10 @@ function Still({ children, className }: { children: React.ReactNode; className?:
   );
 }
 
-/** A full-width section, so a pattern can sit in the free space beside the copy. */
-function Section({ id, border = true, pattern, children }: { id: string; border?: boolean; pattern?: React.ReactNode; children: React.ReactNode }) {
+/** A section separated from the previous one by a quiet hairline. */
+function Section({ id, border = true, children }: { id: string; border?: boolean; children: React.ReactNode }) {
   return (
-    <section aria-labelledby={id} className={cn("relative overflow-x-clip", border && "border-t border-white/[0.06]")}>
-      {border && <RailNodes />}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">{pattern}</div>
+    <section aria-labelledby={id} className={cn("relative", border && "border-t border-white/[0.045]")}>
       <div className={`${wrap} relative py-24 sm:py-32`}>{children}</div>
     </section>
   );
@@ -65,8 +63,7 @@ export default function Home() {
       <main id="main" tabIndex={-1} className="outline-none">
         {/* Hero */}
         <section className="relative overflow-hidden pb-16 sm:pb-24">
-          <Lattice className="right-0 top-0 hidden h-full w-[58%] md:block" mask={fade.right} opacity={0.12} />
-          <Lens className="-right-20 top-4 hidden h-[470px] w-[535px] xl:block" />
+          <StackedSquares className="right-5 top-6 size-[96px] sm:right-8 sm:top-8 sm:size-[150px] lg:top-10 lg:size-[250px] xl:right-[calc(50%-588px)] xl:top-14 xl:size-[340px]" />
           <div className={`${wrap} relative pt-20 sm:pt-28`}>
           <div className="max-w-[760px]">
             <Statement
@@ -104,7 +101,7 @@ export default function Home() {
         </p>
 
         {/* Conversation */}
-        <Section id="conversation" border={false} pattern={<Lattice className="right-0 top-0 hidden h-[380px] w-[34%] xl:block" mask={fade.topRight} opacity={0.12} />}>
+        <Section id="conversation" border={false}>
           <Statement id="conversation" claim="every reply streams smoothly" rest="markdown is split into blocks, so only the live block re-renders" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2">
             <div>
@@ -161,7 +158,7 @@ export default function Home() {
         </Section>
 
         {/* Agents */}
-        <Section id="agents" pattern={<StackedSquares className="right-[calc(50%-588px)] top-10 hidden h-[260px] w-[260px] xl:block" />}>
+        <Section id="agents">
           <Statement id="agents" claim="humans stay in control" rest="approvals, artifacts and feedback are first-class" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-3">
             <div>
@@ -193,7 +190,7 @@ export default function Home() {
         </Section>
 
         {/* Input */}
-        <Section id="input" pattern={<Lens className="right-[calc(50%-600px)] top-8 hidden h-[300px] w-[342px] opacity-80 xl:block" />}>
+        <Section id="input">
           <Statement id="input" claim="an input that does it all" rest="files, slash commands and a model picker, in one composer" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2">
             <div>
@@ -218,7 +215,7 @@ export default function Home() {
         </Section>
 
         {/* Accessibility */}
-        <Section id="a11y" pattern={<Arcs className="right-[calc(50%-588px)] top-10 hidden h-[260px] w-[260px] xl:block" />}>
+        <Section id="a11y">
           <Statement id="a11y" claim="accessible by default" rest="tested with axe and by keyboard, in every state" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
             <Feature title="keyboard first">every control is reachable and operable without a mouse, and focus is never dropped.</Feature>
