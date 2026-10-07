@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { REGISTRY_URL } from "@/lib/registry-url";
 import { SiteHeader } from "@/components/site-header";
 
 const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
@@ -15,9 +16,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const description = "Minimal, accessible UI components for chat, agents and tool use. Copy them into your project.";
+
 export const metadata: Metadata = {
-  title: "aiui",
-  description: "Minimal, modern UI components for AI applications.",
+  metadataBase: new URL(REGISTRY_URL),
+  title: { default: "aiui — UI components for AI applications", template: "%s — aiui" },
+  description,
+  openGraph: { title: "aiui", description, type: "website" },
+  twitter: { card: "summary_large_image", title: "aiui", description },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

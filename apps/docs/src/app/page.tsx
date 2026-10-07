@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChatDemo } from "@/components/chat-demo";
 import { AgentDemo } from "@/components/agent-demo";
 import { CodeBlock } from "@/registry/ui/code-block";
+import { REGISTRY_URL } from "@/lib/registry-url";
 import { docs } from "@/content/components";
 
 const features = [
@@ -15,15 +16,15 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl space-y-24 px-6 py-20">
+    <main className="mx-auto w-full max-w-5xl space-y-16 px-4 py-12 sm:space-y-24 sm:px-6 sm:py-20">
       <section className="space-y-6 text-center">
-        <h1 className="mx-auto max-w-2xl text-balance text-5xl font-semibold tracking-tight">
+        <h1 className="mx-auto max-w-2xl text-balance text-4xl font-semibold sm:text-5xl tracking-tight">
           UI components for AI applications
         </h1>
-        <p className="mx-auto max-w-xl text-balance text-lg text-muted-foreground">
+        <p className="mx-auto max-w-xl text-balance text-base text-muted-foreground sm:text-lg">
           Minimal, accessible building blocks for chat, agents and tool use. Copy them into your project and make them yours.
         </p>
-        <div className="flex justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           <Link href="/docs/button" className="inline-flex h-10 items-center rounded-md bg-foreground px-5 text-sm font-medium text-background transition-colors hover:bg-foreground/90">
             Browse components
           </Link>
@@ -31,8 +32,9 @@ export default function Home() {
             GitHub
           </a>
         </div>
-        <div className="mx-auto max-w-md pt-2 text-left">
-          <CodeBlock lang="bash" code="npx shadcn@latest add <registry-url>/r/streaming-markdown.json" />
+        <div className="mx-auto max-w-lg pt-2 text-left">
+          <CodeBlock lang="bash" code={`npx shadcn@latest add \\
+  ${REGISTRY_URL}/r/streaming-markdown.json`} />
         </div>
       </section>
 

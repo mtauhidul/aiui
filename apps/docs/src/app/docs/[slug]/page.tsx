@@ -5,11 +5,17 @@ import path from "node:path";
 import { docs } from "@/content/components";
 import { CodeBlock } from "@/registry/ui/code-block";
 
-const REGISTRY = process.env.NEXT_PUBLIC_REGISTRY_URL ?? "http://localhost:3100";
+import { REGISTRY_URL as REGISTRY } from "@/lib/registry-url";
 
 async function getSource(file: string) {
   "use cache";
   return readFile(path.join(process.cwd(), "src/registry/ui", file), "utf8");
+}
+
+export async function generateMetadata({ params }: PageProps<"/docs/[slug]">) {
+  const { slug } = await params;
+  const doc = docs.find((d) => d.slug === slug);
+  return doc ? { title: doc.title, description: doc.description } : {};
 }
 
 export function generateStaticParams() {
