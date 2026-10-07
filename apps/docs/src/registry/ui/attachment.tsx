@@ -26,7 +26,7 @@ function RemoveButton({ name, onRemove, className }: { name: string; onRemove: (
       onClick={onRemove}
       aria-label={`Remove ${name}`}
       className={cn(
-        "flex size-5 items-center justify-center rounded-full bg-foreground text-background outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring",
+        "flex size-5 items-center justify-center rounded-sm bg-foreground text-background outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
     >
@@ -37,7 +37,7 @@ function RemoveButton({ name, onRemove, className }: { name: string; onRemove: (
 
 function Progress({ value, label, className }: { value: number; label: string; className?: string }) {
   return (
-    <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value} className={cn("h-0.5 overflow-hidden rounded-full bg-border", className)}>
+    <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value} className={cn("h-0.5 overflow-hidden rounded-none bg-border", className)}>
       <div className="h-full bg-accent transition-[width] duration-200 motion-reduce:transition-none" style={{ width: `${value}%` }} />
     </div>
   );

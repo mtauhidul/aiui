@@ -18,7 +18,7 @@ function StatusDot({ state }: { state: ToolCallState }) {
     <span
       aria-hidden
       className={cn(
-        "size-2 rounded-full",
+        "size-2 rounded-[1px]",
         state === "pending" && "bg-muted-foreground/40",
         state === "running" && "animate-pulse motion-reduce:animate-none bg-accent",
         state === "success" && "bg-emerald-500",
@@ -31,7 +31,7 @@ function StatusDot({ state }: { state: ToolCallState }) {
 function Json({ label, value }: { label: string; value: unknown }) {
   return (
     <div className="space-y-1">
-      <div className="text-xs font-medium text-muted-foreground">{label}</div>
+      <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{label}</div>
       <pre className="overflow-x-auto rounded-md bg-muted/60 p-2.5 font-mono text-xs leading-relaxed">
         {typeof value === "string" ? value : JSON.stringify(value, null, 2)}
       </pre>
@@ -45,6 +45,7 @@ export function ToolCall({
   input,
   output,
   error,
+  duration,
   defaultOpen = false,
   className,
 }: {
@@ -53,6 +54,8 @@ export function ToolCall({
   input?: unknown;
   output?: unknown;
   error?: string;
+  /** Elapsed time, e.g. "1.2s". Shown beside the status. */
+  duration?: string;
   defaultOpen?: boolean;
   className?: string;
 }) {
@@ -64,8 +67,16 @@ export function ToolCall({
       <Collapsible.Trigger className="group flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring">
         <StatusDot state={state} />
         <span className="font-mono text-[13px]">{name}</span>
-        <span className="ml-auto text-xs text-muted-foreground" aria-live="polite">
+        <span
+          className={cn(
+            "ml-auto font-mono text-xs text-muted-foreground",
+            state === "error" && "text-red-400",
+            state === "success" && "text-emerald-400",
+          )}
+          aria-live="polite"
+        >
           {stateLabel[state]}
+          {duration && <span className="text-muted-foreground"> · {duration}</span>}
         </span>
         <svg
           viewBox="0 0 16 16"

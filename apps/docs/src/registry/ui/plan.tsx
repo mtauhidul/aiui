@@ -6,7 +6,7 @@ export type StepState = "pending" | "active" | "done" | "error";
 export type PlanStep = { id: string; title: string; state: StepState; detail?: string };
 
 function StepIcon({ state }: { state: StepState }) {
-  const base = "flex size-5 shrink-0 items-center justify-center rounded-full border text-[10px]";
+  const base = "flex size-5 shrink-0 items-center justify-center rounded-sm border text-[10px]";
   if (state === "done")
     return (
       <span aria-hidden className={cn(base, "border-transparent bg-foreground text-background")}>
@@ -14,7 +14,7 @@ function StepIcon({ state }: { state: StepState }) {
       </span>
     );
   if (state === "active")
-    return <span aria-hidden className={cn(base, "border-accent")}><span className="size-2 animate-pulse motion-reduce:animate-none rounded-full bg-accent" /></span>;
+    return <span aria-hidden className={cn(base, "border-accent")}><span className="size-2 animate-pulse motion-reduce:animate-none rounded-[1px] bg-accent" /></span>;
   if (state === "error")
     return <span aria-hidden className={cn(base, "border-red-500 text-red-500")}>!</span>;
   return <span aria-hidden className={cn(base, "border-border")} />;

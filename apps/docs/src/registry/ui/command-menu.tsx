@@ -70,7 +70,7 @@ export function CommandMenu({
       role="listbox"
       aria-label="Commands"
       className={cn(
-        "max-h-64 overflow-y-auto rounded-xl border bg-background p-1 shadow-lg",
+        "max-h-64 overflow-y-auto rounded-lg border bg-background p-1 shadow-lg",
         className,
       )}
     >

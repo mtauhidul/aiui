@@ -36,9 +36,9 @@ export function Trace({ events, className }: { events: TraceEvent[]; className?:
             {e.name}
             {e.status === "error" && <span className="ml-1.5 font-sans text-red-500">failed</span>}
           </span>
-          <span role="cell" className="relative h-2 rounded-full bg-muted">
+          <span role="cell" className="relative h-1.5 rounded-sm bg-muted">
             <span
-              className={cn("absolute inset-y-0 rounded-full", e.status === "error" ? "bg-red-500" : kindColor[e.kind])}
+              className={cn("absolute inset-y-0 rounded-sm", e.status === "error" ? "bg-red-500" : kindColor[e.kind])}
               style={{ left: `${(e.start / total) * 100}%`, width: `max(2px, ${(e.duration / total) * 100}%)` }}
             />
           </span>

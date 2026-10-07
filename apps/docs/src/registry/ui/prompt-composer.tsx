@@ -125,8 +125,8 @@ export function PromptComposer({
         onFiles(Array.from(e.dataTransfer.files));
       }}
       className={cn(
-        "relative rounded-2xl border bg-background p-2 shadow-sm transition-shadow focus-within:ring-2 focus-within:ring-ring/40",
-        dragging && "ring-2 ring-accent",
+        "group/composer relative rounded-lg border bg-background p-2 transition-colors focus-within:border-foreground/40",
+        dragging && "border-accent",
         className,
       )}
     >
@@ -202,6 +202,11 @@ export function PromptComposer({
                 return;
               }
             }
+            if (e.key === "Escape" && isStreaming && onStop) {
+              e.preventDefault();
+              onStop();
+              return;
+            }
             if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
               e.preventDefault();
               submit();
@@ -225,9 +230,14 @@ export function PromptComposer({
           )}
         </Button>
       </div>
-      {toolbar && <div className="flex items-center gap-1 px-1 pt-1">{toolbar}</div>}
+      <div className="flex items-center gap-1 px-1 pt-1">
+        {toolbar}
+        <span aria-hidden className="ml-auto hidden font-mono text-[11px] text-muted-foreground group-focus-within/composer:inline">
+          {isStreaming && onStop ? "esc stop" : "↵ send · ⇧↵ newline"}
+        </span>
+      </div>
       {dragging && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-background/80 text-sm font-medium text-accent">
+        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg bg-background/80 text-sm font-medium text-accent">
           Drop files to attach
         </div>
       )}

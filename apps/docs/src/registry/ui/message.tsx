@@ -40,7 +40,7 @@ export function MessageContent({
       className={cn(
         "min-w-0 text-[15px] leading-relaxed",
         "group-data-[role=assistant]:max-w-[44rem] group-data-[role=assistant]:flex-1",
-        "group-data-[role=user]:max-w-[85%] group-data-[role=user]:rounded-2xl group-data-[role=user]:bg-muted group-data-[role=user]:px-4 group-data-[role=user]:py-2.5",
+        "group-data-[role=user]:max-w-[85%] group-data-[role=user]:rounded-lg group-data-[role=user]:bg-muted group-data-[role=user]:px-4 group-data-[role=user]:py-2.5",
         className,
       )}
       {...props}

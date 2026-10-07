@@ -135,7 +135,7 @@ export function Feedback({
                     type="button"
                     aria-pressed={on}
                     onClick={() => setPicked((p) => (on ? p.filter((x) => x !== r) : [...p, r]))}
-                    className="rounded-full border px-2.5 py-1 text-xs text-muted-foreground outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring aria-pressed:border-foreground aria-pressed:text-foreground"
+                    className="rounded-md border px-2.5 py-1 text-xs text-muted-foreground outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring aria-pressed:border-foreground aria-pressed:text-foreground"
                   >
                     {r}
                   </button>

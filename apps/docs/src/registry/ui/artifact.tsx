@@ -20,7 +20,7 @@ export function Artifact({
   className?: string;
 }) {
   return (
-    <Tabs.Root defaultValue="preview" className={cn("flex h-full flex-col overflow-hidden rounded-xl border bg-background", className)}>
+    <Tabs.Root defaultValue="preview" className={cn("flex h-full flex-col overflow-hidden rounded-lg border bg-background", className)}>
       <div className="flex h-11 items-center gap-3 border-b px-3">
         <span className="truncate text-sm font-medium">{title}</span>
         <Tabs.List className="ml-auto flex gap-0.5 rounded-md bg-muted p-0.5 text-xs">

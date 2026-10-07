@@ -141,7 +141,7 @@ export function ModelPicker({
         <Combobox.Positioner align="start" sideOffset={6}>
           <Combobox.Popup
             aria-label="Select model"
-            className="z-50 w-80 max-w-[var(--available-width)] origin-[var(--transform-origin)] overflow-hidden rounded-xl border bg-background text-foreground shadow-lg transition-[scale,opacity] duration-150 motion-reduce:transition-none data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
+            className="z-50 w-80 max-w-[var(--available-width)] origin-[var(--transform-origin)] overflow-hidden rounded-lg border bg-background text-foreground shadow-lg transition-[scale,opacity] duration-150 motion-reduce:transition-none data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
           >
             <div className="border-b p-2">
               <Combobox.Input

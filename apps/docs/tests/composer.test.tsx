@@ -52,6 +52,13 @@ describe("PromptComposer", () => {
     expect(onStop).toHaveBeenCalled();
   });
 
+  it("stops generation on Escape while streaming", async () => {
+    const onStop = vi.fn();
+    render(<PromptComposer onSubmit={vi.fn()} onStop={onStop} isStreaming />);
+    await userEvent.type(box(), "{Escape}");
+    expect(onStop).toHaveBeenCalledTimes(1);
+  });
+
   it("does not submit while an IME composition is active", () => {
     const onSubmit = vi.fn();
     render(<PromptComposer onSubmit={onSubmit} />);
