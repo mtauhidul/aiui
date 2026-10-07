@@ -250,6 +250,22 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/model-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

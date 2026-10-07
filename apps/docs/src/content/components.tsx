@@ -45,6 +45,17 @@ export const docs: ComponentDoc[] = [
       { name: "isStreaming", type: "boolean", default: "false", description: "Swaps send for stop and blocks submit." },
       { name: "placeholder", type: "string", default: '"Ask anything…"', description: "Input placeholder." },
     ] },
+  { slug: "model-picker", title: "Model Picker", group: "Input", description: "Searchable model selector grouped by provider, with context size and capability tags. Sits in the Prompt Composer toolbar.", file: "model-picker.tsx", demo: D.ModelPickerDemo,
+    props: [
+      { name: "models", type: "Model[]", description: "{ value, label, provider, description?, contextWindow?, capabilities? }. contextWindow is in tokens." },
+      { name: "value", type: "string", description: "Selected model id (controlled)." },
+      { name: "defaultValue", type: "string", description: "Initial model id (uncontrolled)." },
+      { name: "onValueChange", type: "(value: string) => void", description: "Called with the new model id." },
+      { name: "groupByProvider", type: "boolean", default: "true", description: "Group the list under provider headings." },
+      { name: "placeholder", type: "string", default: '"Select model"', description: "Shown when nothing is selected." },
+      { name: "disabled", type: "boolean", description: "Disable the picker." },
+      { name: "PromptComposer.toolbar", type: "ReactNode", description: "Slot below the input for controls like this picker." },
+    ] },
   { slug: "attachment", title: "Attachment", group: "Input", description: "File chips and image thumbnails with upload progress and errors, plus a hook that handles validation, previews and uploads. Plugs into Prompt Composer for drag-and-drop, paste and attach.", file: "attachment.tsx", demo: D.AttachmentDemo,
     props: [
       { name: "Attachment.item", type: "AttachmentData", description: "{ name, size, previewUrl?, status, progress, error? }. Images with a previewUrl render as thumbnails." },

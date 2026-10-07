@@ -10,6 +10,7 @@ export function PromptComposer({
   isStreaming = false,
   placeholder = "Ask anything…",
   attachments,
+  toolbar,
   onFiles,
   accept,
   allowEmpty = false,
@@ -26,6 +27,8 @@ export function PromptComposer({
   onFiles?: (files: File[]) => void;
   /** Passed to the file picker, e.g. "image/*,.pdf". */
   accept?: string;
+  /** Rendered below the input, e.g. a <ModelPicker />. */
+  toolbar?: React.ReactNode;
   /** Allow sending with no text (e.g. attachments only). */
   allowEmpty?: boolean;
   /** Block sending, e.g. while uploads are in progress. */
@@ -138,6 +141,7 @@ export function PromptComposer({
           </Button>
         )}
       </div>
+      {toolbar && <div className="flex items-center gap-1 px-1 pt-1">{toolbar}</div>}
       {dragging && (
         <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-2xl bg-background/80 text-sm font-medium text-accent">
           Drop files to attach

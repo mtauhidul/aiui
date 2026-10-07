@@ -226,6 +226,46 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "use-attachments",
+      "type": "registry:hook",
+      "files": [
+        {
+          "path": "src/registry/hooks/use-attachments.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "utils",
+        "use-attachments"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/attachment.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/model-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

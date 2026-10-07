@@ -15,6 +15,7 @@ import { ApprovalPrompt } from "@/registry/ui/approval-prompt";
 import { Artifact } from "@/registry/ui/artifact";
 import { AttachmentList } from "@/registry/ui/attachment";
 import { useAttachments } from "@/registry/hooks/use-attachments";
+import { ModelPicker, type Model } from "@/registry/ui/model-picker";
 import { useFakeStream } from "@/registry/hooks/use-fake-stream";
 
 const SOURCES: Source[] = [
@@ -217,6 +218,30 @@ export function AttachmentDemo() {
         Images up to 5 MB, PDF or text, max 5 files. Name a file &quot;fail&quot; to see the error state.
       </p>
       {sent && <p className="text-xs text-muted-foreground">Sent: {sent}</p>}
+    </div>
+  );
+}
+
+const MODELS: Model[] = [
+  { value: "claude-fable-5-1", label: "Claude Fable 5.1", provider: "Anthropic", description: "Most capable. Best for complex, long-running work.", contextWindow: 1_000_000, capabilities: ["vision", "reasoning", "tools"] },
+  { value: "claude-sonnet-5-5", label: "Claude Sonnet 5.5", provider: "Anthropic", description: "Balanced speed and intelligence.", contextWindow: 500_000, capabilities: ["vision", "tools"] },
+  { value: "claude-haiku-4-5", label: "Claude Haiku 4.5", provider: "Anthropic", description: "Fastest and most affordable.", contextWindow: 200_000, capabilities: ["fast", "tools"] },
+  { value: "gpt-example-large", label: "GPT Example Large", provider: "OpenAI", description: "General-purpose flagship model.", contextWindow: 400_000, capabilities: ["vision", "reasoning"] },
+  { value: "gemini-example-pro", label: "Gemini Example Pro", provider: "Google", description: "Very long context for large documents.", contextWindow: 2_000_000, capabilities: ["vision", "tools"] },
+];
+
+export function ModelPickerDemo() {
+  const [model, setModel] = React.useState("claude-sonnet-5-5");
+  const [sent, setSent] = React.useState<string | null>(null);
+  return (
+    <div className="space-y-4">
+      <PromptComposer
+        placeholder="Message the selected model…"
+        toolbar={<ModelPicker models={MODELS} value={model} onValueChange={setModel} />}
+        onSubmit={(t) => setSent(`"${t}" → ${model}`)}
+      />
+      <p className="text-xs text-muted-foreground">Selected: <span className="font-mono">{model}</span></p>
+      {sent && <p className="text-xs text-muted-foreground">Sent {sent}</p>}
     </div>
   );
 }
