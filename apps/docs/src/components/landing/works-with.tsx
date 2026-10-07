@@ -4,7 +4,7 @@ const ITEMS = ["Vercel AI SDK", "LangChain", "OpenAI", "Anthropic", "Next.js", "
 export function WorksWith() {
   const set = (hidden: boolean) =>
     ITEMS.map((name) => (
-      <li key={name + hidden} className="flex shrink-0 items-center gap-10 whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+      <li key={name + hidden} className="font-medium flex shrink-0 items-center gap-10 whitespace-nowrap text-xs text-muted-foreground">
         {name}
         <span aria-hidden className="size-1 bg-border" />
       </li>

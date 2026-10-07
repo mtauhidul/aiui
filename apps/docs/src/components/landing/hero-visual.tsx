@@ -72,8 +72,8 @@ export function HeroVisual() {
             <span className="size-2 bg-foreground/25" />
             <span className="size-2 bg-foreground/25" />
             <span className="size-2 bg-foreground/25" />
-            <span className="ml-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">session / 0x4f2a</span>
-            <span className="ml-auto inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+            <span className="font-medium ml-3 text-xs text-muted-foreground">session / 0x4f2a</span>
+            <span className="font-medium ml-auto inline-flex items-center gap-1.5 text-xs text-accent tabular-nums">
               <span className="animate-caret size-1.5 bg-accent" />
               streaming
             </span>
@@ -104,12 +104,12 @@ export function HeroVisual() {
 
         {/* floating satellites */}
         <div className={`${panel} animate-float absolute -right-[2%] top-[-2%] hidden w-48 p-3 [border-radius:calc(var(--radius)+2px)] md:block`} style={z(130)}>
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Sources</p>
+          <p className="font-medium mb-2 text-xs text-muted-foreground">Sources</p>
           <Sources sources={SOURCES} />
         </div>
 
         <div className={`${panel} absolute -left-[5%] bottom-[8%] hidden w-56 p-3.5 [border-radius:calc(var(--radius)+2px)] md:block`} style={z(160)}>
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Plan</p>
+          <p className="font-medium mb-3 text-xs text-muted-foreground">Plan</p>
           <Plan
             steps={[
               { id: "1", title: "Read the document", state: "done" },
@@ -120,7 +120,7 @@ export function HeroVisual() {
         </div>
 
         <div className={`${panel} animate-float absolute -right-[4%] bottom-[2%] hidden w-64 p-3 [animation-delay:-3s] [border-radius:calc(var(--radius)+2px)] md:block`} style={z(100)}>
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Trace</p>
+          <p className="font-medium mb-2 text-xs text-muted-foreground">Trace</p>
           <Trace
             className="border-0"
             events={[

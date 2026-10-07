@@ -1,10 +1,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/** Mono, uppercase micro-label with a signal-colored square. */
+/** Small label with a signal-colored square. */
 export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <p className={cn("inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground", className)}>
+    <p className={cn("inline-flex items-center gap-2 text-[13px] font-medium text-muted-foreground", className)}>
       <span aria-hidden className="size-1.5 bg-accent" />
       {children}
     </p>
@@ -40,7 +40,7 @@ export function Frame({
     <div className={cn("relative border bg-surface/80", className)}>
       <Ticks />
       {caption && (
-        <div className="flex items-center justify-between border-b px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+        <div className="font-medium flex items-center justify-between border-b px-4 py-2 text-xs text-muted-foreground">
           {caption}
         </div>
       )}

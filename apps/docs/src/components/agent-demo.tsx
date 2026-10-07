@@ -24,7 +24,7 @@ const EVENTS: TraceEvent[] = [
 
 const CODE = `export function Hello() {\n  return <h1>Hello, world</h1>;\n}`;
 
-const cap = "mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground";
+const cap = "font-medium mb-3 text-xs text-muted-foreground";
 
 export function AgentDemo() {
   const [status, setStatus] = React.useState<"pending" | "approved" | "denied">("pending");
@@ -56,7 +56,7 @@ export function AgentDemo() {
         <Artifact
           className="min-h-[22rem] flex-1"
           title="Hello.tsx"
-          preview={<h1 className="font-display text-4xl tracking-tight">Hello, <em>world</em></h1>}
+          preview={<h1 className="font-display text-3xl font-medium tracking-[-0.04em]">Hello, <em className="text-muted-foreground">world</em></h1>}
           code={<CodeBlock code={CODE} lang="tsx" />}
         />
       </div>

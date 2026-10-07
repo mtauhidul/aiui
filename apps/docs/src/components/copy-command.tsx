@@ -19,7 +19,7 @@ export function CopyCommand({ command, className }: { command: string; className
       <span aria-hidden className="flex items-center border-r px-3 font-mono text-xs text-accent">$</span>
       {/* Focusable so keyboard users can scroll a command that overflows on narrow screens. */}
       <div
-        role="region"
+        role="group"
         aria-label="Install command"
         tabIndex={0}
         className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap px-3 py-3 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
@@ -29,7 +29,7 @@ export function CopyCommand({ command, className }: { command: string; className
       <button
         type="button"
         onClick={copy}
-        className="flex shrink-0 items-center gap-2 border-l px-3.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+        className="font-medium flex shrink-0 items-center gap-2 border-l px-3.5 text-xs text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
       >
         {copied ? "Copied" : "Copy"}
         <span className="sr-only"> install command</span>

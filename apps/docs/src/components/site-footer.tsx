@@ -21,7 +21,7 @@ export function SiteFooter() {
           </nav>
         </div>
       </div>
-      <div aria-hidden className="select-none overflow-hidden whitespace-nowrap pt-10 text-center font-display text-[clamp(7rem,26vw,22rem)] leading-[0.8] tracking-tighter text-outline">
+      <div aria-hidden className="select-none overflow-hidden whitespace-nowrap pt-10 text-center font-display text-[clamp(6rem,23vw,19rem)] font-semibold leading-[0.78] tracking-[-0.06em] text-outline">
         aiui
       </div>
     </footer>

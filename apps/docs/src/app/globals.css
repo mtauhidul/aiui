@@ -58,7 +58,7 @@
   --radius-sm: calc(var(--radius) - 4px);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-instrument), "Times New Roman", serif;
+  --font-display: var(--font-geist-sans);
 }
 
 @layer base {
@@ -71,6 +71,8 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+  /* Emphasis inside display headings is a color shift, never an italic. */
+  .font-display em { font-style: normal; }
   ::selection { background: var(--accent); color: var(--accent-foreground); }
 }
 

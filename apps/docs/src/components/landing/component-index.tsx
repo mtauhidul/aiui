@@ -11,12 +11,12 @@ export function ComponentIndex() {
             href={`/docs/${d.slug}`}
             className="group flex h-full flex-col gap-3 p-5 outline-none transition-colors hover:bg-surface focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
           >
-            <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <div className="font-medium flex items-center justify-between text-xs text-muted-foreground">
               <span>{String(i + 1).padStart(2, "0")}</span>
               <span>{d.group}</span>
             </div>
             <div className="flex items-center justify-between gap-3">
-              <span className="font-display text-3xl leading-none tracking-tight">{d.title}</span>
+              <span className="font-display text-xl font-medium leading-none tracking-[-0.025em]">{d.title}</span>
               <span aria-hidden className="text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent motion-reduce:transition-none motion-reduce:group-hover:translate-x-0">→</span>
             </div>
             <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{d.description}</p>

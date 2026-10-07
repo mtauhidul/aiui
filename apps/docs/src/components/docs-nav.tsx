@@ -11,7 +11,7 @@ export function DocsNav({ onNavigate }: { onNavigate?: () => void }) {
     <nav className="space-y-7 text-sm" aria-label="Components">
       {groups.map((g) => (
         <div key={g}>
-          <div className="mb-2 px-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{g}</div>
+          <div className="font-medium mb-2 px-3 text-xs text-muted-foreground">{g}</div>
           <ul className="space-y-px border-l">
             {docs.filter((d) => d.group === g).map((d) => {
               const active = pathname === `/docs/${d.slug}`;

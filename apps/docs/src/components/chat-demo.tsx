@@ -73,7 +73,7 @@ export function ChatDemo() {
       <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
         {turns.length === 0 && !isStreaming && (
           <div className="flex h-full flex-col items-center justify-center gap-5 text-center">
-            <p className="font-display text-3xl tracking-tight">Try it. It is <em>live</em>.</p>
+            <p className="font-display text-2xl font-medium tracking-[-0.03em]">Try it. It is <em className="text-accent">live</em>.</p>
             <p className="max-w-xs text-sm text-muted-foreground">Pick a prompt or type your own to watch a streamed reply with reasoning, a tool call and citations.</p>
             <div className="flex flex-wrap justify-center gap-2">
               {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
@@ -81,7 +81,7 @@ export function ChatDemo() {
                   key={p}
                   type="button"
                   onClick={() => send(p)}
-                  className="border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground outline-none transition-colors hover:border-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                  className="font-medium border px-3 py-1.5 text-xs text-muted-foreground outline-none transition-colors hover:border-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {p}
                 </button>

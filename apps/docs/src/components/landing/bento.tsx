@@ -23,7 +23,7 @@ function Cell({
 }) {
   return (
     <article className={cn("group relative flex flex-col overflow-hidden border bg-surface/70 p-6 transition-colors hover:bg-surface", className)}>
-      <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+      <div className="font-medium flex items-center justify-between text-xs text-muted-foreground">
         <span>{index}</span>
         <span>{label}</span>
       </div>
@@ -38,7 +38,7 @@ function Cell({
 
 function StreamingViz() {
   const row = "grid grid-cols-[1fr_auto_auto] items-center gap-3";
-  const tag = "w-20 text-right font-mono text-[10px] uppercase tracking-widest text-muted-foreground";
+  const tag = "font-medium w-20 text-right text-xs text-muted-foreground";
   return (
     <div className="space-y-3.5">
       {[78, 92, 64].map((w, i) => (
@@ -120,8 +120,8 @@ export function Bento() {
             ["✓", "reduced motion"],
           ].map(([big, small]) => (
             <div key={small} className="bg-surface px-4 py-5">
-              <div className="font-display text-4xl leading-none">{big}</div>
-              <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{small}</div>
+              <div className="font-display text-3xl font-medium leading-none tracking-[-0.04em]">{big}</div>
+              <div className="font-medium mt-2 text-xs text-muted-foreground">{small}</div>
             </div>
           ))}
         </div>

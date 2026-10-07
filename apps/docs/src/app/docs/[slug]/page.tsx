@@ -44,14 +44,14 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
   const prev = docs[index - 1];
   const next = docs[index + 1];
 
-  const h2 = "flex items-baseline gap-3 font-display text-3xl tracking-tight";
-  const num = "font-mono text-[11px] tracking-[0.18em] text-accent";
+  const h2 = "flex items-baseline gap-3 font-display text-2xl font-medium tracking-[-0.03em]";
+  const num = "font-medium text-xs text-accent tabular-nums";
 
   return (
     <article className="space-y-14">
       <header className="space-y-5">
         <Eyebrow>Components / {doc.group}</Eyebrow>
-        <h1 className="font-display text-5xl leading-none tracking-tight sm:text-7xl">{doc.title}</h1>
+        <h1 className="font-display text-5xl font-medium leading-none tracking-[-0.045em] sm:text-6xl">{doc.title}</h1>
         <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">{doc.description}</p>
       </header>
 
@@ -68,7 +68,7 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
         <h2 className={h2}><span aria-hidden className={num}>02</span>Props</h2>
         <div className="overflow-x-auto border">
           <table className="w-full text-sm">
-            <thead className="border-b bg-muted/50 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <thead className="font-medium border-b bg-muted/50 text-left text-xs text-muted-foreground">
               <tr><th className="px-4 py-3 font-medium">Prop</th><th className="px-4 py-3 font-medium">Type</th><th className="px-4 py-3 font-medium">Default</th><th className="px-4 py-3 font-medium">Description</th></tr>
             </thead>
             <tbody>
@@ -111,8 +111,8 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
               rel={i === 0 ? "prev" : "next"}
               className={`group bg-surface/70 p-5 outline-none transition-colors hover:bg-surface focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${i === 1 ? "sm:text-right" : ""}`}
             >
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{x.label}</div>
-              <div className="mt-1 font-display text-2xl tracking-tight">{x.d.title}</div>
+              <div className="font-medium text-xs text-muted-foreground">{x.label}</div>
+              <div className="mt-1 font-display text-xl font-medium tracking-[-0.02em]">{x.d.title}</div>
             </Link>
           ) : (
             <div key={i} className="hidden bg-surface/40 sm:block" />
