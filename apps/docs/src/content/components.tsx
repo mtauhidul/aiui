@@ -45,6 +45,18 @@ export const docs: ComponentDoc[] = [
       { name: "isStreaming", type: "boolean", default: "false", description: "Swaps send for stop and blocks submit." },
       { name: "placeholder", type: "string", default: '"Ask anything…"', description: "Input placeholder." },
     ] },
+  { slug: "attachment", title: "Attachment", group: "Input", description: "File chips and image thumbnails with upload progress and errors, plus a hook that handles validation, previews and uploads. Plugs into Prompt Composer for drag-and-drop, paste and attach.", file: "attachment.tsx", demo: D.AttachmentDemo,
+    props: [
+      { name: "Attachment.item", type: "AttachmentData", description: "{ name, size, previewUrl?, status, progress, error? }. Images with a previewUrl render as thumbnails." },
+      { name: "Attachment.onRemove", type: "() => void", description: "Shows a remove button when set." },
+      { name: "AttachmentList.items", type: "AttachmentData[]", description: "Items from useAttachments." },
+      { name: "AttachmentList.onRemove", type: "(id: string) => void", description: "Remove handler." },
+      { name: "useAttachments({ accept, maxSize, maxFiles, upload })", type: "options", description: "Returns { items, add, remove, clear, isUploading, ready }. upload(file, onProgress, signal) is optional. Without it, files are ready immediately. Remove aborts an in-flight upload." },
+      { name: "PromptComposer.onFiles", type: "(files: File[]) => void", description: "Enables the attach button, drag-and-drop and paste." },
+      { name: "PromptComposer.attachments", type: "ReactNode", description: "Slot above the input, usually an AttachmentList." },
+      { name: "PromptComposer.allowEmpty", type: "boolean", default: "false", description: "Allow sending with no text." },
+      { name: "PromptComposer.submitDisabled", type: "boolean", default: "false", description: "Block sending, e.g. while uploading." },
+    ] },
   { slug: "reasoning", title: "Reasoning", group: "Agent", description: "Collapsible thinking block that opens while streaming and collapses when done.", file: "reasoning.tsx", demo: D.ReasoningDemo,
     props: [
       { name: "isStreaming", type: "boolean", default: "false", description: "Open and animate while true." },

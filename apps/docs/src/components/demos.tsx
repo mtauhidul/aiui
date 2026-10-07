@@ -13,6 +13,8 @@ import { Plan } from "@/registry/ui/plan";
 import { Trace } from "@/registry/ui/trace";
 import { ApprovalPrompt } from "@/registry/ui/approval-prompt";
 import { Artifact } from "@/registry/ui/artifact";
+import { AttachmentList } from "@/registry/ui/attachment";
+import { useAttachments } from "@/registry/hooks/use-attachments";
 import { useFakeStream } from "@/registry/hooks/use-fake-stream";
 
 const SOURCES: Source[] = [
@@ -167,5 +169,54 @@ export function ArtifactDemo() {
       preview={<h1 className="text-2xl font-semibold">Hello, world</h1>}
       code={<CodeBlock lang="tsx" code={`export const Hello = () => <h1>Hello, world</h1>;`} />}
     />
+  );
+}
+
+function fakeUpload(file: File, onProgress: (n: number) => void, signal: AbortSignal) {
+  return new Promise<void>((resolve, reject) => {
+    let p = 0;
+    const t = setInterval(() => {
+      p += 8 + Math.random() * 14;
+      if (p >= 100) {
+        clearInterval(t);
+        onProgress(100);
+        if (file.name.toLowerCase().includes("fail")) reject(new Error("Upload failed"));
+        else resolve();
+      } else onProgress(p);
+    }, 150);
+    signal.addEventListener("abort", () => {
+      clearInterval(t);
+      reject(new DOMException("Aborted", "AbortError"));
+    });
+  });
+}
+
+export function AttachmentDemo() {
+  const { items, add, remove, clear, isUploading, ready } = useAttachments({
+    accept: "image/*,.pdf,.txt,.md",
+    maxSize: 5 * 1024 * 1024,
+    maxFiles: 5,
+    upload: fakeUpload,
+  });
+  const [sent, setSent] = React.useState<string | null>(null);
+  return (
+    <div className="space-y-4">
+      <PromptComposer
+        placeholder="Drop, paste or attach files…"
+        onFiles={add}
+        accept="image/*,.pdf,.txt,.md"
+        allowEmpty={ready.length > 0}
+        submitDisabled={isUploading}
+        attachments={<AttachmentList items={items} onRemove={remove} />}
+        onSubmit={(text) => {
+          setSent(`${text || "(no text)"} + ${ready.length} file(s)`);
+          clear();
+        }}
+      />
+      <p className="text-xs text-muted-foreground">
+        Images up to 5 MB, PDF or text, max 5 files. Name a file &quot;fail&quot; to see the error state.
+      </p>
+      {sent && <p className="text-xs text-muted-foreground">Sent: {sent}</p>}
+    </div>
   );
 }
