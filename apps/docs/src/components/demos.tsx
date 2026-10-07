@@ -78,7 +78,7 @@ export function StreamingMarkdownDemo() {
       <Button variant="outline" size="sm" onClick={() => start(MD)} disabled={isStreaming}>
         {isStreaming ? "Streaming…" : "Replay stream"}
       </Button>
-      <StreamingMarkdown sources={SOURCES}>{text || MD}</StreamingMarkdown>
+      <StreamingMarkdown sources={SOURCES} streaming={isStreaming}>{text || MD}</StreamingMarkdown>
     </div>
   );
 }
@@ -155,6 +155,7 @@ export function ApprovalPromptDemo() {
   return (
     <ApprovalPrompt
       title="Send this email?"
+      risk="medium"
       description="The agent wants to email 12 recipients."
       details="Subject: Q3 update"
       status={status}

@@ -125,7 +125,7 @@ export function PromptComposer({
         onFiles(Array.from(e.dataTransfer.files));
       }}
       className={cn(
-        "group/composer relative rounded-lg border bg-background p-2 transition-colors focus-within:border-foreground/40",
+        "group/composer relative rounded border bg-background p-2 transition-colors focus-within:border-foreground/40",
         dragging && "border-accent",
         className,
       )}
@@ -237,7 +237,7 @@ export function PromptComposer({
         </span>
       </div>
       {dragging && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg bg-background/80 text-sm font-medium text-accent">
+        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded bg-background/80 text-sm font-medium text-accent">
           Drop files to attach
         </div>
       )}

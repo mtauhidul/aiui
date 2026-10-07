@@ -33,7 +33,11 @@ export function CodeBlock({
   }, [code, lang]);
 
   async function copy() {
-    await navigator.clipboard.writeText(code);
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch {
+      return;
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }
@@ -41,13 +45,18 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-lg border bg-muted/40 text-[13px]",
+        "overflow-hidden rounded border bg-muted/40 text-[13px]",
         className,
       )}
     >
       <div className="flex h-9 items-center justify-between border-b px-3">
         <span className="font-mono text-xs text-muted-foreground">{lang}</span>
-        <Button variant="ghost" size="sm" onClick={copy}>
+        <Button variant="ghost" size="sm" onClick={copy} className="font-mono text-xs">
+          {copied ? (
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="m3 8.5 3.5 3.5L13 4.5" /></svg>
+          ) : (
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden><rect x="5.5" y="5.5" width="8" height="8" rx="1" /><path d="M10.5 5.5v-2a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2" /></svg>
+          )}
           {copied ? "Copied" : "Copy"}
         </Button>
         <span role="status" className="sr-only">{copied ? "Copied to clipboard" : ""}</span>

@@ -70,7 +70,7 @@ export function CommandMenu({
       role="listbox"
       aria-label="Commands"
       className={cn(
-        "max-h-64 overflow-y-auto rounded-lg border bg-background p-1 shadow-lg",
+        "max-h-64 overflow-y-auto rounded border bg-background p-1 shadow-lg",
         className,
       )}
     >
@@ -85,7 +85,7 @@ export function CommandMenu({
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => onSelect(c)}
           className={cn(
-            "flex cursor-default items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
+            "flex cursor-default items-center gap-2.5 rounded-sm px-2 py-1.5 text-sm",
             i === activeIndex && "bg-muted",
           )}
         >

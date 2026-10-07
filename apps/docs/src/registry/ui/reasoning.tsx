@@ -28,7 +28,7 @@ export function Reasoning({
 
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen} className={className}>
-      <Collapsible.Trigger className="group flex items-center gap-1.5 rounded-md text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
+      <Collapsible.Trigger className="group flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
         <span className={cn(isStreaming && "animate-pulse motion-reduce:animate-none")}>
           {isStreaming
             ? "Thinking…"

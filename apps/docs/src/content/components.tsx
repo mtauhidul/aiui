@@ -31,6 +31,7 @@ export const docs: ComponentDoc[] = [
     props: [
       { name: "children", type: "string", description: "The full markdown text so far." },
       { name: "sources", type: "Source[]", description: "When set, [n] in the text renders as a citation marker for sources[n - 1]." },
+      { name: "streaming", type: "boolean", default: "false", description: "Shows a caret after the last block and sets aria-busy while text is arriving." },
     ] },
   { slug: "code-block", a11y: ["The Copy button confirms through a separate role=\"status\" region (\"Copied to clipboard\"), which screen readers announce reliably.", "Light mode uses a high-contrast Shiki theme (github-light-high-contrast); all token colors pass 4.5:1."],  title: "Code Block", group: "Conversation", description: "Syntax-highlighted code with light and dark themes and a copy button.", file: "code-block.tsx", demo: D.CodeBlockDemo,
     props: [
@@ -43,7 +44,7 @@ export const docs: ComponentDoc[] = [
       { name: "CitationMarker.source", type: "Source", description: "{ title, url, snippet? }" },
       { name: "Sources.sources", type: "Source[]", description: "Sources to list." },
     ] },
-  { slug: "prompt-composer", a11y: ["Enter sends, Shift+Enter inserts a newline, and IME composition is respected.", "Send is disabled when there is nothing to send; while streaming the same button becomes \"Stop generating\".", "The attach button is labelled, and drop or paste of files is also supported."],  title: "Prompt Composer", group: "Input", description: "Auto-growing input. Enter sends, Shift+Enter adds a line, and send becomes stop while streaming.", file: "prompt-composer.tsx", demo: D.PromptComposerDemo,
+  { slug: "prompt-composer", a11y: ["Enter sends, Shift+Enter inserts a newline, Escape stops a running response, and IME composition is respected.", "Send is disabled when there is nothing to send; while streaming the same button becomes \"Stop generating\".", "The attach button is labelled, and drop or paste of files is also supported."],  title: "Prompt Composer", group: "Input", description: "Auto-growing input. Enter sends, Shift+Enter adds a line, and send becomes stop while streaming.", file: "prompt-composer.tsx", demo: D.PromptComposerDemo,
     props: [
       { name: "onSubmit", type: "(value: string) => void", description: "Called with the trimmed text." },
       { name: "onStop", type: "() => void", description: "Called when stop is pressed." },
@@ -101,6 +102,7 @@ export const docs: ComponentDoc[] = [
       { name: "state", type: '"pending" | "running" | "success" | "error"', description: "Current status." },
       { name: "input / output", type: "unknown", description: "Rendered as JSON." },
       { name: "error", type: "string", description: "Error message." },
+      { name: "duration", type: "string", description: 'Elapsed time such as "1.2s", shown beside the status.' },
       { name: "defaultOpen", type: "boolean", default: "false", description: "Start expanded." },
     ] },
   { slug: "plan", a11y: ["An ordered list named \"Plan\"; the active step has aria-current=\"step\".", "Each step's state is read out (\"Completed:\", \"In progress:\", \"Not started:\", \"Failed:\"), not just shown as an icon.", "Respects prefers-reduced-motion: the active-step pulse is turned off; the active step is still marked by its ring and aria-current."],  title: "Plan", group: "Agent", description: "Step list with done, active, pending and error states.", file: "plan.tsx", demo: D.PlanDemo,
@@ -113,6 +115,7 @@ export const docs: ComponentDoc[] = [
       { name: "description", type: "string", description: "Supporting text." },
       { name: "details", type: "ReactNode", description: "Monospace detail block, e.g. a command." },
       { name: "status", type: '"pending" | "approved" | "denied"', default: '"pending"', description: "Shows buttons while pending." },
+      { name: "risk", type: '"low" | "medium" | "high"', description: "Adds a text label and coloured edge so the stakes are clear before deciding." },
       { name: "autoFocus", type: "boolean", default: "false", description: "Move focus into the prompt when it appears." },
       { name: "onApprove / onDeny", type: "() => void", description: "Decision handlers." },
     ] },

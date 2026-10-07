@@ -32,7 +32,7 @@ function Json({ label, value }: { label: string; value: unknown }) {
   return (
     <div className="space-y-1">
       <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">{label}</div>
-      <pre className="overflow-x-auto rounded-md bg-muted/60 p-2.5 font-mono text-xs leading-relaxed">
+      <pre className="overflow-x-auto rounded-sm bg-muted/60 p-2.5 font-mono text-xs leading-relaxed">
         {typeof value === "string" ? value : JSON.stringify(value, null, 2)}
       </pre>
     </div>
@@ -62,16 +62,16 @@ export function ToolCall({
   return (
     <Collapsible.Root
       defaultOpen={defaultOpen}
-      className={cn("rounded-lg border bg-muted/20", className)}
+      className={cn("rounded border bg-muted/20", className)}
     >
-      <Collapsible.Trigger className="group flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <Collapsible.Trigger className="group flex w-full items-center gap-2.5 rounded px-3 py-2 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring">
         <StatusDot state={state} />
         <span className="font-mono text-[13px]">{name}</span>
         <span
           className={cn(
             "ml-auto font-mono text-xs text-muted-foreground",
-            state === "error" && "text-red-400",
-            state === "success" && "text-emerald-400",
+            state === "error" && "text-red-700 dark:text-red-400",
+            state === "success" && "text-emerald-700 dark:text-emerald-400",
           )}
           aria-live="polite"
         >

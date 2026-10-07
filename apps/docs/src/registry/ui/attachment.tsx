@@ -62,7 +62,7 @@ export function Attachment({
         <img
           src={item.previewUrl}
           alt={item.name}
-          className={cn("size-full rounded-lg border object-cover", uploading && "opacity-60", failed && "border-red-500")}
+          className={cn("size-full rounded border object-cover", uploading && "opacity-60", failed && "border-red-500")}
         />
         {uploading && <Progress value={item.progress} label={`Uploading ${item.name}`} className="absolute inset-x-1.5 bottom-1.5" />}
         {onRemove && (
@@ -75,12 +75,12 @@ export function Attachment({
   return (
     <div
       className={cn(
-        "group relative flex h-16 w-44 shrink-0 items-center gap-2.5 overflow-hidden rounded-lg border bg-muted/40 px-2.5",
+        "group relative flex h-16 w-44 shrink-0 items-center gap-2.5 overflow-hidden rounded border bg-muted/40 px-2.5",
         failed && "border-red-500/60",
         className,
       )}
     >
-      <div className={cn("flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground", failed && "text-red-500")}>
+      <div className={cn("flex size-9 shrink-0 items-center justify-center rounded-sm bg-muted text-muted-foreground", failed && "text-red-500")}>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="size-4"><path d="M9.5 1.75H4.75a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h6.5a1.5 1.5 0 0 0 1.5-1.5V5l-3.25-3.25Z" /><path d="M9.5 1.75V5h3.25" /></svg>
       </div>
       <div className="min-w-0 flex-1">

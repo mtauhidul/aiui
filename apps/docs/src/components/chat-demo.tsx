@@ -98,7 +98,7 @@ export function ChatDemo() {
           <Message>
             <MessageContent>
               <AssistantExtras done={false} />
-              <StreamingMarkdown sources={SOURCES}>{text}</StreamingMarkdown>
+              <StreamingMarkdown sources={SOURCES} streaming>{text}</StreamingMarkdown>
             </MessageContent>
           </Message>
         )}

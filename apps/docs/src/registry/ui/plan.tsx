@@ -37,11 +37,11 @@ export function Plan({ steps, className }: { steps: PlanStep[]; className?: stri
           className="relative flex gap-3 pb-4 last:pb-0"
         >
           {i < steps.length - 1 && (
-            <span aria-hidden className="absolute left-[9.5px] top-6 bottom-1 w-px bg-border" />
+            <span aria-hidden className={cn("absolute left-[9.5px] top-6 bottom-1 w-px", step.state === "done" ? "bg-foreground/50" : "bg-border")} />
           )}
           <StepIcon state={step.state} />
           <div className="min-w-0 -mt-px">
-            <div className={cn("text-sm", step.state === "pending" && "text-muted-foreground", step.state === "done" && "text-muted-foreground line-through decoration-border")}>
+            <div className={cn("text-sm", step.state === "active" && "font-medium", step.state === "pending" && "text-muted-foreground", step.state === "done" && "text-muted-foreground line-through decoration-border")}>
               <span className="sr-only">{stateText[step.state]}: </span>
               {step.title}
             </div>

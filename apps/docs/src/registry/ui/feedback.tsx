@@ -123,7 +123,7 @@ export function Feedback({
       </div>
 
       {phase === "form" && current && (
-        <div ref={panelRef} className="w-full max-w-sm space-y-3 rounded-lg border bg-background p-3">
+        <div ref={panelRef} className="w-full max-w-sm space-y-3 rounded border bg-background p-3">
           <div className="text-sm font-medium">{current === "up" ? "What did you like?" : "What went wrong?"}</div>
           {options.length > 0 && (
             <div className="flex flex-wrap gap-1.5" role="group" aria-label="Reasons">
@@ -135,7 +135,7 @@ export function Feedback({
                     type="button"
                     aria-pressed={on}
                     onClick={() => setPicked((p) => (on ? p.filter((x) => x !== r) : [...p, r]))}
-                    className="rounded-md border px-2.5 py-1 text-xs text-muted-foreground outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring aria-pressed:border-foreground aria-pressed:text-foreground"
+                    className="rounded-sm border px-2.5 py-1 text-xs text-muted-foreground outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring aria-pressed:border-foreground aria-pressed:text-foreground"
                   >
                     {r}
                   </button>
@@ -156,7 +156,7 @@ export function Feedback({
               }
               if (e.key === "Escape") closeForm("idle");
             }}
-            className="w-full resize-none rounded-md border bg-transparent px-2.5 py-2 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="w-full resize-none rounded-sm border bg-transparent px-2.5 py-2 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
           />
           <div className="flex justify-end gap-2">
             <Button type="button" size="sm" variant="ghost" onClick={() => closeForm("idle")}>Skip</Button>

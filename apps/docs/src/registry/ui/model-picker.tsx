@@ -35,7 +35,7 @@ function ProviderMark({ provider, className }: { provider: string; className?: s
   return (
     <span
       aria-hidden
-      className={cn("flex size-5 shrink-0 items-center justify-center rounded-md bg-muted text-[10px] font-semibold uppercase text-muted-foreground", className)}
+      className={cn("flex size-5 shrink-0 items-center justify-center rounded-sm bg-muted text-[10px] font-semibold uppercase text-muted-foreground", className)}
     >
       {provider.charAt(0)}
     </span>
@@ -86,7 +86,7 @@ export function ModelPicker({
     <Combobox.Item
       key={model.value}
       value={model}
-      className="group/item flex cursor-default items-start gap-2.5 rounded-md px-2 py-2 text-sm outline-none select-none data-[highlighted]:bg-muted"
+      className="group/item flex cursor-default items-start gap-2.5 rounded-sm px-2 py-2 text-sm outline-none select-none data-[highlighted]:bg-muted"
     >
       <ProviderMark provider={model.provider} className="mt-0.5" />
       <div className="min-w-0 flex-1">
@@ -100,7 +100,7 @@ export function ModelPicker({
         {!!model.capabilities?.length && (
           <div className="mt-1.5 flex flex-wrap gap-1">
             {model.capabilities.map((c) => (
-              <span key={c} className="rounded border px-1.5 py-px text-[10px] text-muted-foreground">
+              <span key={c} className="rounded-sm border px-1.5 py-px text-[10px] text-muted-foreground">
                 {capabilityLabel[c]}
               </span>
             ))}
@@ -129,7 +129,7 @@ export function ModelPicker({
       <Combobox.Trigger
         aria-label="Model"
         className={cn(
-          "inline-flex h-8 items-center gap-2 rounded-md px-2 text-sm text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 data-[popup-open]:bg-muted data-[popup-open]:text-foreground",
+          "inline-flex h-8 items-center gap-2 rounded-sm px-2 text-sm text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 data-[popup-open]:bg-muted data-[popup-open]:text-foreground",
           className,
         )}
       >
@@ -141,12 +141,12 @@ export function ModelPicker({
         <Combobox.Positioner align="start" sideOffset={6}>
           <Combobox.Popup
             aria-label="Select model"
-            className="z-50 w-80 max-w-[var(--available-width)] origin-[var(--transform-origin)] overflow-hidden rounded-lg border bg-background text-foreground shadow-lg transition-[scale,opacity] duration-150 motion-reduce:transition-none data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
+            className="z-50 w-80 max-w-[var(--available-width)] origin-[var(--transform-origin)] overflow-hidden rounded border bg-background text-foreground shadow-lg transition-[scale,opacity] duration-150 motion-reduce:transition-none data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0"
           >
             <div className="border-b p-2">
               <Combobox.Input
                 placeholder="Search models…"
-                className="h-8 w-full rounded-md bg-muted/60 px-2.5 text-sm outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
+                className="h-8 w-full rounded-sm bg-muted/60 px-2.5 text-sm outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-ring"
               />
             </div>
             <Combobox.Empty>
