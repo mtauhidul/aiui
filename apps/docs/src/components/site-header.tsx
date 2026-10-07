@@ -6,7 +6,7 @@ const link = "rounded-md px-3 py-1.5 text-[16px] text-muted-foreground outline-n
 
 export function SiteHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-30 h-[61px] border-b border-white/[0.045] bg-black/90 backdrop-blur">
+    <header className="fixed inset-x-0 top-0 z-30 h-[61px] border-b border-white/[0.1] bg-black/90 backdrop-blur">
       <div className="mx-auto flex h-full w-full max-w-[1240px] items-center gap-2 px-5 sm:px-8">
         <MobileNav />
         <Link href="/" className="rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="aiui home">

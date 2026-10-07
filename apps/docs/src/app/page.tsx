@@ -48,7 +48,7 @@ function Still({ children, className }: { children: React.ReactNode; className?:
 /** A section separated from the previous one by a quiet hairline. */
 function Section({ id, border = true, children }: { id: string; border?: boolean; children: React.ReactNode }) {
   return (
-    <section aria-labelledby={id} className={cn("relative", border && "border-t border-white/[0.045]")}>
+    <section aria-labelledby={id} className={cn("relative", border && "border-t border-white/[0.12]")}>
       <div className={`${wrap} relative py-24 sm:py-32`}>{children}</div>
     </section>
   );
@@ -63,7 +63,7 @@ export default function Home() {
       <main id="main" tabIndex={-1} className="outline-none">
         {/* Hero */}
         <section className="relative overflow-hidden pb-16 sm:pb-24">
-          <StackedSquares className="right-5 top-6 size-[96px] sm:right-8 sm:top-8 sm:size-[150px] lg:top-10 lg:size-[250px] xl:right-[calc(50%-588px)] xl:top-14 xl:size-[340px]" />
+          <StackedSquares className="right-0 top-0 size-[520px] sm:size-[680px] lg:size-[860px] xl:right-[calc(50%-620px)] xl:size-[1080px] min-[1500px]:size-[1240px]" />
           <div className={`${wrap} relative pt-20 sm:pt-28`}>
           <div className="max-w-[760px]">
             <Statement
