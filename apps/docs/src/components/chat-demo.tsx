@@ -43,6 +43,7 @@ function AssistantExtras({ done }: { done: boolean }) {
         state={done ? "success" : "running"}
         input={{ query: "streaming markdown" }}
         output={done ? { results: 2 } : undefined}
+        duration={done ? "0.6s" : undefined}
       />
     </div>
   );
