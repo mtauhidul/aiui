@@ -3,6 +3,7 @@ import { Figtree, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { REGISTRY_URL } from "@/lib/registry-url";
 import { SiteHeader } from "@/components/site-header";
+import { Lattice, fade } from "@/components/patterns";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -40,9 +41,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader />
-        {/* Faint vertical rails that mark the content column on wide screens. */}
-        <div aria-hidden className="pointer-events-none fixed inset-y-0 left-1/2 hidden w-full max-w-[1240px] -translate-x-1/2 border-x border-white/[0.05] lg:block" />
-        {children}
+        <div className="relative flex flex-1 flex-col">
+          {/* Faint lattice in the gutters either side of the content column, on wide screens only. */}
+          <Lattice className="inset-y-0 left-0 hidden w-[calc(50%-620px)] min-[1320px]:block" s={26} opacity={0.075} mask={fade.vertical} />
+          <Lattice className="inset-y-0 right-0 hidden w-[calc(50%-620px)] min-[1320px]:block" s={26} opacity={0.075} mask={fade.vertical} />
+          {/* Faint vertical rails that mark the content column. */}
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full max-w-[1240px] -translate-x-1/2 border-x border-white/[0.06] lg:block" />
+          {children}
+        </div>
       </body>
     </html>
   );

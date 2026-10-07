@@ -1,6 +1,8 @@
 import Link from "next/link";
 import * as React from "react";
 import { Panel, Statement } from "@/components/kit";
+import { Arcs, Lattice, Lens, RailNodes, StackedSquares, fade } from "@/components/patterns";
+import { cn } from "@/lib/utils";
 import { CopyCommand } from "@/components/copy-command";
 import { Showcase } from "@/components/landing/showcase";
 import { SiteFooter } from "@/components/site-footer";
@@ -43,6 +45,17 @@ function Still({ children, className }: { children: React.ReactNode; className?:
   );
 }
 
+/** A full-width section, so a pattern can sit in the free space beside the copy. */
+function Section({ id, border = true, pattern, children }: { id: string; border?: boolean; pattern?: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <section aria-labelledby={id} className={cn("relative overflow-x-clip", border && "border-t border-white/[0.06]")}>
+      {border && <RailNodes />}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">{pattern}</div>
+      <div className={`${wrap} relative py-24 sm:py-32`}>{children}</div>
+    </section>
+  );
+}
+
 const cream =
   "inline-flex h-11 items-center rounded-md bg-accent px-5 text-[17px] font-medium text-accent-foreground outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-black";
 
@@ -51,7 +64,10 @@ export default function Home() {
     <>
       <main id="main" tabIndex={-1} className="outline-none">
         {/* Hero */}
-        <section className={`${wrap} pt-20 sm:pt-28`}>
+        <section className="relative overflow-hidden pb-16 sm:pb-24">
+          <Lattice className="right-0 top-0 hidden h-full w-[58%] md:block" mask={fade.right} opacity={0.12} />
+          <Lens className="-right-20 top-4 hidden h-[470px] w-[535px] xl:block" />
+          <div className={`${wrap} relative pt-20 sm:pt-28`}>
           <div className="max-w-[760px]">
             <Statement
               as="h1"
@@ -75,6 +91,7 @@ export default function Home() {
               </a>
             </div>
           </div>
+          </div>
         </section>
 
         {/* The product, as the visual */}
@@ -87,7 +104,7 @@ export default function Home() {
         </p>
 
         {/* Conversation */}
-        <section aria-labelledby="conversation" className={section}>
+        <Section id="conversation" border={false} pattern={<Lattice className="right-0 top-0 hidden h-[380px] w-[34%] xl:block" mask={fade.topRight} opacity={0.12} />}>
           <Statement id="conversation" claim="every reply streams smoothly" rest="markdown is split into blocks, so only the live block re-renders" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2">
             <div>
@@ -141,10 +158,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Agents */}
-        <section aria-labelledby="agents" className={`${section} border-t border-white/[0.06]`}>
+        <Section id="agents" pattern={<StackedSquares className="right-[calc(50%-588px)] top-10 hidden h-[260px] w-[260px] xl:block" />}>
           <Statement id="agents" claim="humans stay in control" rest="approvals, artifacts and feedback are first-class" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-3">
             <div>
@@ -173,10 +190,10 @@ export default function Home() {
               <div className="mt-6"><Feature title="feedback">thumbs with an optional follow-up, returning focus afterwards.</Feature></div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Input */}
-        <section aria-labelledby="input" className={`${section} border-t border-white/[0.06]`}>
+        <Section id="input" pattern={<Lens className="right-[calc(50%-600px)] top-8 hidden h-[300px] w-[342px] opacity-80 xl:block" />}>
           <Statement id="input" claim="an input that does it all" rest="files, slash commands and a model picker, in one composer" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2">
             <div>
@@ -198,10 +215,10 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Accessibility */}
-        <section aria-labelledby="a11y" className={`${section} border-t border-white/[0.06]`}>
+        <Section id="a11y" pattern={<Arcs className="right-[calc(50%-588px)] top-10 hidden h-[260px] w-[260px] xl:block" />}>
           <Statement id="a11y" claim="accessible by default" rest="tested with axe and by keyboard, in every state" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
             <Feature title="keyboard first">every control is reachable and operable without a mouse, and focus is never dropped.</Feature>
@@ -209,10 +226,10 @@ export default function Home() {
             <Feature title="clear contrast">text meets the 4.5:1 minimum on every surface.</Feature>
             <Feature title="reduced motion">movement stops when your system asks for less.</Feature>
           </div>
-        </section>
+        </Section>
 
         {/* Install */}
-        <section aria-labelledby="install" className={`${section} border-t border-white/[0.06]`}>
+        <Section id="install">
           <Statement id="install" claim="copy it into your project" rest="no package to install and nothing to fork" className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-3">
             <Feature title="add a component">pull the source in with the shadcn cli. dependencies resolve automatically.</Feature>
@@ -220,10 +237,10 @@ export default function Home() {
             <Feature title="make it yours">it is your file now. change the markup, tokens and behavior freely.</Feature>
           </div>
           <CopyCommand command={`npx shadcn@latest add ${REGISTRY_URL}/r/prompt-composer.json`} className="mt-12 max-w-2xl" />
-        </section>
+        </Section>
 
         {/* Index */}
-        <section aria-labelledby="index" className={`${section} border-t border-white/[0.06]`}>
+        <Section id="index">
           <Statement id="index" claim={`all ${docs.length} components`} className="max-w-[820px]" />
           <ul className="mt-14 border-t">
             {docs.map((d, i) => (
@@ -241,7 +258,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </section>
+        </Section>
       </main>
       <SiteFooter />
     </>
