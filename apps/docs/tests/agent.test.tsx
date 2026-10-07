@@ -185,3 +185,28 @@ describe("Artifact", () => {
     expect(await checkA11y(container)).toHaveNoViolations();
   });
 });
+
+describe("screen-reader state that is not visual-only", () => {
+  it("Plan reads out each step's state", () => {
+    render(
+      <Plan
+        steps={[
+          { id: "1", title: "Search", state: "done" },
+          { id: "2", title: "Draft", state: "active" },
+          { id: "3", title: "Test", state: "pending" },
+          { id: "4", title: "Ship", state: "error" },
+        ]}
+      />,
+    );
+    const items = within(screen.getByRole("list", { name: "Plan" })).getAllByRole("listitem");
+    const expected = ["Completed: Search", "In progress: Draft", "Not started: Test", "Failed: Ship"];
+    items.forEach((item, n) => expect(item).toHaveTextContent(expected[n]));
+    // The decorative "!" in the error icon must not be read aloud.
+    expect(screen.getByText("!")).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("Trace labels failed spans in text, not only color", () => {
+    render(<Trace events={[{ id: "a", kind: "tool", name: "run", start: 0, duration: 10, status: "error" }]} />);
+    expect(screen.getByText("failed")).toBeInTheDocument();
+  });
+});

@@ -21,7 +21,7 @@ export function CodeBlock({
     import("shiki").then(({ codeToHtml }) =>
       codeToHtml(code, {
         lang,
-        themes: { light: "github-light", dark: "github-dark-default" },
+        themes: { light: "github-light-high-contrast", dark: "github-dark-default" },
         defaultColor: false,
       })
         .catch(() => null)
@@ -47,9 +47,10 @@ export function CodeBlock({
     >
       <div className="flex h-9 items-center justify-between border-b px-3">
         <span className="font-mono text-xs text-muted-foreground">{lang}</span>
-        <Button variant="ghost" size="sm" onClick={copy} aria-live="polite">
+        <Button variant="ghost" size="sm" onClick={copy}>
           {copied ? "Copied" : "Copy"}
         </Button>
+        <span role="status" className="sr-only">{copied ? "Copied to clipboard" : ""}</span>
       </div>
       {html ? (
         <div

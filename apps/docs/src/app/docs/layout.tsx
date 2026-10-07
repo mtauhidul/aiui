@@ -6,7 +6,7 @@ export default function DocsLayout({ children }: LayoutProps<"/docs">) {
       <aside className="sticky top-24 hidden h-fit w-52 shrink-0 md:block">
         <DocsNav />
       </aside>
-      <div className="min-w-0 flex-1">{children}</div>
+      <main id="main" tabIndex={-1} className="min-w-0 flex-1 outline-none">{children}</main>
     </div>
   );
 }

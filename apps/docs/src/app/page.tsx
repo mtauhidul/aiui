@@ -16,7 +16,7 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl space-y-16 px-4 py-12 sm:space-y-24 sm:px-6 sm:py-20">
+    <main id="main" tabIndex={-1} className="mx-auto w-full max-w-5xl outline-none space-y-16 px-4 py-12 sm:space-y-24 sm:px-6 sm:py-20">
       <section className="space-y-6 text-center">
         <h1 className="mx-auto max-w-2xl text-balance text-4xl font-semibold sm:text-5xl tracking-tight">
           UI components for AI applications
@@ -40,7 +40,8 @@ export default function Home() {
 
       <section className="mx-auto w-full max-w-3xl"><ChatDemo /></section>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section aria-labelledby="features" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <h2 id="features" className="sr-only">Features</h2>
         {features.map((f) => (
           <div key={f.title} className="rounded-xl border p-5">
             <h3 className="font-medium">{f.title}</h3>

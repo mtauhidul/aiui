@@ -209,15 +209,21 @@ export function PromptComposer({
           }}
           className="max-h-[200px] flex-1 resize-none bg-transparent px-2 py-1.5 text-[15px] outline-none placeholder:text-muted-foreground"
         />
-        {isStreaming ? (
-          <Button type="button" variant="outline" size="icon" onClick={onStop} aria-label="Stop generating">
+        {/* One element for both states so keyboard focus survives send -> stop. */}
+        <Button
+          type={isStreaming ? "button" : "submit"}
+          variant={isStreaming ? "outline" : "accent"}
+          size="icon"
+          disabled={!isStreaming && !canSend}
+          onClick={isStreaming ? onStop : undefined}
+          aria-label={isStreaming ? "Stop generating" : "Send message"}
+        >
+          {isStreaming ? (
             <svg viewBox="0 0 16 16" fill="currentColor"><rect x="3.5" y="3.5" width="9" height="9" rx="1.5" /></svg>
-          </Button>
-        ) : (
-          <Button type="submit" variant="accent" size="icon" disabled={!canSend} aria-label="Send message">
+          ) : (
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" /></svg>
-          </Button>
-        )}
+          )}
+        </Button>
       </div>
       {toolbar && <div className="flex items-center gap-1 px-1 pt-1">{toolbar}</div>}
       {dragging && (

@@ -9,16 +9,23 @@ function StepIcon({ state }: { state: StepState }) {
   const base = "flex size-5 shrink-0 items-center justify-center rounded-full border text-[10px]";
   if (state === "done")
     return (
-      <span className={cn(base, "border-transparent bg-foreground text-background")}>
+      <span aria-hidden className={cn(base, "border-transparent bg-foreground text-background")}>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3"><path d="m3.5 8.5 3 3 6-6.5" /></svg>
       </span>
     );
   if (state === "active")
-    return <span className={cn(base, "border-accent")}><span className="size-2 animate-pulse rounded-full bg-accent" /></span>;
+    return <span aria-hidden className={cn(base, "border-accent")}><span className="size-2 animate-pulse rounded-full bg-accent" /></span>;
   if (state === "error")
-    return <span className={cn(base, "border-red-500 text-red-500")}>!</span>;
-  return <span className={cn(base, "border-border")} />;
+    return <span aria-hidden className={cn(base, "border-red-500 text-red-500")}>!</span>;
+  return <span aria-hidden className={cn(base, "border-border")} />;
 }
+
+const stateText: Record<StepState, string> = {
+  done: "Completed",
+  active: "In progress",
+  pending: "Not started",
+  error: "Failed",
+};
 
 export function Plan({ steps, className }: { steps: PlanStep[]; className?: string }) {
   return (
@@ -35,6 +42,7 @@ export function Plan({ steps, className }: { steps: PlanStep[]; className?: stri
           <StepIcon state={step.state} />
           <div className="min-w-0 -mt-px">
             <div className={cn("text-sm", step.state === "pending" && "text-muted-foreground", step.state === "done" && "text-muted-foreground line-through decoration-border")}>
+              <span className="sr-only">{stateText[step.state]}: </span>
               {step.title}
             </div>
             {step.detail && <div className="mt-0.5 text-xs text-muted-foreground">{step.detail}</div>}

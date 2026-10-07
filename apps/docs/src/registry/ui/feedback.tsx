@@ -66,6 +66,7 @@ export function Feedback({
   const [picked, setPicked] = React.useState<string[]>([]);
   const [comment, setComment] = React.useState("");
   const panelRef = React.useRef<HTMLDivElement>(null);
+  const ratingRef = React.useRef<HTMLDivElement>(null);
 
   const opensForm = (v: FeedbackValue) => details === "both" || (details === "down" && v === "down");
 
@@ -82,10 +83,16 @@ export function Feedback({
     setPhase(result && opensForm(result) ? "form" : "idle");
   }
 
+  // The form unmounts while it holds focus, so hand focus back to the rating.
+  function closeForm(next: "idle" | "done") {
+    setPhase(next);
+    queueMicrotask(() => ratingRef.current?.querySelector<HTMLElement>('[aria-pressed="true"]')?.focus());
+  }
+
   function submit() {
     if (!current) return;
     onSubmit?.({ value: current, reasons: picked, comment: comment.trim() });
-    setPhase("done");
+    closeForm("done");
   }
 
   const options = (current && (reasons[current] ?? DEFAULT_REASONS[current])) || [];
@@ -94,7 +101,7 @@ export function Feedback({
     <div className={cn("space-y-2", className)}>
       <div className="flex items-center gap-0.5">
         {children}
-        <div className="flex items-center gap-0.5" role="group" aria-label="Rate this response">
+        <div ref={ratingRef} className="flex items-center gap-0.5" role="group" aria-label="Rate this response">
           {(["up", "down"] as const).map((v) => (
             <Button
               key={v}
@@ -147,12 +154,12 @@ export function Feedback({
                 e.preventDefault();
                 submit();
               }
-              if (e.key === "Escape") setPhase("idle");
+              if (e.key === "Escape") closeForm("idle");
             }}
             className="w-full resize-none rounded-md border bg-transparent px-2.5 py-2 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
           />
           <div className="flex justify-end gap-2">
-            <Button type="button" size="sm" variant="ghost" onClick={() => setPhase("idle")}>Skip</Button>
+            <Button type="button" size="sm" variant="ghost" onClick={() => closeForm("idle")}>Skip</Button>
             <Button type="button" size="sm" onClick={submit}>Submit</Button>
           </div>
         </div>

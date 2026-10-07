@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
@@ -105,12 +107,26 @@ export function AttachmentList({
   onRemove?: (id: string) => void;
   className?: string;
 }) {
+  const listRef = React.useRef<HTMLUListElement>(null);
   if (!items.length) return null;
+
+  // The focused Remove button disappears with its item, so move focus to a neighbour
+  // (or the message input when the list is empty) instead of dropping it on <body>.
+  function remove(index: number, id: string) {
+    const form = listRef.current?.closest("form");
+    onRemove?.(id);
+    requestAnimationFrame(() => {
+      const buttons = listRef.current?.querySelectorAll<HTMLElement>('button[aria-label^="Remove"]');
+      if (buttons?.length) buttons[Math.min(index, buttons.length - 1)].focus();
+      else form?.querySelector("textarea")?.focus();
+    });
+  }
+
   return (
-    <ul className={cn("flex gap-2 overflow-x-auto px-1 pb-1 pt-2", className)} aria-label="Attachments">
-      {items.map((item) => (
+    <ul ref={listRef} className={cn("flex gap-2 overflow-x-auto px-1 pb-1 pt-2", className)} aria-label="Attachments">
+      {items.map((item, i) => (
         <li key={item.id} className="shrink-0">
-          <Attachment item={item} onRemove={onRemove && (() => onRemove(item.id))} />
+          <Attachment item={item} onRemove={onRemove && (() => remove(i, item.id))} />
         </li>
       ))}
     </ul>

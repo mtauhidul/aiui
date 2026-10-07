@@ -74,6 +74,15 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
       </section>
 
       <section className="space-y-3">
+        <h2 className="text-lg font-semibold">Accessibility</h2>
+        <ul className="list-disc space-y-1.5 pl-5 text-sm text-muted-foreground">
+          {doc.a11y.map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="space-y-3">
         <h2 className="text-lg font-semibold">Source</h2>
         <CodeBlock lang="tsx" code={source} />
       </section>

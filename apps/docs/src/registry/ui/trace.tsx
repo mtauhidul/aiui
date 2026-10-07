@@ -32,7 +32,10 @@ export function Trace({ events, className }: { events: TraceEvent[]; className?:
       </div>
       {events.map((e) => (
         <div key={e.id} role="row" className="grid grid-cols-[minmax(0,10rem)_1fr_4rem] items-center gap-3 px-3 py-1.5 text-xs">
-          <span role="cell" className="truncate font-mono">{e.name}</span>
+          <span role="cell" className="truncate font-mono">
+            {e.name}
+            {e.status === "error" && <span className="ml-1.5 font-sans text-red-500">failed</span>}
+          </span>
           <span role="cell" className="relative h-2 rounded-full bg-muted">
             <span
               className={cn("absolute inset-y-0 rounded-full", e.status === "error" ? "bg-red-500" : kindColor[e.kind])}

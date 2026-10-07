@@ -31,6 +31,15 @@ export function ApprovalPrompt({
     if (autoFocus && status === "pending") ref.current?.focus();
   }, [autoFocus, status]);
 
+  // Approve/Deny unmount once decided; keep keyboard focus in the prompt instead of losing it to <body>.
+  const wasPending = React.useRef(status === "pending");
+  React.useEffect(() => {
+    if (wasPending.current && status !== "pending" && document.activeElement === document.body) {
+      ref.current?.focus();
+    }
+    wasPending.current = status === "pending";
+  }, [status]);
+
   return (
     <div
       ref={ref}

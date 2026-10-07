@@ -35,6 +35,17 @@ describe("Message", () => {
     expect(screen.getByRole("button", { name: "Copy" })).toBeInTheDocument();
   });
 
+  it("announces the speaker to assistive tech, and lets you override or omit it", () => {
+    const { rerender } = render(<Message role="user" data-testid="m"><MessageContent>Hi</MessageContent></Message>);
+    expect(screen.getByTestId("m")).toHaveTextContent("You said:Hi");
+    rerender(<Message data-testid="m"><MessageContent>Hi</MessageContent></Message>);
+    expect(screen.getByTestId("m")).toHaveTextContent("Assistant said:Hi");
+    rerender(<Message label="Claude:" data-testid="m"><MessageContent>Hi</MessageContent></Message>);
+    expect(screen.getByTestId("m")).toHaveTextContent("Claude:Hi");
+    rerender(<Message label={false} data-testid="m"><MessageContent>Hi</MessageContent></Message>);
+    expect(screen.getByTestId("m")).toHaveTextContent(/^Hi$/);
+  });
+
   it("has no a11y violations", async () => {
     const { container } = render(<Message><MessageContent>Hi</MessageContent></Message>);
     expect(await checkA11y(container)).toHaveNoViolations();

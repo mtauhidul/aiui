@@ -65,7 +65,7 @@ export function ChatDemo() {
 
   return (
     <div className="flex h-[620px] flex-col rounded-xl border">
-      <div ref={ref} role="log" aria-live="polite" aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
+      <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
         {turns.length === 0 && !isStreaming && (
           <p className="pt-24 text-center text-sm text-muted-foreground">
             Send a message to see a streamed reply.

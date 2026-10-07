@@ -5,9 +5,16 @@ export type MessageRole = "user" | "assistant";
 
 export function Message({
   role = "assistant",
+  label,
   className,
+  children,
   ...props
-}: React.ComponentProps<"div"> & { role?: MessageRole }) {
+}: React.ComponentProps<"div"> & {
+  role?: MessageRole;
+  /** Spoken before the message so screen readers know the speaker. Pass false to omit. */
+  label?: string | false;
+}) {
+  const speaker = label ?? (role === "user" ? "You said:" : "Assistant said:");
   return (
     <div
       data-role={role}
@@ -17,7 +24,10 @@ export function Message({
         className,
       )}
       {...props}
-    />
+    >
+      {speaker && <span className="sr-only">{speaker}</span>}
+      {children}
+    </div>
   );
 }
 
