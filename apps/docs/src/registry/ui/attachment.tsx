@@ -33,9 +33,9 @@ function RemoveButton({ name, onRemove, className }: { name: string; onRemove: (
   );
 }
 
-function Progress({ value, className }: { value: number; className?: string }) {
+function Progress({ value, label, className }: { value: number; label: string; className?: string }) {
   return (
-    <div role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={value} className={cn("h-0.5 overflow-hidden rounded-full bg-border", className)}>
+    <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value} className={cn("h-0.5 overflow-hidden rounded-full bg-border", className)}>
       <div className="h-full bg-accent transition-[width] duration-200" style={{ width: `${value}%` }} />
     </div>
   );
@@ -62,7 +62,7 @@ export function Attachment({
           alt={item.name}
           className={cn("size-full rounded-lg border object-cover", uploading && "opacity-60", failed && "border-red-500")}
         />
-        {uploading && <Progress value={item.progress} className="absolute inset-x-1.5 bottom-1.5" />}
+        {uploading && <Progress value={item.progress} label={`Uploading ${item.name}`} className="absolute inset-x-1.5 bottom-1.5" />}
         {onRemove && (
           <RemoveButton name={item.name} onRemove={onRemove} className="absolute -right-1.5 -top-1.5 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100" />
         )}
@@ -87,7 +87,7 @@ export function Attachment({
           {failed ? item.error : uploading ? `${item.progress}%` : formatBytes(item.size)}
         </div>
       </div>
-      {uploading && <Progress value={item.progress} className="absolute inset-x-0 bottom-0 rounded-none" />}
+      {uploading && <Progress value={item.progress} label={`Uploading ${item.name}`} className="absolute inset-x-0 bottom-0 rounded-none" />}
       {onRemove && (
         <RemoveButton name={item.name} onRemove={onRemove} className="absolute right-1.5 top-1.5 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100" />
       )}

@@ -167,10 +167,9 @@ export function PromptComposer({
           value={value}
           placeholder={placeholder}
           aria-label="Message"
+          // role="combobox" isn't allowed on <textarea>, so use the attributes a textbox supports.
           {...(commands && {
-            role: "combobox",
             "aria-autocomplete": "list" as const,
-            "aria-expanded": menuOpen,
             "aria-controls": menuOpen ? menuId : undefined,
             "aria-activedescendant": menuOpen ? optionId(menuId, active) : undefined,
           })}
