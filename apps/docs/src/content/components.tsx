@@ -45,6 +45,14 @@ export const docs: ComponentDoc[] = [
       { name: "isStreaming", type: "boolean", default: "false", description: "Swaps send for stop and blocks submit." },
       { name: "placeholder", type: "string", default: '"Ask anything…"', description: "Input placeholder." },
     ] },
+  { slug: "slash-commands", title: "Slash Commands", group: "Input", description: "Type \"/\" in the Prompt Composer to open a filterable command menu. Arrow keys navigate, Enter or Tab selects, Escape dismisses.", file: "command-menu.tsx", demo: D.SlashCommandsDemo,
+    props: [
+      { name: "PromptComposer.commands", type: "SlashCommand[]", description: "{ id, name, description?, keywords?, insert?, icon? }. Name has no leading slash." },
+      { name: "PromptComposer.onCommand", type: "(command: SlashCommand) => void", description: "Called for commands without insert. The typed /query is cleared." },
+      { name: "SlashCommand.insert", type: "string", description: "Replace the input with this text (a prompt template) instead of running the command." },
+      { name: "CommandMenu", type: "component", description: "The listbox on its own, for custom inputs. Takes id, commands, activeIndex, onActiveChange and onSelect." },
+      { name: "filterCommands(commands, query)", type: "SlashCommand[]", description: "Ranks name-prefix matches first, then name substrings, then keywords or description words starting with the query." },
+    ] },
   { slug: "model-picker", title: "Model Picker", group: "Input", description: "Searchable model selector grouped by provider, with context size and capability tags. Sits in the Prompt Composer toolbar.", file: "model-picker.tsx", demo: D.ModelPickerDemo,
     props: [
       { name: "models", type: "Model[]", description: "{ value, label, provider, description?, contextWindow?, capabilities? }. contextWindow is in tokens." },

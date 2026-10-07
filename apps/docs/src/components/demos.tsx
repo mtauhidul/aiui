@@ -16,6 +16,7 @@ import { Artifact } from "@/registry/ui/artifact";
 import { AttachmentList } from "@/registry/ui/attachment";
 import { useAttachments } from "@/registry/hooks/use-attachments";
 import { ModelPicker, type Model } from "@/registry/ui/model-picker";
+import { type SlashCommand } from "@/registry/ui/command-menu";
 import { useFakeStream } from "@/registry/hooks/use-fake-stream";
 
 const SOURCES: Source[] = [
@@ -242,6 +243,31 @@ export function ModelPickerDemo() {
       />
       <p className="text-xs text-muted-foreground">Selected: <span className="font-mono">{model}</span></p>
       {sent && <p className="text-xs text-muted-foreground">Sent {sent}</p>}
+    </div>
+  );
+}
+
+const COMMANDS: SlashCommand[] = [
+  { id: "summarize", name: "summarize", description: "Summarize text", keywords: ["tldr"], insert: "Summarize the following:\n\n" },
+  { id: "translate", name: "translate", description: "Translate to another language", insert: "Translate to French:\n\n" },
+  { id: "clear", name: "clear", description: "Clear the conversation" },
+  { id: "model", name: "model", description: "Switch model" },
+  { id: "help", name: "help", description: "Show available commands" },
+];
+
+export function SlashCommandsDemo() {
+  const [log, setLog] = React.useState<string[]>([]);
+  return (
+    <div className="space-y-4 pt-52">
+      <PromptComposer
+        placeholder='Type "/" for commands…'
+        commands={COMMANDS}
+        onCommand={(c) => setLog((l) => [`Ran /${c.name}`, ...l].slice(0, 4))}
+        onSubmit={(t) => setLog((l) => [`Sent: ${t}`, ...l].slice(0, 4))}
+      />
+      <ul className="space-y-0.5 text-xs text-muted-foreground">
+        {log.map((l, i) => <li key={i}>{l}</li>)}
+      </ul>
     </div>
   );
 }

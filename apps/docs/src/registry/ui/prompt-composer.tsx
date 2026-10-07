@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import { CommandMenu, filterCommands, optionId, type SlashCommand } from "./command-menu";
 
 export function PromptComposer({
   onSubmit,
@@ -13,6 +14,8 @@ export function PromptComposer({
   toolbar,
   onFiles,
   accept,
+  commands,
+  onCommand,
   allowEmpty = false,
   submitDisabled = false,
   className,
@@ -29,6 +32,10 @@ export function PromptComposer({
   accept?: string;
   /** Rendered below the input, e.g. a <ModelPicker />. */
   toolbar?: React.ReactNode;
+  /** Typing "/" at the start of the input opens a command menu. */
+  commands?: SlashCommand[];
+  /** Called when a command without `insert` is chosen. The "/query" text is cleared. */
+  onCommand?: (command: SlashCommand) => void;
   /** Allow sending with no text (e.g. attachments only). */
   allowEmpty?: boolean;
   /** Block sending, e.g. while uploads are in progress. */
@@ -40,6 +47,39 @@ export function PromptComposer({
   const ref = React.useRef<HTMLTextAreaElement>(null);
   const fileInput = React.useRef<HTMLInputElement>(null);
   const dragDepth = React.useRef(0);
+  const menuId = React.useId();
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [dismissed, setDismissed] = React.useState(false);
+  const caretToEnd = React.useRef(false);
+
+  // The menu is open while the whole input is a single "/token".
+  const slashQuery = commands ? /^\/(\S*)$/.exec(value)?.[1] : undefined;
+  const matches = React.useMemo(
+    () => (commands && slashQuery !== undefined ? filterCommands(commands, slashQuery) : []),
+    [commands, slashQuery],
+  );
+  const menuOpen = !dismissed && matches.length > 0;
+  const active = Math.min(activeIndex, Math.max(0, matches.length - 1));
+
+  React.useLayoutEffect(() => {
+    if (!caretToEnd.current) return;
+    caretToEnd.current = false;
+    const el = ref.current;
+    el?.focus();
+    el?.setSelectionRange(el.value.length, el.value.length);
+  }, [value]);
+
+  function selectCommand(command: SlashCommand) {
+    setDismissed(false);
+    setActiveIndex(0);
+    if (command.insert !== undefined) {
+      caretToEnd.current = true;
+      setValue(command.insert);
+    } else {
+      setValue("");
+      onCommand?.(command);
+    }
+  }
 
   React.useLayoutEffect(() => {
     const el = ref.current;
@@ -90,6 +130,16 @@ export function PromptComposer({
         className,
       )}
     >
+      {menuOpen && (
+        <CommandMenu
+          id={menuId}
+          commands={matches}
+          activeIndex={active}
+          onActiveChange={setActiveIndex}
+          onSelect={selectCommand}
+          className="absolute inset-x-0 bottom-full z-20 mb-2"
+        />
+      )}
       {attachments}
       <div className="flex items-end gap-2">
         {onFiles && (
@@ -117,13 +167,42 @@ export function PromptComposer({
           value={value}
           placeholder={placeholder}
           aria-label="Message"
-          onChange={(e) => setValue(e.target.value)}
+          {...(commands && {
+            role: "combobox",
+            "aria-autocomplete": "list" as const,
+            "aria-expanded": menuOpen,
+            "aria-controls": menuOpen ? menuId : undefined,
+            "aria-activedescendant": menuOpen ? optionId(menuId, active) : undefined,
+          })}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setDismissed(false);
+            setActiveIndex(0);
+          }}
           onPaste={(e) => {
             if (!onFiles || !e.clipboardData.files.length) return;
             e.preventDefault();
             onFiles(Array.from(e.clipboardData.files));
           }}
           onKeyDown={(e) => {
+            if (menuOpen && !e.nativeEvent.isComposing) {
+              if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                const step = e.key === "ArrowDown" ? 1 : -1;
+                setActiveIndex((active + step + matches.length) % matches.length);
+                return;
+              }
+              if (e.key === "Enter" || e.key === "Tab") {
+                e.preventDefault();
+                selectCommand(matches[active]);
+                return;
+              }
+              if (e.key === "Escape") {
+                e.preventDefault();
+                setDismissed(true);
+                return;
+              }
+            }
             if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
               e.preventDefault();
               submit();

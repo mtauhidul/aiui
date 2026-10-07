@@ -90,7 +90,8 @@
       "type": "registry:ui",
       "registryDependencies": [
         "button",
-        "utils"
+        "utils",
+        "command-menu"
       ],
       "files": [
         {
@@ -263,6 +264,19 @@
       "files": [
         {
           "path": "src/registry/ui/model-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/command-menu.tsx",
           "type": "registry:ui"
         }
       ]
