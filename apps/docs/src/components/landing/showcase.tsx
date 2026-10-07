@@ -26,7 +26,7 @@ export function Showcase() {
             <Tabs.Tab
               key={t.value}
               value={t.value}
-              className="relative px-4 py-3.5 text-[15px] text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring data-[selected]:text-foreground data-[selected]:after:absolute data-[selected]:after:inset-x-3 data-[selected]:after:bottom-0 data-[selected]:after:h-px data-[selected]:after:bg-foreground"
+              className="relative px-4 py-3.5 text-[15px] text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring data-[active]:text-foreground data-[active]:after:absolute data-[active]:after:inset-x-3 data-[active]:after:bottom-0 data-[active]:after:h-px data-[active]:after:bg-foreground"
             >
               {t.label}
             </Tabs.Tab>

@@ -28,7 +28,7 @@ export function Artifact({
             <Tabs.Tab
               key={v}
               value={v}
-              className="-mb-px rounded-sm border-b-2 border-transparent px-2.5 py-1.5 font-mono capitalize text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[selected]:border-foreground data-[selected]:text-foreground"
+              className="-mb-px rounded-sm border-b-2 border-transparent px-2.5 py-1.5 font-mono capitalize text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[active]:border-foreground data-[active]:text-foreground"
             >
               {v}
             </Tabs.Tab>
