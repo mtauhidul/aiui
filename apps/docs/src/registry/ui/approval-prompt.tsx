@@ -10,6 +10,7 @@ export function ApprovalPrompt({
   description,
   details,
   status = "pending",
+  autoFocus = false,
   onApprove,
   onDeny,
   className,
@@ -18,11 +19,17 @@ export function ApprovalPrompt({
   description?: string;
   details?: React.ReactNode;
   status?: "pending" | "approved" | "denied";
+  /** Move focus into the prompt when it appears (use when it arrives mid-conversation). */
+  autoFocus?: boolean;
   onApprove?: () => void;
   onDeny?: () => void;
   className?: string;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (autoFocus && status === "pending") ref.current?.focus();
+  }, [autoFocus, status]);
 
   return (
     <div
@@ -30,7 +37,8 @@ export function ApprovalPrompt({
       role="alertdialog"
       aria-modal="false"
       aria-label={title}
-      className={cn("rounded-lg border bg-muted/20 p-3", className)}
+      tabIndex={-1}
+      className={cn("rounded-lg border bg-muted/20 p-3 outline-none focus-visible:ring-2 focus-visible:ring-ring", className)}
     >
       <div className="text-sm font-medium">{title}</div>
       {description && <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>}
