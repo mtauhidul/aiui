@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "approval-prompt",
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/approval-prompt.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { Button } from \"./button\";\n\n/** Human-in-the-loop gate: the agent wants to do something and needs a yes/no. */\nexport function ApprovalPrompt({\n  title,\n  description,\n  details,\n  status = \"pending\",\n  onApprove,\n  onDeny,\n  className,\n}: {\n  title: string;\n  description?: string;\n  details?: React.ReactNode;\n  status?: \"pending\" | \"approved\" | \"denied\";\n  onApprove?: () => void;\n  onDeny?: () => void;\n  className?: string;\n}) {\n  const ref = React.useRef<HTMLDivElement>(null);\n\n  return (\n    <div\n      ref={ref}\n      role=\"alertdialog\"\n      aria-modal=\"false\"\n      aria-label={title}\n      className={cn(\"rounded-lg border bg-muted/20 p-3\", className)}\n    >\n      <div className=\"text-sm font-medium\">{title}</div>\n      {description && <p className=\"mt-0.5 text-sm text-muted-foreground\">{description}</p>}\n      {details && <div className=\"mt-2 rounded-md bg-muted/60 p-2.5 font-mono text-xs\">{details}</div>}\n      <div className=\"mt-3 flex items-center gap-2\" aria-live=\"polite\">\n        {status === \"pending\" ? (\n          <>\n            <Button size=\"sm\" variant=\"accent\" onClick={onApprove}>Approve</Button>\n            <Button size=\"sm\" variant=\"outline\" onClick={onDeny}>Deny</Button>\n          </>\n        ) : (\n          <span className=\"text-xs text-muted-foreground\">\n            {status === \"approved\" ? \"Approved\" : \"Denied\"}\n          </span>\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

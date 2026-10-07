@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prompt-composer",
+  "registryDependencies": [
+    "button",
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/registry/ui/prompt-composer.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { Button } from \"./button\";\n\nexport function PromptComposer({\n  onSubmit,\n  onStop,\n  isStreaming = false,\n  placeholder = \"Ask anything…\",\n  className,\n}: {\n  onSubmit: (value: string) => void;\n  onStop?: () => void;\n  isStreaming?: boolean;\n  placeholder?: string;\n  className?: string;\n}) {\n  const [value, setValue] = React.useState(\"\");\n  const ref = React.useRef<HTMLTextAreaElement>(null);\n\n  React.useLayoutEffect(() => {\n    const el = ref.current;\n    if (!el) return;\n    el.style.height = \"auto\";\n    el.style.height = `${Math.min(el.scrollHeight, 200)}px`;\n  }, [value]);\n\n  function submit() {\n    const text = value.trim();\n    if (!text || isStreaming) return;\n    onSubmit(text);\n    setValue(\"\");\n  }\n\n  return (\n    <form\n      onSubmit={(e) => {\n        e.preventDefault();\n        submit();\n      }}\n      className={cn(\n        \"flex items-end gap-2 rounded-2xl border bg-background p-2 shadow-sm transition-shadow focus-within:ring-2 focus-within:ring-ring/40\",\n        className,\n      )}\n    >\n      <textarea\n        ref={ref}\n        rows={1}\n        value={value}\n        placeholder={placeholder}\n        aria-label=\"Message\"\n        onChange={(e) => setValue(e.target.value)}\n        onKeyDown={(e) => {\n          if (e.key === \"Enter\" && !e.shiftKey && !e.nativeEvent.isComposing) {\n            e.preventDefault();\n            submit();\n          }\n        }}\n        className=\"max-h-[200px] flex-1 resize-none bg-transparent px-2 py-1.5 text-[15px] outline-none placeholder:text-muted-foreground\"\n      />\n      {isStreaming ? (\n        <Button type=\"button\" variant=\"outline\" size=\"icon\" onClick={onStop} aria-label=\"Stop generating\">\n          <svg viewBox=\"0 0 16 16\" fill=\"currentColor\"><rect x=\"3.5\" y=\"3.5\" width=\"9\" height=\"9\" rx=\"1.5\" /></svg>\n        </Button>\n      ) : (\n        <Button type=\"submit\" variant=\"accent\" size=\"icon\" disabled={!value.trim()} aria-label=\"Send message\">\n          <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.75\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><path d=\"M8 13V3M3.5 7.5 8 3l4.5 4.5\" /></svg>\n        </Button>\n      )}\n    </form>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,47 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export type TraceEvent = {
+  id: string;
+  kind: "llm" | "tool" | "retrieval" | "agent";
+  name: string;
+  /** Start offset in ms from the beginning of the run. */
+  start: number;
+  /** Duration in ms. */
+  duration: number;
+  status?: "success" | "error";
+};
+
+const kindColor: Record<TraceEvent["kind"], string> = {
+  llm: "bg-accent",
+  tool: "bg-emerald-500",
+  retrieval: "bg-amber-500",
+  agent: "bg-foreground/70",
+};
+
+const fmt = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(2)}s` : `${Math.round(ms)}ms`);
+
+/** Waterfall view of an agent run: one row per span, bars scaled to total duration. */
+export function Trace({ events, className }: { events: TraceEvent[]; className?: string }) {
+  const total = Math.max(1, ...events.map((e) => e.start + e.duration));
+  return (
+    <div className={cn("rounded-lg border", className)} role="table" aria-label="Trace">
+      <div role="row" className="flex items-center justify-between border-b px-3 py-2 text-xs text-muted-foreground">
+        <span role="columnheader">Span</span>
+        <span role="columnheader">Total {fmt(total)}</span>
+      </div>
+      {events.map((e) => (
+        <div key={e.id} role="row" className="grid grid-cols-[minmax(0,10rem)_1fr_4rem] items-center gap-3 px-3 py-1.5 text-xs">
+          <span role="cell" className="truncate font-mono">{e.name}</span>
+          <span role="cell" className="relative h-2 rounded-full bg-muted">
+            <span
+              className={cn("absolute inset-y-0 rounded-full", e.status === "error" ? "bg-red-500" : kindColor[e.kind])}
+              style={{ left: `${(e.start / total) * 100}%`, width: `max(2px, ${(e.duration / total) * 100}%)` }}
+            />
+          </span>
+          <span role="cell" className="text-right tabular-nums text-muted-foreground">{fmt(e.duration)}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
