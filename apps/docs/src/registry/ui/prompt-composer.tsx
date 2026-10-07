@@ -232,7 +232,7 @@ export function PromptComposer({
       </div>
       <div className="flex items-center gap-1 px-1 pt-1">
         {toolbar}
-        <span aria-hidden className="ml-auto hidden font-mono text-[11px] text-muted-foreground group-focus-within/composer:inline">
+        <span aria-hidden className="ml-auto hidden font-mono text-[11px] text-muted-foreground [@media(hover:hover)]:group-focus-within/composer:inline">
           {isStreaming && onStop ? "esc stop" : "↵ send · ⇧↵ newline"}
         </span>
       </div>

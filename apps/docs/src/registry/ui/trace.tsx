@@ -31,13 +31,13 @@ export function Trace({ events, className }: { events: TraceEvent[]; className?:
         <span role="columnheader">Total {fmt(total)}</span>
       </div>
       {events.map((e) => (
-        <div key={e.id} role="row" className="grid grid-cols-[minmax(0,12rem)_1fr_4rem] items-center gap-3 px-3 py-1.5 text-xs">
+        <div key={e.id} role="row" className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 px-3 py-2 text-xs sm:grid-cols-[minmax(0,12rem)_1fr_4rem] sm:py-1.5">
           <span role="cell" className="truncate font-mono">
             <span className="mr-2 text-[10px] uppercase tracking-wider text-muted-foreground">{e.kind}</span>
             {e.name}
             {e.status === "error" && <span className="ml-1.5 font-sans text-red-700 dark:text-red-400">failed</span>}
           </span>
-          <span role="cell" className="relative h-1.5 rounded-sm bg-muted">
+          <span role="cell" className="relative order-3 col-span-2 h-1.5 rounded-sm bg-muted sm:order-none sm:col-span-1">
             <span
               className={cn("absolute inset-y-0 rounded-sm", e.status === "error" ? "bg-red-500" : kindColor[e.kind])}
               style={{ left: `${(e.start / total) * 100}%`, width: `max(2px, ${(e.duration / total) * 100}%)` }}

@@ -106,13 +106,13 @@ export function ChatDemo() {
       </div>
       <div className="px-4 pb-4 pt-2">
         {!isStreaming && (
-          <div className="mb-3 flex flex-wrap gap-2" aria-label="Suggested prompts" role="group">
+          <div className="-mx-4 mb-3 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Suggested prompts" role="group">
             {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
               <button
                 key={p}
                 type="button"
                 onClick={() => send(p)}
-                className="rounded-md border px-3 py-1.5 text-[14px] text-muted-foreground outline-none transition-colors hover:border-white/30 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                className="shrink-0 whitespace-nowrap rounded-md border px-3 py-1.5 text-[14px] text-muted-foreground outline-none transition-colors hover:border-white/30 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {p}
               </button>
