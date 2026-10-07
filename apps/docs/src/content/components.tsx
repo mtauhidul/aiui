@@ -33,7 +33,7 @@ export const docs: ComponentDoc[] = [
       { name: "sources", type: "Source[]", description: "When set, [n] in the text renders as a citation marker for sources[n - 1]." },
       { name: "streaming", type: "boolean", default: "false", description: "Shows a caret after the last block and sets aria-busy while text is arriving." },
     ] },
-  { slug: "code-block", a11y: ["The Copy button confirms through a separate role=\"status\" region (\"Copied to clipboard\"), which screen readers announce reliably.", "Light mode uses a high-contrast Shiki theme (github-light-high-contrast); all token colors pass 4.5:1."],  title: "Code Block", group: "Conversation", description: "Syntax-highlighted code with light and dark themes and a copy button.", file: "code-block.tsx", demo: D.CodeBlockDemo,
+  { slug: "code-block", a11y: ["The code area is keyboard focusable so long lines can be scrolled without a mouse.", "The Copy button confirms through a separate role=\"status\" region (\"Copied to clipboard\"), which screen readers announce reliably.", "Light mode uses a high-contrast Shiki theme (github-light-high-contrast); all token colors pass 4.5:1."],  title: "Code Block", group: "Conversation", description: "Syntax-highlighted code with light and dark themes and a copy button.", file: "code-block.tsx", demo: D.CodeBlockDemo,
     props: [
       { name: "code", type: "string", description: "Source code to display." },
       { name: "lang", type: "string", default: '"text"', description: "Any Shiki language id." },

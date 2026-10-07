@@ -13,7 +13,8 @@ export function SiteHeader() {
           <Wordmark />
         </Link>
         <nav className="ml-auto flex items-center gap-1" aria-label="Primary">
-          <Link href="/docs/button" className={link}>components</Link>
+          <Link href="/docs/getting-started" className={`${link} max-sm:hidden`}>docs</Link>
+          <Link href="/docs/button" className={`${link} max-sm:hidden`}>components</Link>
           <a href="https://github.com/mtauhidul/aiui" target="_blank" rel="noreferrer" className={link}>github</a>
         </nav>
       </div>

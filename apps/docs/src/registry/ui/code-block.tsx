@@ -63,11 +63,12 @@ export function CodeBlock({
       </div>
       {html ? (
         <div
-          className="overflow-x-auto p-3 font-mono [&_.shiki]:!bg-transparent [&_.shiki_span]:text-[var(--shiki-light)] dark:[&_.shiki_span]:text-[var(--shiki-dark)]"
+          tabIndex={0}
+          className="overflow-x-auto p-3 font-mono outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&_.shiki]:!bg-transparent [&_.shiki_span]:text-[var(--shiki-light)] dark:[&_.shiki_span]:text-[var(--shiki-dark)]"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       ) : (
-        <pre className="overflow-x-auto p-3 font-mono">
+        <pre tabIndex={0} className="overflow-x-auto p-3 font-mono outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
           <code>{code}</code>
         </pre>
       )}

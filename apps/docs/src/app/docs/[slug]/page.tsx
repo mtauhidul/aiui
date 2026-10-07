@@ -6,6 +6,7 @@ import { docs } from "@/content/components";
 import { CodeBlock } from "@/registry/ui/code-block";
 import Link from "next/link";
 import { Panel } from "@/components/kit";
+import { TableScroll } from "@/components/guide";
 
 import { REGISTRY_URL as REGISTRY } from "@/lib/registry-url";
 
@@ -65,7 +66,7 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
 
       <section className="space-y-4">
         <h2 className={h2}>props</h2>
-        <div className="overflow-x-auto rounded-lg border">
+        <TableScroll label={`${doc.title} props`}>
           <table className="w-full text-[15px]">
             <thead className="border-b bg-white/[0.03] text-left text-[14px] text-muted-foreground">
               <tr><th className="px-4 py-3 font-medium">prop</th><th className="px-4 py-3 font-medium">type</th><th className="px-4 py-3 font-medium">default</th><th className="px-4 py-3 font-medium">description</th></tr>
@@ -81,7 +82,7 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </section>
 
       <section className="space-y-4">

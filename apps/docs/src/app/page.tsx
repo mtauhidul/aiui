@@ -74,17 +74,15 @@ export default function Home() {
               open source and shadcn-compatible. copy the code into your project and own every line.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link href="/docs/button" className={cream}>
-                browse components
+              <Link href="/docs/getting-started" className={cream}>
+                get started
               </Link>
-              <a
-                href="https://github.com/mtauhidul/aiui"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/docs/button"
                 className="rounded-md text-[17px] text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
               >
-                view on github →
-              </a>
+                browse components →
+              </Link>
             </div>
           </div>
           </div>

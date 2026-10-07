@@ -105,4 +105,9 @@ describe("CodeBlock copy announcement", () => {
     await user.click(screen.getByRole("button", { name: "Copy" }));
     await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Copied to clipboard"));
   });
+
+  it("makes the scrollable code area keyboard focusable", () => {
+    const { container } = render(<CodeBlock code={"x".repeat(200)} lang="ts" />);
+    expect(container.querySelector("pre")).toHaveAttribute("tabindex", "0");
+  });
 });
