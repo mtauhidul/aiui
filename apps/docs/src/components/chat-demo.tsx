@@ -79,7 +79,7 @@ export function ChatDemo() {
 
   return (
     <div className="flex h-full min-h-[560px] flex-col">
-      <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
+      <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto px-6 py-6 min-[900px]:px-[max(1.5rem,calc((100%-46rem)/2))]">
         {turns.map((t, i) => (
           <Message key={i} role={t.role}>
             <MessageContent>
@@ -104,7 +104,7 @@ export function ChatDemo() {
           </Message>
         )}
       </div>
-      <div className="px-4 pb-4 pt-2">
+      <div className="px-4 pb-4 pt-2 min-[900px]:px-[max(1rem,calc((100%-46rem)/2))]">
         {!isStreaming && (
           <div className="-mx-4 mb-3 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Suggested prompts" role="group">
             {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
