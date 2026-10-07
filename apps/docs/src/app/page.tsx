@@ -197,9 +197,9 @@ export default function Home() {
               <Panel bodyClassName="p-6">
                 <Still className="space-y-3">
                   <CommandMenuStill />
-                  <div className="flex gap-2.5">
-                    <Attachment item={{ name: "brief.pdf", size: 245000, status: "done", progress: 100 }} />
-                    <Attachment item={{ name: "data.csv", size: 880000, status: "uploading", progress: 64 }} />
+                  <div className="grid grid-cols-2 gap-2.5 sm:flex">
+                    <Attachment className="w-auto min-w-0 sm:w-44" item={{ name: "brief.pdf", size: 245000, status: "done", progress: 100 }} />
+                    <Attachment className="w-auto min-w-0 sm:w-44" item={{ name: "data.csv", size: 880000, status: "uploading", progress: 64 }} />
                   </div>
                 </Still>
               </Panel>
