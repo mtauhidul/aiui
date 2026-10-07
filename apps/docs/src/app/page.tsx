@@ -160,8 +160,8 @@ export default function Home() {
         {/* Agents */}
         <Section id="agents">
           <Statement id="agents" claim="humans stay in control" rest="approvals, artifacts and feedback are first-class" className="max-w-[820px]" />
-          <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-3">
-            <div>
+          <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+            <div className="md:col-span-2 lg:col-span-1">
               <Panel bodyClassName="p-5">
                 <Still>
                   <ApprovalPrompt title="Run migration on production?" description="This will modify the users table." details="ALTER TABLE users ADD COLUMN plan text;" />
@@ -197,9 +197,9 @@ export default function Home() {
               <Panel bodyClassName="p-6">
                 <Still className="space-y-3">
                   <CommandMenuStill />
-                  <div className="grid grid-cols-2 gap-2.5 sm:flex">
-                    <Attachment className="w-auto min-w-0 sm:w-44" item={{ name: "brief.pdf", size: 245000, status: "done", progress: 100 }} />
-                    <Attachment className="w-auto min-w-0 sm:w-44" item={{ name: "data.csv", size: 880000, status: "uploading", progress: 64 }} />
+                  <div className="grid max-w-[23rem] grid-cols-2 gap-2.5">
+                    <Attachment className="w-auto min-w-0" item={{ name: "brief.pdf", size: 245000, status: "done", progress: 100 }} />
+                    <Attachment className="w-auto min-w-0" item={{ name: "data.csv", size: 880000, status: "uploading", progress: 64 }} />
                   </div>
                 </Still>
               </Panel>
