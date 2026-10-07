@@ -159,7 +159,7 @@ export default function Home() {
 
         {/* Agents */}
         <Section id="agents">
-          <Statement id="agents" claim="humans stay in control" rest="approvals, artifacts and feedback are first-class" className="max-w-[820px]" />
+          <Statement id="agents" claim="humans stay in control" rest={<>approvals, artifacts and feedback are <span className="whitespace-nowrap">first-class</span></>} className="max-w-[820px]" />
           <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
             <div className="md:col-span-2 lg:col-span-1">
               <Panel bodyClassName="p-5">
