@@ -17,6 +17,7 @@ import { AttachmentList } from "@/registry/ui/attachment";
 import { useAttachments } from "@/registry/hooks/use-attachments";
 import { ModelPicker, type Model } from "@/registry/ui/model-picker";
 import { type SlashCommand } from "@/registry/ui/command-menu";
+import { Feedback, type FeedbackDetails } from "@/registry/ui/feedback";
 import { useFakeStream } from "@/registry/hooks/use-fake-stream";
 
 const SOURCES: Source[] = [
@@ -266,6 +267,30 @@ export function SlashCommandsDemo() {
         onSubmit={(t) => setLog((l) => [`Sent: ${t}`, ...l].slice(0, 4))}
       />
       <ul className="space-y-0.5 text-xs text-muted-foreground">
+        {log.map((l, i) => <li key={i}>{l}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+export function FeedbackDemo() {
+  const [log, setLog] = React.useState<string[]>([]);
+  const push = (s: string) => setLog((l) => [s, ...l].slice(0, 4));
+  return (
+    <div className="space-y-4">
+      <Message>
+        <div className="min-w-0">
+          <MessageContent>Use flexbox: set <code className="font-mono">display: flex</code> and <code className="font-mono">place-content: center</code> on the parent.</MessageContent>
+          <Feedback
+            className="mt-1"
+            onValueChange={(v) => push(`Rating: ${v ?? "cleared"}`)}
+            onSubmit={(d: FeedbackDetails) => push(`Submitted ${d.value}: [${d.reasons.join(", ")}] "${d.comment}"`)}
+          >
+            <Button variant="ghost" size="sm">Copy</Button>
+          </Feedback>
+        </div>
+      </Message>
+      <ul className="space-y-0.5 font-mono text-xs text-muted-foreground">
         {log.map((l, i) => <li key={i}>{l}</li>)}
       </ul>
     </div>

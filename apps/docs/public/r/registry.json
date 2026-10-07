@@ -280,6 +280,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "feedback",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "src/registry/ui/feedback.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

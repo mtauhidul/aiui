@@ -45,6 +45,15 @@ export const docs: ComponentDoc[] = [
       { name: "isStreaming", type: "boolean", default: "false", description: "Swaps send for stop and blocks submit." },
       { name: "placeholder", type: "string", default: '"Ask anything…"', description: "Input placeholder." },
     ] },
+  { slug: "feedback", title: "Feedback", group: "Conversation", description: "Thumbs up and down for a response, with an optional follow-up for reasons and a comment. Designed to sit in the message actions row.", file: "feedback.tsx", demo: D.FeedbackDemo,
+    props: [
+      { name: "value / defaultValue", type: '"up" | "down" | null', description: "Current rating (controlled or initial)." },
+      { name: "onValueChange", type: "(value: FeedbackValue | null) => void", description: "Fires on every change. null when the active rating is toggled off." },
+      { name: "onSubmit", type: "(details: FeedbackDetails) => void", description: "Fires when the follow-up is submitted: { value, reasons, comment }." },
+      { name: "details", type: '"never" | "down" | "both"', default: '"down"', description: "Which ratings open the follow-up form." },
+      { name: "reasons", type: "{ up?: string[]; down?: string[] }", description: "Reason chips per rating. Defaults are exported as DEFAULT_REASONS." },
+      { name: "children", type: "ReactNode", description: "Extra actions (e.g. Copy) rendered in the same row, so the follow-up form opens below the whole row." },
+    ] },
   { slug: "slash-commands", title: "Slash Commands", group: "Input", description: "Type \"/\" in the Prompt Composer to open a filterable command menu. Arrow keys navigate, Enter or Tab selects, Escape dismisses.", file: "command-menu.tsx", demo: D.SlashCommandsDemo,
     props: [
       { name: "PromptComposer.commands", type: "SlashCommand[]", description: "{ id, name, description?, keywords?, insert?, icon? }. Name has no leading slash." },
