@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
 import { Wordmark } from "./brand";
 
+const link = "rounded-md px-3 py-1.5 text-[16px] text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring";
+
 export function SiteHeader() {
   return (
-    <header className="sticky top-3 z-30 px-3">
-      <div className="mx-auto flex h-12 w-full max-w-5xl items-center gap-1 border bg-background/75 pl-2 pr-1.5 shadow-[0_8px_30px_-12px_rgb(0_0_0/0.25)] backdrop-blur-xl [border-radius:calc(var(--radius)+6px)]">
+    <header className="fixed inset-x-0 top-0 z-30 h-[61px] border-b border-white/[0.06] bg-black/90 backdrop-blur">
+      <div className="mx-auto flex h-full w-full max-w-[1240px] items-center gap-2 px-5 sm:px-8">
         <MobileNav />
-        <Link href="/" className="rounded-md px-1.5 py-1 text-[17px] outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="aiui home">
+        <Link href="/" className="rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="aiui home">
           <Wordmark />
         </Link>
-        <nav className="ml-auto flex items-center gap-0.5 text-[13px]" aria-label="Primary">
-          <Link href="/docs/button" className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Components</Link>
-          <a href="https://github.com/mtauhidul/aiui" target="_blank" rel="noreferrer" className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">GitHub</a>
-          <ThemeToggle />
+        <nav className="ml-auto flex items-center gap-1" aria-label="Primary">
+          <Link href="/docs/button" className={link}>components</Link>
+          <a href="https://github.com/mtauhidul/aiui" target="_blank" rel="noreferrer" className={link}>github</a>
         </nav>
       </div>
     </header>

@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Figtree, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { REGISTRY_URL } from "@/lib/registry-url";
 import { SiteHeader } from "@/components/site-header";
 
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
 });
 
@@ -26,17 +24,15 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "aiui", description },
 };
 
+export const viewport: Viewport = { colorScheme: "dark", themeColor: "#000000" };
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${figtree.variable} ${geistMono.variable} h-full dark antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col pt-[61px]">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-foreground focus:px-3 focus:py-2 focus:text-sm focus:text-background"
@@ -44,6 +40,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader />
+        {/* Faint vertical rails that mark the content column on wide screens. */}
+        <div aria-hidden className="pointer-events-none fixed inset-y-0 left-1/2 hidden w-full max-w-[1240px] -translate-x-1/2 border-x border-white/[0.05] lg:block" />
         {children}
       </body>
     </html>

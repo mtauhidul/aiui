@@ -2,10 +2,13 @@
 
 import * as React from "react";
 
-/** Keeps a scroll container pinned to the bottom unless the user scrolls up. */
-export function useAutoScroll<T extends HTMLElement>(dep: unknown) {
+/**
+ * Keeps a scroll container pinned to the bottom unless the user scrolls up.
+ * Pass `{ pinOnMount: false }` to open at the top of an existing conversation.
+ */
+export function useAutoScroll<T extends HTMLElement>(dep: unknown, { pinOnMount = true }: { pinOnMount?: boolean } = {}) {
   const ref = React.useRef<T>(null);
-  const pinned = React.useRef(true);
+  const pinned = React.useRef(pinOnMount);
 
   React.useEffect(() => {
     const el = ref.current;

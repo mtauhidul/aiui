@@ -50,10 +50,16 @@ function AssistantExtras({ done }: { done: boolean }) {
 
 type Turn = { role: "user" | "assistant"; content: string };
 
+// The window opens on a finished conversation, so the first impression is the product, not an empty state.
+const SEED: Turn[] = [
+  { role: "user", content: "How does streaming markdown stay smooth?" },
+  { role: "assistant", content: REPLY },
+];
+
 export function ChatDemo() {
-  const [turns, setTurns] = React.useState<Turn[]>([]);
+  const [turns, setTurns] = React.useState<Turn[]>(SEED);
   const { text, isStreaming, start, stop } = useFakeStream();
-  const ref = useAutoScroll<HTMLDivElement>(text + turns.length);
+  const ref = useAutoScroll<HTMLDivElement>(text + turns.length, { pinOnMount: false });
 
   const wasStreaming = React.useRef(false);
   React.useEffect(() => {
@@ -66,29 +72,13 @@ export function ChatDemo() {
   function send(text: string) {
     setTurns((t) => [...t, { role: "user", content: text }]);
     start(REPLY);
+    // Jump to the newest message; the scroll event re-pins the log so the reply is followed as it streams.
+    requestAnimationFrame(() => ref.current?.scrollTo({ top: ref.current.scrollHeight }));
   }
 
   return (
-    <div className="flex h-[620px] flex-col">
+    <div className="flex h-full min-h-[560px] flex-col">
       <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
-        {turns.length === 0 && !isStreaming && (
-          <div className="flex h-full flex-col items-center justify-center gap-5 text-center">
-            <p className="font-display text-2xl font-medium tracking-[-0.03em]">Try it. It is <em className="text-accent">live</em>.</p>
-            <p className="max-w-xs text-sm text-muted-foreground">Pick a prompt or type your own to watch a streamed reply with reasoning, a tool call and citations.</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => send(p)}
-                  className="font-medium border px-3 py-1.5 text-xs text-muted-foreground outline-none transition-colors hover:border-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  {p}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
         {turns.map((t, i) => (
           <Message key={i} role={t.role}>
             <MessageContent>
@@ -113,7 +103,21 @@ export function ChatDemo() {
           </Message>
         )}
       </div>
-      <div className="p-4">
+      <div className="px-4 pb-4 pt-2">
+        {!isStreaming && (
+          <div className="mb-3 flex flex-wrap gap-2" aria-label="Suggested prompts" role="group">
+            {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => send(p)}
+                className="rounded-md border px-3 py-1.5 text-[14px] text-muted-foreground outline-none transition-colors hover:border-white/30 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        )}
         <PromptComposer
           isStreaming={isStreaming}
           onStop={stop}
