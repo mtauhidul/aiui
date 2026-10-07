@@ -8,22 +8,22 @@ import { docs, groups } from "@/content/components";
 export function DocsNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   return (
-    <nav className="space-y-5 text-sm" aria-label="Components">
+    <nav className="space-y-7 text-sm" aria-label="Components">
       {groups.map((g) => (
         <div key={g}>
-          <div className="mb-1.5 text-xs font-medium text-muted-foreground">{g}</div>
-          <ul className="space-y-0.5">
+          <div className="mb-2 px-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{g}</div>
+          <ul className="space-y-px border-l">
             {docs.filter((d) => d.group === g).map((d) => {
               const active = pathname === `/docs/${d.slug}`;
               return (
-                <li key={d.slug}>
+                <li key={d.slug} className="-ml-px">
                   <Link
                     href={`/docs/${d.slug}`}
                     onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "block rounded-md px-2 py-1 transition-colors hover:bg-muted hover:text-foreground",
-                      active ? "bg-muted font-medium text-foreground" : "text-muted-foreground",
+                      "block border-l px-3 py-1.5 outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+                      active ? "border-accent font-medium text-foreground" : "border-transparent text-muted-foreground",
                     )}
                   >
                     {d.title}

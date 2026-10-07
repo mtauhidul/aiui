@@ -4,6 +4,7 @@ import * as React from "react";
 import { Dialog } from "@base-ui/react/dialog";
 import { Button } from "@/registry/ui/button";
 import { DocsNav } from "./docs-nav";
+import { Wordmark } from "./brand";
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
@@ -14,8 +15,8 @@ export function MobileNav() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-40 bg-black/40 transition-opacity motion-reduce:transition-none data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
-        <Dialog.Popup className="fixed inset-y-0 left-0 z-50 w-72 overflow-y-auto border-r bg-background p-5 shadow-xl transition-transform duration-200 motion-reduce:transition-none data-[ending-style]:-translate-x-full data-[starting-style]:-translate-x-full">
-          <Dialog.Title className="mb-5 text-lg font-semibold tracking-tight">aiui</Dialog.Title>
+        <Dialog.Popup className="fixed inset-y-0 left-0 z-50 w-72 overflow-y-auto border-r bg-surface p-5 shadow-2xl transition-transform duration-200 motion-reduce:transition-none data-[ending-style]:-translate-x-full data-[starting-style]:-translate-x-full">
+          <Dialog.Title className="mb-6 text-lg"><Wordmark /></Dialog.Title>
           <DocsNav onNavigate={() => setOpen(false)} />
         </Dialog.Popup>
       </Dialog.Portal>

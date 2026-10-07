@@ -63,13 +63,31 @@ export function ChatDemo() {
     wasStreaming.current = isStreaming;
   }, [isStreaming, text]);
 
+  function send(text: string) {
+    setTurns((t) => [...t, { role: "user", content: text }]);
+    start(REPLY);
+  }
+
   return (
-    <div className="flex h-[620px] flex-col rounded-xl border">
+    <div className="flex h-[620px] flex-col">
       <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
         {turns.length === 0 && !isStreaming && (
-          <p className="pt-24 text-center text-sm text-muted-foreground">
-            Send a message to see a streamed reply.
-          </p>
+          <div className="flex h-full flex-col items-center justify-center gap-5 text-center">
+            <p className="font-display text-3xl tracking-tight">Try it. It is <em>live</em>.</p>
+            <p className="max-w-xs text-sm text-muted-foreground">Pick a prompt or type your own to watch a streamed reply with reasoning, a tool call and citations.</p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => send(p)}
+                  className="border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground outline-none transition-colors hover:border-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
         {turns.map((t, i) => (
           <Message key={i} role={t.role}>
@@ -99,10 +117,7 @@ export function ChatDemo() {
         <PromptComposer
           isStreaming={isStreaming}
           onStop={stop}
-          onSubmit={(v) => {
-            setTurns((t) => [...t, { role: "user", content: v }]);
-            start(REPLY);
-          }}
+          onSubmit={send}
         />
       </div>
     </div>

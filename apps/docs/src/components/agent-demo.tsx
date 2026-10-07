@@ -24,28 +24,42 @@ const EVENTS: TraceEvent[] = [
 
 const CODE = `export function Hello() {\n  return <h1>Hello, world</h1>;\n}`;
 
+const cap = "mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground";
+
 export function AgentDemo() {
   const [status, setStatus] = React.useState<"pending" | "approved" | "denied">("pending");
   return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <div className="space-y-6">
-        <Plan steps={STEPS} />
-        <ApprovalPrompt
-          title="Run migration on production?"
-          description="This will modify the users table."
-          details="ALTER TABLE users ADD COLUMN plan text;"
-          status={status}
-          onApprove={() => setStatus("approved")}
-          onDeny={() => setStatus("denied")}
-        />
-        <Trace events={EVENTS} />
+    <div className="grid grid-cols-1 gap-px bg-border lg:grid-cols-2 [&>*]:min-w-0 [&>*]:bg-surface/80">
+      <div className="space-y-8 p-6">
+        <div>
+          <p className={cap}>Plan</p>
+          <Plan steps={STEPS} />
+        </div>
+        <div>
+          <p className={cap}>Approval</p>
+          <ApprovalPrompt
+            title="Run migration on production?"
+            description="This will modify the users table."
+            details="ALTER TABLE users ADD COLUMN plan text;"
+            status={status}
+            onApprove={() => setStatus("approved")}
+            onDeny={() => setStatus("denied")}
+          />
+        </div>
+        <div>
+          <p className={cap}>Trace</p>
+          <Trace events={EVENTS} />
+        </div>
       </div>
-      <Artifact
-        className="h-80"
-        title="Hello.tsx"
-        preview={<h1 className="text-2xl font-semibold">Hello, world</h1>}
-        code={<CodeBlock code={CODE} lang="tsx" />}
-      />
+      <div className="flex flex-col p-6">
+        <p className={cap}>Artifact</p>
+        <Artifact
+          className="min-h-[22rem] flex-1"
+          title="Hello.tsx"
+          preview={<h1 className="font-display text-4xl tracking-tight">Hello, <em>world</em></h1>}
+          code={<CodeBlock code={CODE} lang="tsx" />}
+        />
+      </div>
     </div>
   );
 }
