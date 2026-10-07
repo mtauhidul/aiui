@@ -21,14 +21,14 @@ export function Artifact({
 }) {
   return (
     <Tabs.Root defaultValue="preview" className={cn("flex h-full flex-col overflow-hidden rounded border bg-background", className)}>
-      <div className="flex h-11 items-center gap-3 border-b px-3">
-        <span className="truncate text-sm font-medium">{title}</span>
-        <Tabs.List className="ml-auto flex gap-0.5 rounded-sm bg-muted p-0.5 text-xs">
+      <div className="flex h-11 items-center gap-3 border-b px-3 pt-1">
+        <span className="truncate font-mono text-[13px]">{title}</span>
+        <Tabs.List className="ml-auto flex gap-1 text-xs">
           {(["preview", "code"] as const).map((v) => (
             <Tabs.Tab
               key={v}
               value={v}
-              className="rounded-sm px-2.5 py-1 capitalize text-muted-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring data-[selected]:bg-background data-[selected]:text-foreground data-[selected]:shadow-sm"
+              className="-mb-px rounded-sm border-b-2 border-transparent px-2.5 py-1.5 font-mono capitalize text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[selected]:border-foreground data-[selected]:text-foreground"
             >
               {v}
             </Tabs.Tab>

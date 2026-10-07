@@ -86,21 +86,21 @@ export function ModelPicker({
     <Combobox.Item
       key={model.value}
       value={model}
-      className="group/item flex cursor-default items-start gap-2.5 rounded-sm px-2 py-2 text-sm outline-none select-none data-[highlighted]:bg-muted"
+      className="group/item flex cursor-default items-start gap-2.5 rounded-sm px-2 py-2 text-sm outline-none select-none data-[highlighted]:bg-muted data-[highlighted]:shadow-[inset_2px_0_0_currentColor]"
     >
       <ProviderMark provider={model.provider} className="mt-0.5" />
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
           <span className="font-medium">{model.label}</span>
           {model.contextWindow && (
-            <span className="text-xs text-muted-foreground">{formatContext(model.contextWindow)} ctx</span>
+            <span className="font-mono text-[11px] text-muted-foreground">{formatContext(model.contextWindow)} ctx</span>
           )}
         </div>
         {model.description && <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{model.description}</p>}
         {!!model.capabilities?.length && (
           <div className="mt-1.5 flex flex-wrap gap-1">
             {model.capabilities.map((c) => (
-              <span key={c} className="rounded-sm border px-1.5 py-px text-[10px] text-muted-foreground">
+              <span key={c} className="rounded-sm border px-1.5 py-px font-mono text-[10px] text-muted-foreground">
                 {capabilityLabel[c]}
               </span>
             ))}

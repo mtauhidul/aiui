@@ -64,15 +64,13 @@ export function CommandMenu({
   }, [activeIndex, id]);
 
   return (
+    <div className={cn("overflow-hidden rounded border bg-background shadow-lg", className)}>
     <ul
       ref={listRef}
       id={id}
       role="listbox"
       aria-label="Commands"
-      className={cn(
-        "max-h-64 overflow-y-auto rounded border bg-background p-1 shadow-lg",
-        className,
-      )}
+      className="max-h-64 overflow-y-auto p-1"
     >
       {commands.map((c, i) => (
         <li
@@ -86,7 +84,7 @@ export function CommandMenu({
           onClick={() => onSelect(c)}
           className={cn(
             "flex cursor-default items-center gap-2.5 rounded-sm px-2 py-1.5 text-sm",
-            i === activeIndex && "bg-muted",
+            i === activeIndex && "bg-muted shadow-[inset_2px_0_0_currentColor]",
           )}
         >
           {c.icon && <span className="flex size-5 shrink-0 items-center justify-center text-muted-foreground [&_svg]:size-4">{c.icon}</span>}
@@ -95,5 +93,11 @@ export function CommandMenu({
         </li>
       ))}
     </ul>
+    <div aria-hidden className="flex gap-3 border-t px-3 py-1.5 font-mono text-[11px] text-muted-foreground">
+      <span>↑↓ navigate</span>
+      <span>↵ select</span>
+      <span>esc close</span>
+    </div>
+    </div>
   );
 }

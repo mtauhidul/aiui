@@ -81,10 +81,13 @@ export function Attachment({
       )}
     >
       <div className={cn("flex size-9 shrink-0 items-center justify-center rounded-sm bg-muted text-muted-foreground", failed && "text-red-500")}>
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="size-4"><path d="M9.5 1.75H4.75a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h6.5a1.5 1.5 0 0 0 1.5-1.5V5l-3.25-3.25Z" /><path d="M9.5 1.75V5h3.25" /></svg>
+        {(() => {
+          const ext = /\.([a-z0-9]{1,4})$/i.exec(item.name)?.[1];
+          return ext ? <span aria-hidden className="font-mono text-[10px] font-medium uppercase">{ext}</span> : (<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="size-4"><path d="M9.5 1.75H4.75a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h6.5a1.5 1.5 0 0 0 1.5-1.5V5l-3.25-3.25Z" /><path d="M9.5 1.75V5h3.25" /></svg>);
+        })()}
       </div>
       <div className="min-w-0 flex-1">
-        <div className="truncate text-xs font-medium" title={item.name}>{item.name}</div>
+        <div className="truncate font-mono text-xs" title={item.name}>{item.name}</div>
         <div className={cn("truncate text-xs", failed ? "text-red-500" : "text-muted-foreground")} title={failed ? item.error : undefined} aria-live="polite">
           {failed ? item.error : uploading ? `${item.progress}%` : formatBytes(item.size)}
         </div>

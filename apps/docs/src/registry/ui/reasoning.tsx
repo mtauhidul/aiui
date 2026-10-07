@@ -28,7 +28,7 @@ export function Reasoning({
 
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen} className={className}>
-      <Collapsible.Trigger className="group flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
+      <Collapsible.Trigger className="group flex items-center gap-1.5 rounded-sm font-mono text-xs text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
         <span className={cn(isStreaming && "animate-pulse motion-reduce:animate-none")}>
           {isStreaming
             ? "Thinking…"
@@ -49,7 +49,7 @@ export function Reasoning({
         </svg>
       </Collapsible.Trigger>
       <Collapsible.Panel className="h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] duration-200 motion-reduce:transition-none data-[ending-style]:h-0 data-[starting-style]:h-0">
-        <div className="mt-2 border-l pl-3 text-sm leading-relaxed text-muted-foreground">
+        <div className="mt-2 border-l-2 pl-3 text-[13px] leading-relaxed text-muted-foreground">
           {children}
         </div>
       </Collapsible.Panel>
