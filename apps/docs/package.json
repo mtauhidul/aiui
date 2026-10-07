@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/build-registry.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-registry.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "registry:build": "shadcn build registry.json -o public/r",
+    "registry:build": "node scripts/build-registry.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

@@ -20,7 +20,6 @@ import { CommandMenuStill } from "@/components/landing/stills";
 import { Feedback } from "@/registry/ui/feedback";
 
 const wrap = "mx-auto w-full max-w-[1240px] px-5 sm:px-8";
-const section = `${wrap} py-24 sm:py-32`;
 
 const SOURCES: Source[] = [
   { title: "Base UI documentation", url: "https://base-ui.com", snippet: "Unstyled, accessible React components." },

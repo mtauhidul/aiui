@@ -17,14 +17,13 @@ export function Reasoning({
   className?: string;
 }) {
   const [open, setOpen] = React.useState(isStreaming);
-  const wasStreaming = React.useRef(isStreaming);
+  const [wasStreaming, setWasStreaming] = React.useState(isStreaming);
 
-  // Open while thinking, collapse when done.
-  React.useEffect(() => {
-    if (isStreaming) setOpen(true);
-    else if (wasStreaming.current) setOpen(false);
-    wasStreaming.current = isStreaming;
-  }, [isStreaming]);
+  // Open while thinking, collapse when done. Adjusted during render rather than in an effect.
+  if (isStreaming !== wasStreaming) {
+    setWasStreaming(isStreaming);
+    setOpen(isStreaming);
+  }
 
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen} className={className}>

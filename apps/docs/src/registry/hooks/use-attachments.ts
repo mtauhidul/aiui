@@ -44,7 +44,9 @@ function formatLimit(bytes: number) {
 export function useAttachments({ accept, maxSize, maxFiles, upload }: UseAttachmentsOptions = {}) {
   const [items, setItems] = React.useState<AttachmentItem[]>([]);
   const itemsRef = React.useRef(items);
-  itemsRef.current = items;
+  React.useEffect(() => {
+    itemsRef.current = items;
+  }, [items]);
   const controllers = React.useRef(new Map<string, AbortController>());
 
   const patch = React.useCallback((id: string, next: Partial<AttachmentItem>) => {

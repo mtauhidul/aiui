@@ -2,14 +2,34 @@
 
 Minimal, modern UI components for AI applications. Built on Base UI and Tailwind, shadcn-registry compatible.
 
-- `apps/docs` — docs site and live demos
-- `packages/registry` — component source and `registry.json`
+- `apps/docs` — docs site, live demos, and the component source (`src/registry`)
 - `templates` — chat, agent dashboard, playground (planned)
 
 ```bash
 pnpm install
 pnpm dev
 ```
+
+## Install a component
+
+Components are distributed through a shadcn-compatible registry. Each item lists the items it depends on, so one command pulls everything it needs:
+
+```bash
+npx shadcn@latest add https://<your-domain>/r/prompt-composer.json
+```
+
+## Deploy
+
+The docs site is a Next.js app and also serves the registry at `/r/*.json`. `pnpm build` generates the registry first (`apps/docs/scripts/build-registry.mjs`) and then builds the site.
+
+Registry items refer to each other by absolute URL, so the build needs to know the public origin:
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_REGISTRY_URL` | Public origin, e.g. `https://aiui.example.com`. Used in install commands, metadata, the sitemap and registry dependencies. |
+| `VERCEL_PROJECT_PRODUCTION_URL` | Used automatically on Vercel when the variable above is not set. |
+
+With neither set it falls back to `http://localhost:3000`, which is only right for local development. Set the variable before the production build.
 
 ## Testing
 

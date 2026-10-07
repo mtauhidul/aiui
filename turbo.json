@@ -5,9 +5,14 @@
       "dependsOn": [
         "^build"
       ],
+      "env": [
+        "NEXT_PUBLIC_REGISTRY_URL",
+        "VERCEL_PROJECT_PRODUCTION_URL"
+      ],
       "outputs": [
         ".next/**",
-        "!.next/cache/**"
+        "!.next/cache/**",
+        "public/r/**"
       ]
     },
     "dev": {

@@ -36,7 +36,7 @@ function AssistantExtras({ done }: { done: boolean }) {
   return (
     <div className="mb-3 space-y-2">
       <Reasoning isStreaming={!done} duration={3}>
-        The user wants a streaming demo. I'll look up the docs, then answer with an example.
+        The user wants a streaming demo. I&apos;ll look up the docs, then answer with an example.
       </Reasoning>
       <ToolCall
         name="search_docs"

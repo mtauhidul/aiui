@@ -1,1 +1,1 @@
-export const REGISTRY_URL = process.env.NEXT_PUBLIC_REGISTRY_URL ?? "http://localhost:3100";
+export const REGISTRY_URL = process.env.NEXT_PUBLIC_REGISTRY_URL ?? "http://localhost:3000";
