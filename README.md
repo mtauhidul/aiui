@@ -4,8 +4,6 @@
 
 # turn
 
-[![CI](https://github.com/mtauhidul/turnui/actions/workflows/ci.yml/badge.svg)](https://github.com/mtauhidul/turnui/actions/workflows/ci.yml)
-
 Minimal, accessible React components for AI applications: chat, agents and tool use. Built on [Base UI](https://base-ui.com) and Tailwind CSS v4, and distributed through a [shadcn](https://ui.shadcn.com)-compatible registry, so you copy the source into your project and own every line.
 
 **[turnui.xyz](https://turnui.xyz)** · [Getting started](https://turnui.xyz/docs/getting-started) · [Components](https://turnui.xyz/docs/button) · [Use with the AI SDK](https://turnui.xyz/docs/ai-sdk)
