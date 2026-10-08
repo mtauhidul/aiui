@@ -1,9 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - Components now use the standard shadcn `primary` and `primary-foreground` tokens instead of `accent`, so they match your existing theme with no setup. `Button` variant `accent` is now `primary`.
 - Docs: the theme is clearly optional, and the guides say it replaces your existing color variables.
+- The logo mark is now a plain rounded square, matching the social image.
+- Dependencies pinned to compatible version ranges; the unused `motion` package was removed.
+
+Upgrading from 0.1.0: if you copied components earlier, replace `bg-accent`, `border-accent`, `text-accent` and `text-accent-foreground` with the `primary` equivalents, and change `variant="accent"` to `variant="primary"`. Or run `npx shadcn@latest add <component url> --overwrite` to refresh a component.
 
 ## 0.1.0
 
