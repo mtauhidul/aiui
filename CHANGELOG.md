@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2
 
 Install fixes found by testing against fresh Next.js and Vite projects created with `shadcn init`.
 
