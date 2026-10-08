@@ -3,6 +3,7 @@
 Minimal, modern UI components for AI applications. Built on Base UI and Tailwind, shadcn-registry compatible.
 
 - `apps/docs` — docs site, live demos, and the component source (`src/registry`)
+- `templates/chat` — a runnable streaming chat built with the components and the AI SDK. Runs in demo mode with no API key.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add a component, and [CHANGELOG.md](CHANGELOG.md) for what changed.
 

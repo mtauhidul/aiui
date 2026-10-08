@@ -9,4 +9,5 @@ First public release.
 - shadcn-compatible registry served at `/r/*.json`, with an optional `theme` item for the color tokens.
 - Guides: getting started, theming, use with the AI SDK, and accessibility.
 - Dark and light support through eight color tokens.
+- `templates/chat`: a runnable chat app (AI SDK, streaming, reasoning, tool calls, errors with retry). Works in demo mode without an API key.
 - Tests for behavior, accessibility (axe) and reduced motion.

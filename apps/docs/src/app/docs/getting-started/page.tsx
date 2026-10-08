@@ -20,7 +20,7 @@ export default function Page() {
   const [turns, setTurns] = useState<Turn[]>([]);
 
   return (
-    <div className="mx-auto flex h-dvh max-w-2xl flex-col p-4">
+    <main className="mx-auto flex h-dvh max-w-2xl flex-col p-4">
       <div role="log" aria-live="polite" aria-label="Conversation" tabIndex={0} className="flex-1 space-y-4 overflow-y-auto outline-none focus-visible:ring-2 focus-visible:ring-ring">
         {turns.map((t, i) => (
           <Message key={i} role={t.role}>
@@ -33,7 +33,7 @@ export default function Page() {
           setTurns((all) => [...all, { role: "user", text }, { role: "assistant", text: "You said: " + text }])
         }
       />
-    </div>
+    </main>
   );
 }`;
 

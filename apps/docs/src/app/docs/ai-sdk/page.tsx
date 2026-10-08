@@ -67,7 +67,7 @@ export default function Chat() {
   const ref = useAutoScroll<HTMLDivElement>(messages);
 
   return (
-    <div className="mx-auto flex h-dvh max-w-3xl flex-col">
+    <main className="mx-auto flex h-dvh max-w-3xl flex-col">
       <div className="relative flex min-h-0 flex-1 flex-col">
         <div
           ref={ref}
@@ -129,7 +129,7 @@ export default function Chat() {
       <div className="p-4">
         <PromptComposer isStreaming={busy} onStop={stop} onSubmit={(text) => sendMessage({ text })} />
       </div>
-    </div>
+    </main>
   );
 }`;
 
