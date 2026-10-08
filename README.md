@@ -1,39 +1,71 @@
+<p align="center">
+  <img src=".github/assets/banner.png" alt="turn: interfaces for intelligence" width="720">
+</p>
+
 # turn
 
-Minimal, modern UI components for AI applications. Built on Base UI and Tailwind, shadcn-registry compatible.
+[![CI](https://github.com/mtauhidul/turnui/actions/workflows/ci.yml/badge.svg)](https://github.com/mtauhidul/turnui/actions/workflows/ci.yml)
 
-- `apps/docs` — docs site, live demos, and the component source (`src/registry`)
-- `templates/chat` — a runnable streaming chat built with the components and the AI SDK. Runs in demo mode with no API key.
+Minimal, accessible React components for AI applications: chat, agents and tool use. Built on [Base UI](https://base-ui.com) and Tailwind CSS v4, and distributed through a [shadcn](https://ui.shadcn.com)-compatible registry, so you copy the source into your project and own every line.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add a component, and [CHANGELOG.md](CHANGELOG.md) for what changed.
+**[turnui.xyz](https://turnui.xyz)** · [Getting started](https://turnui.xyz/docs/getting-started) · [Components](https://turnui.xyz/docs/button) · [Use with the AI SDK](https://turnui.xyz/docs/ai-sdk)
+
+## Quick start
+
+In a project that already uses Tailwind v4 and the shadcn CLI (`npx shadcn@latest init`):
+
+```bash
+npx shadcn@latest add https://turnui.xyz/r/theme.json
+npx shadcn@latest add https://turnui.xyz/r/message.json https://turnui.xyz/r/prompt-composer.json
+```
+
+Each command also installs the components it depends on. Then follow [Getting started](https://turnui.xyz/docs/getting-started) for a working chat page.
+
+## What is in it
+
+21 components, built for streaming and for agents:
+
+- **Conversation:** Message, Streaming Markdown, Code Block, Citations, Feedback, Scroll to Bottom, Thinking, Error Notice, Copy Button
+- **Input:** Prompt Composer (attachments, drag and drop, paste), Slash Commands, Model Picker, Attachment, Suggestions
+- **Agent:** Reasoning, Tool Call, Plan, Trace, Approval Prompt, Artifact
+- **Foundation:** Button, plus hooks for auto-scroll, attachments and fake streams
+
+Every component is keyboard operable, announces state to screen readers, and respects `prefers-reduced-motion`. See the [accessibility notes](https://turnui.xyz/docs/accessibility).
+
+## Try it
+
+[`templates/chat`](templates/chat) is a runnable chat app with streaming, reasoning, tool calls, errors with retry, and stop. It works with no API key (a built-in fake model) and switches to a real model when you set `AI_GATEWAY_API_KEY`.
 
 ```bash
 pnpm install
-pnpm dev
+pnpm --filter turn-chat-template dev
 ```
 
-## Install a component
+## Develop
 
-Components are distributed through a shadcn-compatible registry. Each item lists the items it depends on, so one command pulls everything it needs:
+This repo is a pnpm and Turborepo workspace.
+
+- `apps/docs`: the docs site, live demos, and the component source (`src/registry`)
+- `templates/chat`: the chat template
 
 ```bash
-npx shadcn@latest add https://turnui.xyz/r/prompt-composer.json
+pnpm install
+pnpm --filter docs dev    # docs site at http://localhost:3000
+pnpm lint
+pnpm test
+pnpm build
 ```
+
+Tests use Vitest and Testing Library, and every component runs through axe. jsdom cannot compute layout or color, so `color-contrast` is disabled there; contrast is checked in a real browser. A test fails the build if any animation lacks a reduced-motion opt-out.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to add a component, and [CHANGELOG.md](CHANGELOG.md) for what changed.
 
 ## Deploy
 
-The docs site is a Next.js app and also serves the registry at `/r/*.json`. `pnpm build` generates the registry first (`apps/docs/scripts/build-registry.mjs`) and then builds the site.
+The docs site also serves the registry at `/r/*.json`. `pnpm build` generates the registry (`apps/docs/scripts/build-registry.mjs`) and then builds the site.
 
 Registry items refer to each other by absolute URL, so the build needs to know the public origin. It defaults to `https://turnui.xyz` for production builds and `http://localhost:3000` for `pnpm dev`. To use another domain, set `NEXT_PUBLIC_REGISTRY_URL` before building (see `apps/docs/.env.example`).
 
-## Testing
+## License
 
-```bash
-pnpm test
-```
-
-Vitest + Testing Library cover behavior (keyboard, ARIA state, callbacks) and every component runs through axe for a11y violations. Tests live in `apps/docs/tests`. jsdom can't compute layout or color, so `color-contrast` is disabled in axe; check contrast in the browser.
-
-## Reduced motion
-
-Anything that moves, scales, slides, resizes or loops opts out with Tailwind's `motion-reduce:` variants, so components stay self-contained when copied into your project. Color and opacity fades are kept. `tests/motion.test.ts` enforces this for every component, so new animations can't ship without an opt-out.
+[MIT](LICENSE)

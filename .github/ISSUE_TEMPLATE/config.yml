@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://turnui.xyz/docs/getting-started
+    about: Guides for installing, theming and using the components.

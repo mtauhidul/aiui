@@ -23,7 +23,7 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", width: 40, height: 40, border: "3px solid #efefe4", borderRadius: 8 }} />
           turn
         </div>
-        <div style={{ display: "flex", flexDirection: "column", fontSize: 92, lineHeight: 1.02, letterSpacing: -3, fontWeight: 400 }}>
+        <div style={{ display: "flex", flexDirection: "column", fontSize: 66, lineHeight: 1.12, letterSpacing: -2, fontWeight: 400 }}>
           <div style={{ display: "flex" }}>interfaces for intelligence</div>
           <div style={{ display: "flex", color: "#8a8a8a" }}>streaming-first components</div>
           <div style={{ display: "flex", color: "#8a8a8a" }}>for chat, agents and tool use</div>
