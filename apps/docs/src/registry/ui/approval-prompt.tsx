@@ -70,7 +70,7 @@ export function ApprovalPrompt({
       {details && <div className="mt-2.5 rounded-sm border bg-background/60 p-2.5 font-mono text-xs">{details}</div>}
       {status === "pending" && (
         <div className="mt-3 flex items-center gap-2">
-          <Button size="sm" variant="accent" onClick={onApprove}>Approve</Button>
+          <Button size="sm" variant="primary" onClick={onApprove}>Approve</Button>
           <Button size="sm" variant="outline" onClick={onDeny}>Deny</Button>
         </div>
       )}

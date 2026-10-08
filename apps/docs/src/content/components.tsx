@@ -19,7 +19,7 @@ export type ComponentDoc = {
 export const docs: ComponentDoc[] = [
   { slug: "button", a11y: ["Native button semantics with a visible focus ring.", "Disabled buttons are removed from the tab order."],  title: "Button", group: "Foundation", description: "Accessible button on Base UI with four variants and three sizes.", file: "button.tsx", demo: D.ButtonDemo,
     props: [
-      { name: "variant", type: '"default" | "accent" | "ghost" | "outline"', default: '"default"', description: "Visual style." },
+      { name: "variant", type: '"default" | "primary" | "ghost" | "outline"', default: '"default"', description: "Visual style." },
       { name: "size", type: '"sm" | "md" | "icon"', default: '"md"', description: "Button size." },
     ] },
   { slug: "message", a11y: ["Each message is prefixed with a screen-reader-only speaker (\"You said:\" / \"Assistant said:\"). Put the list in a container with role=\"log\" and aria-live=\"polite\", and give it tabIndex={0} so keyboard users can scroll a log made only of text.", "Set aria-busy on that container while a reply streams so screen readers announce it once, not per token.", "Actions are revealed on hover and on keyboard focus."],  title: "Message", group: "Conversation", description: "Chat message layout with user and assistant roles and hover actions.", file: "message.tsx", demo: D.MessageDemo,

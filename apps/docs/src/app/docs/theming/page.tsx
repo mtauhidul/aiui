@@ -13,8 +13,8 @@ const tokens = [
   ["muted", "Quiet fills: user bubbles, code chips, hover rows.", "#1a1a1a", "#f2f2ee"],
   ["muted-foreground", "Secondary text, labels, placeholders.", "#a3a3a3", "#525252"],
   ["border", "Every hairline. Components use the plain border utility.", "rgb(255 255 255 / 0.13)", "rgb(0 0 0 / 0.12)"],
-  ["accent", "Primary action: the send button, progress, the selected item.", "#efefe4", "#0a0a0a"],
-  ["accent-foreground", "Text on top of accent.", "#0a0a0a", "#fafaf5"],
+  ["primary", "Primary action: the send button, progress, the selected item.", "#efefe4", "#0a0a0a"],
+  ["primary-foreground", "Text on top of primary.", "#0a0a0a", "#fafaf5"],
   ["ring", "Focus rings.", "#efefe4", "#0a0a0a"],
 ];
 
@@ -24,8 +24,8 @@ const css = `:root {
   --muted: #f2f2ee;
   --muted-foreground: #525252;
   --border: rgb(0 0 0 / 0.12);
-  --accent: #0a0a0a;
-  --accent-foreground: #fafaf5;
+  --primary: #0a0a0a;
+  --primary-foreground: #fafaf5;
   --ring: #0a0a0a;
 }
 
@@ -35,8 +35,8 @@ const css = `:root {
   --muted: #1a1a1a;
   --muted-foreground: #a3a3a3;
   --border: rgb(255 255 255 / 0.13);
-  --accent: #efefe4;
-  --accent-foreground: #0a0a0a;
+  --primary: #efefe4;
+  --primary-foreground: #0a0a0a;
   --ring: #efefe4;
 }
 
@@ -48,8 +48,8 @@ const css = `:root {
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-ring: var(--ring);
 }
 
@@ -61,14 +61,26 @@ export default function Theming() {
   return (
     <Guide slug={guide.slug}>
       <section className="space-y-4">
-        <h2 className={h2}>install the theme</h2>
-        <p className={p}>One command writes the tokens below into your global stylesheet, for both light and dark. It is optional. If your project already defines these names, the components will use your values.</p>
+        <h2 className={h2}>you probably do not need a theme</h2>
+        <p className={p}>
+          The components use the standard shadcn color tokens, so they pick up the theme your project already has. If you set up your project with <span className={code}>shadcn init</span>, skip the theme and the components will look like the rest of your app.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className={h2}>the optional turn theme</h2>
+        <p className={p}>
+          If you want turn&apos;s own look (black and warm off-white, with a light companion), install the theme item. It writes the tokens below into your global stylesheet for both light and dark.
+        </p>
         <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY_URL}/r/theme.json`} />
+        <p className={p}>
+          <strong className="font-medium text-foreground">It replaces your existing values</strong> for these token names, which restyles your whole app, including any shadcn components you already use. Install it on a new project, or when you want that palette everywhere. To change only the components, edit the tokens yourself instead.
+        </p>
       </section>
 
       <section className="space-y-4">
         <h2 className={h2}>tokens</h2>
-        <p className={p}>The components use only these eight, through ordinary Tailwind utilities such as <span className={code}>bg-muted</span> and <span className={code}>text-muted-foreground</span>.</p>
+        <p className={p}>The components use only these eight, all of which a standard shadcn theme already defines, through ordinary Tailwind utilities such as <span className={code}>bg-muted</span> and <span className={code}>text-muted-foreground</span>.</p>
         <TableScroll label="Color tokens">
           <table className="w-full text-[15px]">
             <thead className="border-b bg-white/[0.03] text-left text-[14px] text-muted-foreground">
@@ -86,11 +98,6 @@ export default function Theming() {
             </tbody>
           </table>
         </TableScroll>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className={h2}>accent is the primary action</h2>
-        <p className={p}>In a default shadcn theme, <span className={code}>accent</span> is a pale background used for hover states. In turn it is the strongest color on the page: the send button, upload progress and the selected item all use it. If you skip the theme and keep the default, those controls will look washed out. Set <span className={code}>accent</span> to your brand or primary color and <span className={code}>accent-foreground</span> to a color that reads on it.</p>
       </section>
 
       <section className="space-y-4">

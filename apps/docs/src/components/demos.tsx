@@ -35,7 +35,7 @@ export function ButtonDemo() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <Button>Default</Button>
-      <Button variant="accent">Accent</Button>
+      <Button variant="primary">Primary</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
       <Button size="sm">Small</Button>

@@ -33,7 +33,7 @@ export function CitationMarker({
         target="_blank"
         rel="noreferrer"
         aria-label={`Source ${index}: ${source.title}`}
-        className="mx-0.5 inline-flex h-4 min-w-4 -translate-y-px items-center justify-center rounded-sm border bg-muted/60 px-1 align-middle font-mono text-[10px] text-muted-foreground no-underline transition-colors hover:border-transparent hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring"
+        className="mx-0.5 inline-flex h-4 min-w-4 -translate-y-px items-center justify-center rounded-sm border bg-muted/60 px-1 align-middle font-mono text-[10px] text-muted-foreground no-underline transition-colors hover:border-transparent hover:bg-primary hover:text-primary-foreground focus-visible:ring-2 focus-visible:ring-ring"
       >
         {index}
       </PreviewCard.Trigger>

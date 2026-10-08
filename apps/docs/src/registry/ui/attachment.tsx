@@ -38,7 +38,7 @@ function RemoveButton({ name, onRemove, className }: { name: string; onRemove: (
 function Progress({ value, label, className }: { value: number; label: string; className?: string }) {
   return (
     <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value} className={cn("h-0.5 overflow-hidden rounded-none bg-border", className)}>
-      <div className="h-full bg-accent transition-[width] duration-200 motion-reduce:transition-none" style={{ width: `${value}%` }} />
+      <div className="h-full bg-primary transition-[width] duration-200 motion-reduce:transition-none" style={{ width: `${value}%` }} />
     </div>
   );
 }

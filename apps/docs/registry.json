@@ -30,8 +30,8 @@
           "muted": "#f2f2ee",
           "muted-foreground": "#525252",
           "border": "rgb(0 0 0 / 0.12)",
-          "accent": "#0a0a0a",
-          "accent-foreground": "#fafaf5",
+          "primary": "#0a0a0a",
+          "primary-foreground": "#fafaf5",
           "ring": "#0a0a0a"
         },
         "dark": {
@@ -40,8 +40,8 @@
           "muted": "#1a1a1a",
           "muted-foreground": "#a3a3a3",
           "border": "rgb(255 255 255 / 0.13)",
-          "accent": "#efefe4",
-          "accent-foreground": "#0a0a0a",
+          "primary": "#efefe4",
+          "primary-foreground": "#0a0a0a",
           "ring": "#efefe4"
         }
       }

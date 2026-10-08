@@ -13,7 +13,7 @@ export type TraceEvent = {
 };
 
 const kindColor: Record<TraceEvent["kind"], string> = {
-  llm: "bg-accent",
+  llm: "bg-primary",
   tool: "bg-emerald-500",
   retrieval: "bg-amber-500",
   agent: "bg-foreground/70",

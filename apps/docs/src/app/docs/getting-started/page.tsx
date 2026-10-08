@@ -53,9 +53,9 @@ export default function GettingStarted() {
       </section>
 
       <section className="space-y-4">
-        <h2 className={h2}>1. add the theme</h2>
+        <h2 className={h2}>1. theme (optional)</h2>
         <p className={p}>
-          The components read eight color tokens, and one of them behaves differently from a stock shadcn theme: <span className={code}>accent</span> is the primary action color here, not a pale highlight. Install the theme to set all eight, or skip this step and define them yourself. See <Link href="/docs/theming" className="text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground">theming</Link>.
+          The components use the standard shadcn color tokens, so they match the theme your project already has. You can skip this step. Install the turn theme only on a new project, or if you want its black-and-off-white palette: it <strong className="font-medium text-foreground">replaces your existing color variables</strong> and restyles your whole app. See <Link href="/docs/theming" className="text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground">theming</Link>.
         </p>
         <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY_URL}/r/theme.json`} />
       </section>

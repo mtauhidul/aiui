@@ -4,7 +4,7 @@
 
 /*
  * turn: black, warm off-white and neutral grays. No accent hue.
- * The accent is the off-white itself (primary actions, focus); status colors stay semantic.
+ * The primary color is the off-white itself (primary actions, focus); status colors stay semantic.
  * Dark only. The library's components still read these tokens, so a consumer can re-theme them.
  */
 :root {
@@ -16,8 +16,8 @@
   --muted-foreground: #a3a3a3;
   --faint: #8a8a8a;
   --border: rgb(255 255 255 / 0.13);
-  --accent: #efefe4;
-  --accent-foreground: #0a0a0a;
+  --primary: #efefe4;
+  --primary-foreground: #0a0a0a;
   --ring: #efefe4;
   --radius: 0.25rem;
 }
@@ -31,8 +31,8 @@
   --color-faint: var(--faint);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 3px);

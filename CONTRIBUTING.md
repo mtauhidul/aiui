@@ -29,7 +29,7 @@ pnpm build
 
 - **Self-contained.** No imports from outside the component's own folder except `@/lib/utils` and sibling registry files. Users copy these files, so they must work alone.
 - **Plain props.** No providers or context.
-- **Tokens only.** Use the eight color tokens (`background`, `foreground`, `muted`, `muted-foreground`, `border`, `accent`, `accent-foreground`, `ring`). Status colors may use emerald, amber and red, with a darker shade on light backgrounds.
+- **Tokens only.** Use the eight color tokens (`background`, `foreground`, `muted`, `muted-foreground`, `border`, `primary`, `primary-foreground`, `ring`), which every shadcn theme already defines. Status colors may use emerald, amber and red, with a darker shade on light backgrounds.
 - **Square and quiet.** Corners are 4px for panels and 2px for inner items. No shadows for decoration, no gradients.
 - **Accessible.** Native elements first. Every interactive state needs a text equivalent. If focus can disappear, hand it to a neighbor. Fix accessibility problems in the component, not in the test.
 - **Reduced motion.** Anything that moves, scales, slides or loops needs a `motion-reduce:` opt-out. `tests/motion.test.ts` enforces it.

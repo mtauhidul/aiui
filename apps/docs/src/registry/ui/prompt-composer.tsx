@@ -143,7 +143,7 @@ export function PromptComposer({
       }}
       className={cn(
         "group/composer relative rounded border bg-background p-2 transition-colors focus-within:border-foreground/40",
-        dragging && "border-accent",
+        dragging && "border-primary",
         className,
       )}
     >
@@ -234,7 +234,7 @@ export function PromptComposer({
         {/* One element for both states so keyboard focus survives send -> stop. */}
         <Button
           type={isStreaming ? "button" : "submit"}
-          variant={isStreaming ? "outline" : "accent"}
+          variant={isStreaming ? "outline" : "primary"}
           size="icon"
           disabled={!isStreaming && !canSend}
           onClick={isStreaming ? onStop : undefined}
@@ -254,7 +254,7 @@ export function PromptComposer({
         </span>
       </div>
       {dragging && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded bg-background/80 text-sm font-medium text-accent">
+        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center rounded bg-background/80 text-sm font-medium text-primary">
           Drop files to attach
         </div>
       )}

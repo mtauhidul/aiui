@@ -20,7 +20,7 @@ function StatusDot({ state }: { state: ToolCallState }) {
       className={cn(
         "size-2 rounded-[1px]",
         state === "pending" && "bg-muted-foreground/40",
-        state === "running" && "animate-pulse motion-reduce:animate-none bg-accent",
+        state === "running" && "animate-pulse motion-reduce:animate-none bg-primary",
         state === "success" && "bg-emerald-500",
         state === "error" && "bg-red-500",
       )}

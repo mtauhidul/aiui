@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Components now use the standard shadcn `primary` and `primary-foreground` tokens instead of `accent`, so they match your existing theme with no setup. `Button` variant `accent` is now `primary`.
+- Docs: the theme is clearly optional, and the guides say it replaces your existing color variables.
+
 ## 0.1.0
 
 First public release.

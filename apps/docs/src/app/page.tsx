@@ -54,7 +54,7 @@ function Section({ id, border = true, children }: { id: string; border?: boolean
 }
 
 const cream =
-  "inline-flex h-11 items-center rounded-md bg-accent px-5 text-[17px] font-medium text-accent-foreground outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+  "inline-flex h-11 items-center rounded-md bg-primary px-5 text-[17px] font-medium text-primary-foreground outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-black";
 
 export default function Home() {
   return (
