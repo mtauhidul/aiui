@@ -22,7 +22,7 @@ export const docs: ComponentDoc[] = [
       { name: "variant", type: '"default" | "accent" | "ghost" | "outline"', default: '"default"', description: "Visual style." },
       { name: "size", type: '"sm" | "md" | "icon"', default: '"md"', description: "Button size." },
     ] },
-  { slug: "message", a11y: ["Each message is prefixed with a screen-reader-only speaker (\"You said:\" / \"Assistant said:\"). Put the list in a container with role=\"log\" and aria-live=\"polite\".", "Set aria-busy on that container while a reply streams so screen readers announce it once, not per token.", "Actions are revealed on hover and on keyboard focus."],  title: "Message", group: "Conversation", description: "Chat message layout with user and assistant roles and hover actions.", file: "message.tsx", demo: D.MessageDemo,
+  { slug: "message", a11y: ["Each message is prefixed with a screen-reader-only speaker (\"You said:\" / \"Assistant said:\"). Put the list in a container with role=\"log\" and aria-live=\"polite\", and give it tabIndex={0} so keyboard users can scroll a log made only of text.", "Set aria-busy on that container while a reply streams so screen readers announce it once, not per token.", "Actions are revealed on hover and on keyboard focus."],  title: "Message", group: "Conversation", description: "Chat message layout with user and assistant roles and hover actions.", file: "message.tsx", demo: D.MessageDemo,
     props: [
       { name: "role", type: '"user" | "assistant"', default: '"assistant"', description: "Aligns and styles the message. User messages render as a bubble." },
       { name: "label", type: "string | false", description: 'Screen-reader-only speaker label. Defaults to "You said:" or "Assistant said:". Pass false to omit.' },
@@ -124,6 +124,36 @@ export const docs: ComponentDoc[] = [
       { name: "title", type: "string", description: "Header title." },
       { name: "preview / code", type: "ReactNode", description: "Tab contents." },
       { name: "onClose", type: "() => void", description: "Shows a close button when set." },
+    ] },
+  { slug: "scroll-to-bottom", a11y: ["The button is only in the DOM while the container is away from the bottom, so it is never an unreachable tab stop.", "It has an accessible name that contains its visible text (\"latest\").", "After jumping, focus moves to the scroll container so it is not dropped on the page. The container gets tabindex=-1 if it has none.", "Scrolling is instant when the user prefers reduced motion."],  title: "Scroll to Bottom", group: "Conversation", description: "A jump-to-latest button that appears when a scroll container is not at the bottom. Pairs with useAutoScroll.", file: "scroll-to-bottom.tsx", demo: D.ScrollToBottomDemo,
+    props: [
+      { name: "target", type: "RefObject<HTMLElement | null>", description: "The scrolling element, for example the ref from useAutoScroll." },
+      { name: "threshold", type: "number", default: "120", description: "Distance from the bottom, in pixels, before the button appears." },
+      { name: "label", type: "string", default: '"Scroll to latest message"', description: "Accessible name." },
+    ] },
+  { slug: "thinking", a11y: ["A role=\"status\" region with a visible text label, so the wait is announced politely.", "The pulsing squares are decorative (aria-hidden) and stop under reduced motion."],  title: "Thinking", group: "Conversation", description: "A loading indicator for the gap between sending a message and the first token.", file: "thinking.tsx", demo: D.ThinkingDemo,
+    props: [
+      { name: "label", type: "string", default: '"Thinking"', description: "Text shown next to the indicator. An ellipsis is added." },
+    ] },
+  { slug: "error-notice", a11y: ["Announced immediately as role=\"alert\".", "The error is stated in text; the red edge is only decoration.", "While retrying, the button stays focusable but inert, so keyboard focus is not lost. Keep the notice mounted until the retry produces output."],  title: "Error Notice", group: "Conversation", description: "A failed reply with a plain explanation and an optional retry.", file: "error-notice.tsx", demo: D.ErrorNoticeDemo,
+    props: [
+      { name: "title", type: "string", default: '"Something went wrong"', description: "Short headline." },
+      { name: "message", type: "ReactNode", description: "What happened, in plain words." },
+      { name: "onRetry", type: "() => void", description: "Shows a retry button when set." },
+      { name: "retrying", type: "boolean", default: "false", description: 'Disables the button and shows "Retrying…".' },
+      { name: "retryLabel", type: "string", default: '"Retry"', description: "Button text." },
+    ] },
+  { slug: "copy-button", a11y: ["An icon button with an accessible name (\"Copy\" by default).", "Success is confirmed through a separate role=\"status\" region, which screen readers announce reliably.", "If the clipboard is blocked the button stays quiet instead of claiming success."],  title: "Copy Button", group: "Conversation", description: "Copies text and confirms it. Sits in the message actions row next to Feedback.", file: "copy-button.tsx", demo: D.CopyButtonDemo,
+    props: [
+      { name: "value", type: "string | (() => string)", description: "Text to copy, or a function that returns it at click time." },
+      { name: "label", type: "string", default: '"Copy"', description: "Accessible name." },
+    ] },
+  { slug: "suggestions", a11y: ["A group with an accessible name; each suggestion is a native button.", "Use disabled while a reply streams instead of removing the row, so keyboard focus is not lost.", "On narrow screens the row scrolls sideways; its buttons make it keyboard reachable."],  title: "Suggestions", group: "Input", description: "A row of starter prompts. One scrolling line on phones, wrapped on wider screens.", file: "suggestions.tsx", demo: D.SuggestionsDemo,
+    props: [
+      { name: "items", type: "(string | { label: string; value?: string })[]", description: "The prompts. Use the object form to show a short label but send longer text." },
+      { name: "onSelect", type: "(prompt: string) => void", description: "Called with the value, or the label when there is no value." },
+      { name: "disabled", type: "boolean", default: "false", description: "Keeps the row visible but inert." },
+      { name: "label", type: "string", default: '"Suggested prompts"', description: "Accessible name of the group." },
     ] },
 ];
 

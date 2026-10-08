@@ -322,6 +322,73 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "scroll-to-bottom",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "src/registry/ui/scroll-to-bottom.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ]
+    },
+    {
+      "name": "suggestions",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "src/registry/ui/suggestions.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "thinking",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "src/registry/ui/thinking.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils"
+      ]
+    },
+    {
+      "name": "error-notice",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "src/registry/ui/error-notice.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "src/registry/ui/copy-button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "button"
+      ]
     }
   ]
 }

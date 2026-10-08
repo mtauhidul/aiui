@@ -18,6 +18,12 @@ import { useAttachments } from "@/registry/hooks/use-attachments";
 import { ModelPicker, type Model } from "@/registry/ui/model-picker";
 import { type SlashCommand } from "@/registry/ui/command-menu";
 import { Feedback, type FeedbackDetails } from "@/registry/ui/feedback";
+import { ScrollToBottom } from "@/registry/ui/scroll-to-bottom";
+import { Suggestions } from "@/registry/ui/suggestions";
+import { Thinking } from "@/registry/ui/thinking";
+import { ErrorNotice } from "@/registry/ui/error-notice";
+import { CopyButton } from "@/registry/ui/copy-button";
+import { useAutoScroll } from "@/registry/hooks/use-auto-scroll";
 import { useFakeStream } from "@/registry/hooks/use-fake-stream";
 
 const SOURCES: Source[] = [
@@ -287,13 +293,85 @@ export function FeedbackDemo() {
             onValueChange={(v) => push(`Rating: ${v ?? "cleared"}`)}
             onSubmit={(d: FeedbackDetails) => push(`Submitted ${d.value}: [${d.reasons.join(", ")}] "${d.comment}"`)}
           >
-            <Button variant="ghost" size="sm">Copy</Button>
+            <CopyButton value="Use flexbox: set display: flex and place-content: center on the parent." />
           </Feedback>
         </div>
       </Message>
       <ul className="space-y-0.5 font-mono text-xs text-muted-foreground">
         {log.map((l, i) => <li key={i}>{l}</li>)}
       </ul>
+    </div>
+  );
+}
+
+export function ScrollToBottomDemo() {
+  const ref = useAutoScroll<HTMLDivElement>(0, { pinOnMount: false });
+  return (
+    <div className="relative mx-auto max-w-md">
+      <div ref={ref} role="log" aria-label="Long conversation" tabIndex={0} className="h-56 space-y-3 overflow-y-auto rounded border p-4 text-sm text-muted-foreground outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
+        {Array.from({ length: 14 }, (_, i) => (
+          <p key={i}>Message {i + 1}. Scroll up and the latest button appears at the bottom edge.</p>
+        ))}
+      </div>
+      <ScrollToBottom target={ref} />
+    </div>
+  );
+}
+
+export function ThinkingDemo() {
+  return (
+    <div className="space-y-4">
+      <Thinking />
+      <Thinking label="Searching the docs" />
+    </div>
+  );
+}
+
+export function ErrorNoticeDemo() {
+  const [state, setState] = React.useState<"failed" | "retrying" | "ok">("failed");
+  React.useEffect(() => {
+    if (state !== "retrying") return;
+    const id = setTimeout(() => setState("ok"), 1400);
+    return () => clearTimeout(id);
+  }, [state]);
+  if (state === "ok")
+    return (
+      <div className="flex items-center gap-3 text-sm text-muted-foreground">
+        Recovered.
+        <Button size="sm" variant="outline" onClick={() => setState("failed")}>Fail again</Button>
+      </div>
+    );
+  return (
+    <ErrorNotice
+      message="The model did not respond in time. Your message was not lost."
+      onRetry={() => setState("retrying")}
+      retrying={state === "retrying"}
+    />
+  );
+}
+
+export function CopyButtonDemo() {
+  return (
+    <Message>
+      <div className="min-w-0">
+        <MessageContent>npx shadcn@latest add button</MessageContent>
+        <MessageActions className="opacity-100">
+          <CopyButton value="npx shadcn@latest add button" />
+        </MessageActions>
+      </div>
+    </Message>
+  );
+}
+
+export function SuggestionsDemo() {
+  const [picked, setPicked] = React.useState<string | null>(null);
+  return (
+    <div className="space-y-3">
+      <Suggestions
+        items={["Explain streaming markdown", { label: "Show code", value: "Show me a code example" }, "Cite your sources"]}
+        onSelect={setPicked}
+      />
+      <p className="font-mono text-xs text-muted-foreground">{picked ? `selected: ${picked}` : "pick one"}</p>
     </div>
   );
 }

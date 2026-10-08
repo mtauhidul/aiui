@@ -1,7 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { Message, MessageContent } from "@/registry/ui/message";
+import { Message, MessageContent, MessageActions } from "@/registry/ui/message";
+import { Suggestions } from "@/registry/ui/suggestions";
+import { ScrollToBottom } from "@/registry/ui/scroll-to-bottom";
+import { CopyButton } from "@/registry/ui/copy-button";
 import { StreamingMarkdown } from "@/registry/ui/streaming-markdown";
 import { Reasoning } from "@/registry/ui/reasoning";
 import { ToolCall } from "@/registry/ui/tool-call";
@@ -79,7 +82,8 @@ export function ChatDemo() {
 
   return (
     <div className="flex h-full min-h-[560px] flex-col">
-      <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto px-6 py-6 min-[900px]:px-[max(1.5rem,calc((100%-46rem)/2))]">
+      <div className="relative flex min-h-0 flex-1 flex-col">
+      <div ref={ref} role="log" aria-live="polite" aria-busy={isStreaming} aria-label="Conversation" tabIndex={0} className="outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring flex-1 space-y-6 overflow-y-auto px-6 py-6 min-[900px]:px-[max(1.5rem,calc((100%-46rem)/2))]">
         {turns.map((t, i) => (
           <Message key={i} role={t.role}>
             <MessageContent>
@@ -90,6 +94,9 @@ export function ChatDemo() {
                   <AssistantExtras done />
                   <StreamingMarkdown sources={SOURCES}>{t.content}</StreamingMarkdown>
                   <Sources sources={SOURCES} className="mt-3" />
+                  <MessageActions className="-ml-2">
+                    <CopyButton value={t.content} />
+                  </MessageActions>
                 </>
               )}
             </MessageContent>
@@ -104,21 +111,15 @@ export function ChatDemo() {
           </Message>
         )}
       </div>
+      <ScrollToBottom target={ref} />
+      </div>
       <div className="px-4 pb-4 pt-2 min-[900px]:px-[max(1rem,calc((100%-46rem)/2))]">
-        {!isStreaming && (
-          <div className="-mx-4 mb-3 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Suggested prompts" role="group">
-            {["Explain streaming markdown", "Show me a code example", "Cite your sources"].map((p) => (
-              <button
-                key={p}
-                type="button"
-                onClick={() => send(p)}
-                className="shrink-0 whitespace-nowrap rounded-md border px-3 py-1.5 text-[14px] text-muted-foreground outline-none transition-colors hover:border-white/30 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {p}
-              </button>
-            ))}
-          </div>
-        )}
+        <Suggestions
+          className="mb-3"
+          disabled={isStreaming}
+          items={["Explain streaming markdown", "Show me a code example", "Cite your sources"]}
+          onSelect={send}
+        />
         <PromptComposer
           isStreaming={isStreaming}
           onStop={stop}

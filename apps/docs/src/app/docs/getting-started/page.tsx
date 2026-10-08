@@ -21,7 +21,7 @@ export default function Page() {
 
   return (
     <div className="mx-auto flex h-dvh max-w-2xl flex-col p-4">
-      <div role="log" aria-live="polite" aria-label="Conversation" className="flex-1 space-y-4 overflow-y-auto">
+      <div role="log" aria-live="polite" aria-label="Conversation" tabIndex={0} className="flex-1 space-y-4 overflow-y-auto outline-none focus-visible:ring-2 focus-visible:ring-ring">
         {turns.map((t, i) => (
           <Message key={i} role={t.role}>
             <MessageContent>{t.text}</MessageContent>
@@ -76,7 +76,7 @@ export default function GettingStarted() {
         <p className={p}>A complete page with a message list and a composer. It echoes your message back, so you can see everything working before you connect a model.</p>
         <CodeBlock lang="tsx" code={firstChat} />
         <p className={p}>
-          The container has <span className={code}>role=&quot;log&quot;</span> and <span className={code}>aria-live=&quot;polite&quot;</span> so screen readers announce new messages. Enter sends, Shift+Enter adds a line.
+          The container has <span className={code}>role=&quot;log&quot;</span> and <span className={code}>aria-live=&quot;polite&quot;</span> so screen readers announce new messages, and <span className={code}>tabIndex=&#123;0&#125;</span> so keyboard users can scroll it. Enter sends, Shift+Enter adds a line.
         </p>
       </section>
 

@@ -48,6 +48,9 @@ import { Message, MessageContent } from "@/components/ui/message";
 import { StreamingMarkdown } from "@/components/ui/streaming-markdown";
 import { Reasoning } from "@/components/ui/reasoning";
 import { ToolCall, type ToolCallState } from "@/components/ui/tool-call";
+import { Thinking } from "@/components/ui/thinking";
+import { ErrorNotice } from "@/components/ui/error-notice";
+import { ScrollToBottom } from "@/components/ui/scroll-to-bottom";
 import { PromptComposer } from "@/components/ui/prompt-composer";
 import { useAutoScroll } from "@/hooks/use-auto-scroll";
 
@@ -59,48 +62,69 @@ const toolState: Record<string, ToolCallState> = {
 };
 
 export default function Chat() {
-  const { messages, sendMessage, status, stop } = useChat();
+  const { messages, sendMessage, status, stop, error, regenerate } = useChat();
   const busy = status === "submitted" || status === "streaming";
   const ref = useAutoScroll<HTMLDivElement>(messages);
 
   return (
     <div className="mx-auto flex h-dvh max-w-3xl flex-col">
-      <div ref={ref} role="log" aria-live="polite" aria-busy={busy} aria-label="Conversation" className="flex-1 space-y-6 overflow-y-auto p-6">
-        {messages.map((message, m) => (
-          <Message key={message.id} role={message.role === "user" ? "user" : "assistant"}>
-            <MessageContent>
-              {message.parts.map((part, i) => {
-                const live = busy && m === messages.length - 1;
-                if (part.type === "text")
-                  return message.role === "user" ? (
-                    part.text
-                  ) : (
-                    <StreamingMarkdown key={i} streaming={live && i === message.parts.length - 1}>
-                      {part.text}
-                    </StreamingMarkdown>
-                  );
-                if (part.type === "reasoning")
-                  return (
-                    <Reasoning key={i} isStreaming={part.state === "streaming"}>
-                      {part.text}
-                    </Reasoning>
-                  );
-                if (isToolUIPart(part))
-                  return (
-                    <ToolCall
-                      key={part.toolCallId}
-                      name={getToolName(part)}
-                      state={toolState[part.state] ?? "pending"}
-                      input={part.input}
-                      output={part.output}
-                      error={part.errorText}
-                    />
-                  );
-                return null;
-              })}
-            </MessageContent>
-          </Message>
-        ))}
+      <div className="relative flex min-h-0 flex-1 flex-col">
+        <div
+          ref={ref}
+          role="log"
+          aria-live="polite"
+          aria-busy={busy}
+          aria-label="Conversation"
+          tabIndex={0}
+          className="flex-1 space-y-6 overflow-y-auto p-6 outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {messages.map((message, m) => (
+            <Message key={message.id} role={message.role === "user" ? "user" : "assistant"}>
+              <MessageContent>
+                {message.parts.map((part, i) => {
+                  const live = busy && m === messages.length - 1;
+                  if (part.type === "text")
+                    return message.role === "user" ? (
+                      part.text
+                    ) : (
+                      <StreamingMarkdown key={i} streaming={live && i === message.parts.length - 1}>
+                        {part.text}
+                      </StreamingMarkdown>
+                    );
+                  if (part.type === "reasoning")
+                    return (
+                      <Reasoning key={i} isStreaming={part.state === "streaming"}>
+                        {part.text}
+                      </Reasoning>
+                    );
+                  if (isToolUIPart(part))
+                    return (
+                      <ToolCall
+                        key={part.toolCallId}
+                        name={getToolName(part)}
+                        state={toolState[part.state] ?? "pending"}
+                        input={part.input}
+                        output={part.output}
+                        error={part.errorText}
+                      />
+                    );
+                  return null;
+                })}
+              </MessageContent>
+            </Message>
+          ))}
+          {status === "submitted" && <Thinking />}
+          {error && (
+            <ErrorNotice
+              message={error.message}
+              onRetry={() => {
+                regenerate();
+                ref.current?.focus(); // the notice disappears on retry; keep focus in the conversation
+              }}
+            />
+          )}
+        </div>
+        <ScrollToBottom target={ref} />
       </div>
       <div className="p-4">
         <PromptComposer isStreaming={busy} onStop={stop} onSubmit={(text) => sendMessage({ text })} />
@@ -114,6 +138,8 @@ const map = [
   ["reasoning part", "Reasoning", "Open while part.state is streaming, collapses when it ends."],
   ["tool part", "ToolCall", "Map the tool state to pending, running, success or error."],
   ["status", "PromptComposer", "Pass isStreaming for the stop button. status is submitted, streaming, ready or error."],
+  ["status is submitted", "Thinking", "Shown until the first token arrives."],
+  ["error", "ErrorNotice", "Pass regenerate as onRetry. Move focus back into the conversation, since the notice disappears."],
 ];
 
 export default function AiSdk() {
@@ -130,6 +156,9 @@ npx shadcn@latest add \\
   ${REGISTRY_URL}/r/streaming-markdown.json \\
   ${REGISTRY_URL}/r/reasoning.json \\
   ${REGISTRY_URL}/r/tool-call.json \\
+  ${REGISTRY_URL}/r/thinking.json \\
+  ${REGISTRY_URL}/r/error-notice.json \\
+  ${REGISTRY_URL}/r/scroll-to-bottom.json \\
   ${REGISTRY_URL}/r/prompt-composer.json \\
   ${REGISTRY_URL}/r/use-auto-scroll.json`} />
         <p className={p}>

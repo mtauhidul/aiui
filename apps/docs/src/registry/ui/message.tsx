@@ -55,7 +55,7 @@ export function MessageActions({
   return (
     <div
       className={cn(
-        "mt-1 flex items-center gap-0.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100",
+        "mt-1 flex items-center gap-0.5 transition-opacity [@media(hover:hover)]:opacity-0 group-hover:opacity-100 focus-within:opacity-100",
         className,
       )}
       {...props}

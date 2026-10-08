@@ -220,6 +220,9 @@ export default function Home() {
             <Feature title="clear contrast">text meets the 4.5:1 minimum on every surface.</Feature>
             <Feature title="reduced motion">movement stops when your system asks for less.</Feature>
           </div>
+          <Link href="/docs/accessibility" className="mt-10 inline-block rounded-sm text-[17px] text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
+            read the accessibility notes →
+          </Link>
         </Section>
 
         {/* Install */}

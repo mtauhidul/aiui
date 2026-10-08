@@ -3,7 +3,8 @@
 Minimal, modern UI components for AI applications. Built on Base UI and Tailwind, shadcn-registry compatible.
 
 - `apps/docs` — docs site, live demos, and the component source (`src/registry`)
-- `templates` — chat, agent dashboard, playground (planned)
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to add a component, and [CHANGELOG.md](CHANGELOG.md) for what changed.
 
 ```bash
 pnpm install

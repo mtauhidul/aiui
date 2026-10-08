@@ -81,12 +81,29 @@ export function PromptComposer({
     }
   }
 
-  React.useLayoutEffect(() => {
+  const autosize = React.useCallback(() => {
     const el = ref.current;
     if (!el) return;
     el.style.height = "auto";
     el.style.height = `${Math.min(el.scrollHeight, 200)}px`;
-  }, [value]);
+  }, []);
+
+  React.useLayoutEffect(autosize, [value, autosize]);
+
+  // Re-measure when the width changes. A composer mounted in a hidden tab or collapsed panel is
+  // first measured at zero width, which would otherwise leave it stuck at its maximum height.
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    let width = el.clientWidth;
+    const observer = new ResizeObserver(() => {
+      if (el.clientWidth === width) return;
+      width = el.clientWidth;
+      autosize();
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [autosize]);
 
   const canSend = !submitDisabled && (allowEmpty || value.trim().length > 0);
 
