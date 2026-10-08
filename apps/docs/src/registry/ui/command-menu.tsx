@@ -57,10 +57,16 @@ export function CommandMenu({
 }) {
   const listRef = React.useRef<HTMLUListElement>(null);
 
+  // Keep the active option visible inside the list. scrollIntoView would also scroll the page
+  // (including on first render), so adjust the list's own scroll position instead.
   React.useEffect(() => {
-    listRef.current
-      ?.querySelector<HTMLElement>(`[id="${optionId(id, activeIndex)}"]`)
-      ?.scrollIntoView({ block: "nearest" });
+    const list = listRef.current;
+    const option = list?.querySelector<HTMLElement>(`[id="${optionId(id, activeIndex)}"]`);
+    if (!list || !option) return;
+    const top = option.offsetTop;
+    const bottom = top + option.offsetHeight;
+    if (top < list.scrollTop) list.scrollTop = top;
+    else if (bottom > list.scrollTop + list.clientHeight) list.scrollTop = bottom - list.clientHeight;
   }, [activeIndex, id]);
 
   return (
@@ -70,7 +76,7 @@ export function CommandMenu({
       id={id}
       role="listbox"
       aria-label="Commands"
-      className="max-h-64 overflow-y-auto p-1"
+      className="relative max-h-64 overflow-y-auto p-1"
     >
       {commands.map((c, i) => (
         <li

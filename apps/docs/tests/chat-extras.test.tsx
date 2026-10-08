@@ -7,6 +7,7 @@ import { Suggestions } from "@/registry/ui/suggestions";
 import { Thinking } from "@/registry/ui/thinking";
 import { ErrorNotice } from "@/registry/ui/error-notice";
 import { CopyButton } from "@/registry/ui/copy-button";
+import { CommandMenu } from "@/registry/ui/command-menu";
 import { checkA11y } from "./axe";
 
 /** jsdom has no layout, so give a scroller fixed metrics. */
@@ -141,5 +142,19 @@ describe("CopyButton", () => {
     render(<CopyButton value="x" />);
     await user.click(screen.getByRole("button", { name: "Copy" }));
     expect(screen.getByRole("status")).toBeEmptyDOMElement();
+  });
+});
+
+describe("CommandMenu scrolling", () => {
+  it("never scrolls the page to its active option", () => {
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+    const commands = Array.from({ length: 12 }, (_, i) => ({ id: `c${i}`, name: `command-${i}` }));
+    const { rerender } = render(
+      <CommandMenu id="m" commands={commands} activeIndex={0} onActiveChange={() => {}} onSelect={() => {}} />,
+    );
+    rerender(<CommandMenu id="m" commands={commands} activeIndex={9} onActiveChange={() => {}} onSelect={() => {}} />);
+    // scrollIntoView scrolls every scrollable ancestor, including the window, so it must not be used.
+    expect(scrollIntoView).not.toHaveBeenCalled();
   });
 });
