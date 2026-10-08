@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button } from "./turn-button";
 
 /** A failed reply, with an optional retry. Keep it mounted until the retry produces output so focus is not lost. */
 export function ErrorNotice({

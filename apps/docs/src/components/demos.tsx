@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/turn-button";
 import { Message, MessageContent, MessageActions } from "@/registry/ui/message";
 import { CodeBlock } from "@/registry/ui/code-block";
 import { StreamingMarkdown } from "@/registry/ui/streaming-markdown";

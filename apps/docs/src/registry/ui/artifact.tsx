@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Tabs } from "@base-ui/react/tabs";
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button } from "./turn-button";
 
 /** Side pane for generated content, with Preview and Code tabs. */
 export function Artifact({

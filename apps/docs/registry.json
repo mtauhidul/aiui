@@ -4,21 +4,6 @@
   "homepage": "https://turnui.xyz",
   "items": [
     {
-      "name": "utils",
-      "type": "registry:lib",
-      "dependencies": [
-        "clsx",
-        "tailwind-merge"
-      ],
-      "files": [
-        {
-          "path": "src/registry/lib-utils.ts",
-          "type": "registry:lib",
-          "target": "lib/utils.ts"
-        }
-      ]
-    },
-    {
       "name": "theme",
       "type": "registry:theme",
       "title": "turn theme",
@@ -47,7 +32,7 @@
       }
     },
     {
-      "name": "button",
+      "name": "turn-button",
       "type": "registry:ui",
       "dependencies": [
         "@base-ui/react",
@@ -55,7 +40,7 @@
       ],
       "files": [
         {
-          "path": "src/registry/ui/button.tsx",
+          "path": "src/registry/ui/turn-button.tsx",
           "type": "registry:ui"
         }
       ],
@@ -83,7 +68,7 @@
         "shiki"
       ],
       "registryDependencies": [
-        "button",
+        "turn-button",
         "utils"
       ],
       "files": [
@@ -117,7 +102,7 @@
       "name": "prompt-composer",
       "type": "registry:ui",
       "registryDependencies": [
-        "button",
+        "turn-button",
         "utils",
         "command-menu"
       ],
@@ -229,7 +214,7 @@
       "type": "registry:ui",
       "dependencies": [],
       "registryDependencies": [
-        "button",
+        "turn-button",
         "utils"
       ],
       "files": [
@@ -246,7 +231,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "button",
+        "turn-button",
         "utils"
       ],
       "files": [
@@ -314,7 +299,7 @@
       "type": "registry:ui",
       "registryDependencies": [
         "utils",
-        "button"
+        "turn-button"
       ],
       "files": [
         {
@@ -334,7 +319,7 @@
       ],
       "registryDependencies": [
         "utils",
-        "button"
+        "turn-button"
       ]
     },
     {
@@ -374,7 +359,7 @@
       ],
       "registryDependencies": [
         "utils",
-        "button"
+        "turn-button"
       ]
     },
     {
@@ -387,7 +372,7 @@
         }
       ],
       "registryDependencies": [
-        "button"
+        "turn-button"
       ]
     }
   ]

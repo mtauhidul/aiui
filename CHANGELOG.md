@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+Install fixes found by testing against fresh Next.js and Vite projects created with `shadcn init`.
+
+- The button item is now `turn-button` (`components/ui/turn-button.tsx`). The old `button` collided with the `button.tsx` that `shadcn init` creates, so installing a turn component either skipped ours or overwrote yours.
+- turn no longer ships its own `utils`. It depends on shadcn's, so installing no longer asks to overwrite `lib/utils.ts`.
+- Removed unused `React` imports that made `npm run build` fail in a new Vite project (`noUnusedLocals`).
+
+Upgrading from 0.1.0 or 0.1.1: re-add the components you use with `--overwrite`. They will import `./turn-button` instead of `./button`. If you replaced your own `button.tsx` with turn's, restore it from version control.
+
 ## 0.1.1
 
 - Components now use the standard shadcn `primary` and `primary-foreground` tokens instead of `accent`, so they match your existing theme with no setup. `Button` variant `accent` is now `primary`.

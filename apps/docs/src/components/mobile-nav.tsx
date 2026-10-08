@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Dialog } from "@base-ui/react/dialog";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/turn-button";
 import { DocsNav } from "./docs-nav";
 import { Wordmark } from "./brand";
 

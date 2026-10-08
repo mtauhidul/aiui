@@ -61,7 +61,7 @@ async function ComponentContent({ params }: { params: PageProps<"/docs/[slug]">[
 
       <section className="space-y-4">
         <h2 className={h2}>install</h2>
-        <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY}/r/${doc.slug}.json`} />
+        <CodeBlock lang="bash" code={`npx shadcn@latest add ${REGISTRY}/r/${doc.item ?? doc.slug}.json`} />
       </section>
 
       <section className="space-y-4">

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /** Shown between sending a message and the first token. For the reasoning text itself, see Reasoning. */

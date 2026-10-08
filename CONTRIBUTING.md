@@ -34,10 +34,14 @@ pnpm build
 - **Accessible.** Native elements first. Every interactive state needs a text equivalent. If focus can disappear, hand it to a neighbor. Fix accessibility problems in the component, not in the test.
 - **Reduced motion.** Anything that moves, scales, slides or loops needs a `motion-reduce:` opt-out. `tests/motion.test.ts` enforces it.
 
+## Naming
+
+Registry item names become file names in other people's projects, and `shadcn init` already creates files such as `button.tsx`. Never reuse a name shadcn ships (button, card, dialog, input and so on). That is why turn's button is `turn-button`.
+
 ## Adding a component
 
 1. Write it in `src/registry/ui`.
-2. Add it to `registry.json` with its dependencies (bare names; the build rewrites them to URLs).
+2. Add it to `registry.json` with its dependencies. Use the item names of other turn items (the build rewrites them to URLs). `utils` is the one exception: it resolves to shadcn's own item on purpose.
 3. Add a docs entry and a demo.
 4. Add tests: behavior, and `checkA11y`.
 5. Add a line to `CHANGELOG.md`.

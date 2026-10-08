@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/turn-button";
 import { Message, MessageContent, MessageActions } from "@/registry/ui/message";
 import { checkA11y } from "./axe";
 

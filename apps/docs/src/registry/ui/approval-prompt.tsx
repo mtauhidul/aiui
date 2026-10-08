@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button } from "./turn-button";
 
 /** Human-in-the-loop gate: the agent wants to do something and needs a yes/no. */
 const riskStyle = {

@@ -8,6 +8,8 @@ import { readFileSync, writeFileSync, rmSync } from "node:fs";
 const dev = process.argv.includes("--dev");
 const base = (process.env.NEXT_PUBLIC_REGISTRY_URL ?? (dev ? "http://localhost:3000" : "https://turnui.xyz")).replace(/\/$/, "");
 
+const SHADCN_BUILTIN = new Set(["utils"]);
+
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 const names = new Set(registry.items.map((item) => item.name));
 
@@ -15,7 +17,8 @@ registry.homepage = base;
 for (const item of registry.items) {
   if (!item.registryDependencies) continue;
   item.registryDependencies = item.registryDependencies.map((dep) => {
-    if (/^(https?:|@)/.test(dep)) return dep;
+    // Items shadcn ships itself (installed by `shadcn init`) resolve against shadcn's registry on purpose.
+    if (/^(https?:|@)/.test(dep) || SHADCN_BUILTIN.has(dep)) return dep;
     if (!names.has(dep)) throw new Error(`${item.name} depends on unknown registry item "${dep}"`);
     return `${base}/r/${dep}.json`;
   });

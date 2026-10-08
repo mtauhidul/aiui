@@ -5,6 +5,8 @@ export type Prop = { name: string; type: string; default?: string; description: 
 
 export type ComponentDoc = {
   slug: string;
+  /** Registry item name when it differs from the slug. */
+  item?: string;
   title: string;
   group: "Foundation" | "Conversation" | "Input" | "Agent";
   description: string;
@@ -17,7 +19,7 @@ export type ComponentDoc = {
 };
 
 export const docs: ComponentDoc[] = [
-  { slug: "button", a11y: ["Native button semantics with a visible focus ring.", "Disabled buttons are removed from the tab order."],  title: "Button", group: "Foundation", description: "Accessible button on Base UI with four variants and three sizes.", file: "button.tsx", demo: D.ButtonDemo,
+  { slug: "button", item: "turn-button", a11y: ["Native button semantics with a visible focus ring.", "Disabled buttons are removed from the tab order."],  title: "Button", group: "Foundation", description: "Accessible button on Base UI with four variants and three sizes.", file: "turn-button.tsx", demo: D.ButtonDemo,
     props: [
       { name: "variant", type: '"default" | "primary" | "ghost" | "outline"', default: '"default"', description: "Visual style." },
       { name: "size", type: '"sm" | "md" | "icon"', default: '"md"', description: "Button size." },
