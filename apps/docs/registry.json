@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "aiui",
-  "homepage": "https://aiui.dev",
+  "name": "turn",
+  "homepage": "https://turnui.xyz",
   "items": [
     {
       "name": "utils",
@@ -21,8 +21,8 @@
     {
       "name": "theme",
       "type": "registry:theme",
-      "title": "aiui theme",
-      "description": "Color tokens the aiui components read. Optional: skip it if your own theme already defines them.",
+      "title": "turn theme",
+      "description": "Color tokens the turn components read. Optional: skip it if your own theme already defines them.",
       "cssVars": {
         "light": {
           "background": "#ffffff",

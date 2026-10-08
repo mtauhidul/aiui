@@ -18,10 +18,10 @@ const description = "Minimal, accessible UI components for chat, agents and tool
 
 export const metadata: Metadata = {
   metadataBase: new URL(REGISTRY_URL),
-  title: { default: "aiui — UI components for AI applications", template: "%s — aiui" },
+  title: { default: "turn — UI components for AI applications", template: "%s — turn" },
   description,
-  openGraph: { title: "aiui", description, type: "website" },
-  twitter: { card: "summary_large_image", title: "aiui", description },
+  openGraph: { title: "turn", description, type: "website" },
+  twitter: { card: "summary_large_image", title: "turn", description },
 };
 
 export const viewport: Viewport = { colorScheme: "dark", themeColor: "#000000" };

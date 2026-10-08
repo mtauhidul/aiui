@@ -90,7 +90,7 @@ export default function Theming() {
 
       <section className="space-y-4">
         <h2 className={h2}>accent is the primary action</h2>
-        <p className={p}>In a default shadcn theme, <span className={code}>accent</span> is a pale background used for hover states. In aiui it is the strongest color on the page: the send button, upload progress and the selected item all use it. If you skip the theme and keep the default, those controls will look washed out. Set <span className={code}>accent</span> to your brand or primary color and <span className={code}>accent-foreground</span> to a color that reads on it.</p>
+        <p className={p}>In a default shadcn theme, <span className={code}>accent</span> is a pale background used for hover states. In turn it is the strongest color on the page: the send button, upload progress and the selected item all use it. If you skip the theme and keep the default, those controls will look washed out. Set <span className={code}>accent</span> to your brand or primary color and <span className={code}>accent-foreground</span> to a color that reads on it.</p>
       </section>
 
       <section className="space-y-4">

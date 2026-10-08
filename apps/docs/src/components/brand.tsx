@@ -15,7 +15,7 @@ export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5 text-[19px] font-medium tracking-[-0.02em]", className)}>
       <LogoMark />
-      aiui
+      turn
     </span>
   );
 }

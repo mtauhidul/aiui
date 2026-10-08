@@ -49,7 +49,7 @@ export default function GettingStarted() {
             A project set up with the shadcn CLI. If you do not have one yet, run <span className={code}>npx shadcn@latest init</span>. It creates <span className={code}>components.json</span>, the <span className={code}>cn</span> helper and the base styles.
           </li>
         </ul>
-        <p className={p}>aiui is a registry, not a package. The CLI copies the source into your project and installs the small number of dependencies each component needs (Base UI, and for a few components Shiki, marked or react-markdown).</p>
+        <p className={p}>turn is a registry, not a package. The CLI copies the source into your project and installs the small number of dependencies each component needs (Base UI, and for a few components Shiki, marked or react-markdown).</p>
       </section>
 
       <section className="space-y-4">

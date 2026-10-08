@@ -4,10 +4,9 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, rmSync } from "node:fs";
 
-const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-const base = (
-  process.env.NEXT_PUBLIC_REGISTRY_URL ?? (vercel ? `https://${vercel}` : "http://localhost:3000")
-).replace(/\/$/, "");
+// `--dev` is passed by the predev script so local installs point at the dev server.
+const dev = process.argv.includes("--dev");
+const base = (process.env.NEXT_PUBLIC_REGISTRY_URL ?? (dev ? "http://localhost:3000" : "https://turnui.xyz")).replace(/\/$/, "");
 
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 const names = new Set(registry.items.map((item) => item.name));
