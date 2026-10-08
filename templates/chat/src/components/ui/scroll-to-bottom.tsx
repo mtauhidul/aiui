@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "./button";
+import { Button } from "./turn-button";
 
 /**
  * A "jump to latest" button that appears when a scroll container is not at the bottom.

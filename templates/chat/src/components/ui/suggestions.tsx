@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export type Suggestion = string | { label: string; value?: string };

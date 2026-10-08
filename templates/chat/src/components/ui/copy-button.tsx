@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "./button";
+import { Button } from "./turn-button";
 
 /** Icon button that copies text and confirms through a status region. Sits in the MessageActions row. */
 export function CopyButton({
