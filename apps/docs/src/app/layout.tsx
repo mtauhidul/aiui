@@ -3,6 +3,7 @@ import { Figtree, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { REGISTRY_URL } from "@/lib/registry-url";
 import { SiteHeader } from "@/components/site-header";
+import { Analytics } from "@vercel/analytics/next";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full max-w-[1240px] -translate-x-1/2 border-x border-white/[0.12] lg:block" />
           {children}
         </div>
+        <Analytics />
       </body>
     </html>
   );
